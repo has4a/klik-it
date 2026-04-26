@@ -230,7 +230,6 @@ section {
 // ============================================================================
 // Usage:
 // <div class="section-header">
-//   <span class="section-label">O nás</span>
 //   <h2>Spoľahlivý <span class="text-accent">IT partner</span></h2>
 //   <p>Subheadline text</p>
 // </div>
@@ -241,26 +240,6 @@ section {
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: $space-2;
-  font-family: $font-mono;
-  color: var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  margin-bottom: $space-4;
-  font-size: $text-xs;
-
-  // Dash prefix for tech feel
-  &::before {
-    content: "—";
-    color: var(--color-accent);
-    opacity: 0.5;
-  }
 }
 
 .section-header h2 {
