@@ -31,78 +31,49 @@
 // ---------------------------------------------------------------------------
 // STATS — Left column
 // ---------------------------------------------------------------------------
+// Editorial fact-stack: no card chrome, hairline divider between items,
+// display-weight numbers, mono uppercase labels. Reads as proof, not as
+// "here are some boxes with numbers in them".
 .about__stats {
   display: flex;
   flex-direction: column;
-  gap: $space-8;
-
-  @include until(lg) {
-    // On mobile: horizontal row
-    flex-direction: row;
-    justify-content: center;
-    gap: $space-6;
-    text-align: center;
-  }
-
-  @include until(sm) {
-    flex-direction: column;
-    align-items: stretch;
-  }
 }
 
 .about__stat {
   display: flex;
   flex-direction: column;
-  gap: $space-2;
-  padding: $space-8 $space-6;
-  border-radius: var(--radius-lg);
-  @include surface(2);
-  transition: border-color $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  gap: $space-3;
+  padding: $space-6 0;
 
-  @media (hover: hover) {
-    &:hover {
-      border-color: var(--color-border-hover);
-      box-shadow: var(--shadow-md);
-    }
+  &:not(:first-child) {
+    border-top: 1px solid var(--color-border);
   }
 
-  @include until(lg) {
-    flex: 1;
-    align-items: center;
-    padding: $space-6 $space-4;
+  &:first-child {
+    padding-top: 0;
   }
-}
 
-// Light mode — stat cards need shadow for separation
-.light-mode .about__stat {
-  box-shadow: var(--shadow-sm);
-
-  @media (hover: hover) {
-    &:hover {
-      box-shadow: var(--shadow-md);
-    }
+  &:last-child {
+    padding-bottom: 0;
   }
 }
 
 .about__stat-number {
   font-family: $font-heading;
-  font-size: $text-5xl;
+  font-size: clamp(3rem, 2rem + 4vw, 5.5rem); // 48-88px
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
 .about__stat-label {
-  font-family: $font-body;
-  font-size: $text-sm;
-  color: var(--color-text-secondary);
-  font-weight: 400;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1.4;
-
-  @include until(lg) {
-    font-size: $text-xs;
-  }
 }
 
 // ---------------------------------------------------------------------------
