@@ -32,3 +32,6 @@ desktop.ini
 .cache/
 .parcel-cache/
 .vite/
+
+# Claude Code local config (machine-specific)
+.claude/settings.local.json
