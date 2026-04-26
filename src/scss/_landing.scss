@@ -267,6 +267,9 @@
 // ---------------------------------------------------------------------------
 // Static mono line + reused .hero__badge-dot. No directional animation,
 // reads as server-status / system-health vocabulary rather than "scroll".
+// Uses a dedicated fade-in keyframe so the centering transform survives —
+// the shared hero-entrance keyframe sets transform: translateY(0) at end,
+// which would clobber translateX(-50%) and de-center the element.
 .hero__status {
   position: absolute;
   bottom: $space-8;
@@ -282,13 +285,18 @@
   letter-spacing: 0.02em;
   white-space: nowrap;
 
-  // Fade in after all hero content has revealed
   opacity: 0;
-  animation: hero-entrance $duration-slower $ease-out forwards;
+  animation: hero-status-fade-in $duration-slower $ease-out forwards;
   animation-delay: 1s;
 
   @include until(sm) {
     font-size: 11px;
+  }
+}
+
+@keyframes hero-status-fade-in {
+  to {
+    opacity: 1;
   }
 }
 
