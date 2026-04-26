@@ -24,14 +24,22 @@
 }
 
 // ---------------------------------------------------------------------------
-// SERVICE CARD — Static, no toggle
+// SERVICE CARD — Anchor link, flex column so arrow sticks to bottom
 // ---------------------------------------------------------------------------
 .service-card {
   @include surface(1);
   border-radius: var(--radius-lg);
   padding: $space-8;
+  padding-bottom: $space-10;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // Anchor reset
+  text-decoration: none;
+  color: inherit;
+
   // Only transition border — transform handled by GSAP during reveal.
   // After reveal (.is-revealed), re-enable transform transition for hover.
   transition: border-color $duration-normal $ease-out,
@@ -43,6 +51,11 @@
       transform $duration-normal $ease-out;
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
   @media (hover: hover) {
     &:hover {
       border-color: var(--color-border-hover);
@@ -52,6 +65,7 @@
 
   @include until(sm) {
     padding: $space-6;
+    padding-bottom: $space-8;
   }
 }
 
@@ -114,6 +128,33 @@
   }
 }
 
+// Arrow — quiet by default, leans in on hover.
+// margin-top: auto pushes arrow to card bottom so all arrows in a grid row align.
+.service-card__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: $space-6;
+  color: var(--color-text-tertiary);
+  opacity: 0.4;
+  transition: transform $duration-normal $ease-out,
+    opacity $duration-normal $ease-out,
+    color $duration-normal $ease-out;
+
+  svg {
+    display: block;
+  }
+
+  @media (hover: hover) {
+    .service-card:hover & {
+      transform: translateX(4px);
+      opacity: 1;
+      color: var(--color-accent);
+    }
+  }
+}
+
 // ---------------------------------------------------------------------------
 // STAGGER for reveal
 // ---------------------------------------------------------------------------
@@ -124,7 +165,8 @@
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
 @include reduced-motion {
-  .service-card {
+  .service-card,
+  .service-card__arrow {
     transition: none !important;
     transform: none !important;
   }
