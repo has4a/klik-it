@@ -20,9 +20,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include from(2xl) {
+  // 4-col kicks in at xl (1280px) — covers most desktops, not just wide screens.
+  // Gap stays $space-6 so the directional arrow has room to breathe.
+  @include from(xl) {
     grid-template-columns: repeat(4, 1fr);
-    gap: $space-4;
   }
 }
 
@@ -55,18 +56,43 @@
     padding: $space-6;
   }
 
-  // Connector line between steps (desktop 4-col only)
-  @include from(2xl) {
-    &:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: 0;
-      width: $space-4;
-      height: 1px;
-      background: var(--gradient-accent);
-      opacity: 0.25;
-      transform: translateX(100%);
+  // Directional connector between steps in 4-col layout — communicates flow.
+  // Composed of a fading gradient line + caret tip aligned with the number row.
+  // Top value targets the visual centre of the $text-4xl number (~$space-8 padding
+  // + ~half the number's cap-height); a small magic number is the cleanest way
+  // to bridge a clamp() font-size without runtime math.
+  @include from(xl) {
+    &:not(:last-child) {
+      &::after {
+        content: "";
+        position: absolute;
+        top: 52px;
+        right: 0;
+        width: $space-6;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          var(--color-accent) 0%,
+          var(--color-accent) 60%,
+          transparent 100%
+        );
+        opacity: 0.5;
+        transform: translateX(100%);
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 52px;
+        right: 0;
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid var(--color-accent);
+        border-right: 1px solid var(--color-accent);
+        opacity: 0.5;
+        // Translate +$space-5 (20px) places the visual tip ~end of the 24px gap.
+        transform: translate(#{$space-5}, -50%) rotate(45deg);
+      }
     }
   }
 }
