@@ -263,50 +263,32 @@
 }
 
 // ---------------------------------------------------------------------------
-// SCROLL INDICATOR
+// STATUS LINE — Hero footer, IT-brand health indicator (replaces scroll cue)
 // ---------------------------------------------------------------------------
-.hero__scroll {
+// Static mono line + reused .hero__badge-dot. No directional animation,
+// reads as server-status / system-health vocabulary rather than "scroll".
+.hero__status {
   position: absolute;
   bottom: $space-8;
   left: 50%;
   transform: translateX(-50%);
   z-index: $z-base;
-  // Fade in after all content has revealed
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  // Fade in after all hero content has revealed
   opacity: 0;
   animation: hero-entrance $duration-slower $ease-out forwards;
   animation-delay: 1s;
-}
 
-.hero__scroll-line {
-  width: 2px;
-  height: 48px;
-  background: var(--gradient-accent);
-  border-radius: var(--radius-full);
-  opacity: 0.5;
-  // Scroll hint animation
-  animation: scroll-hint 2s $ease-out infinite;
-}
-
-@keyframes scroll-hint {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 0;
-  }
-  30% {
-    transform: scaleY(1);
-    transform-origin: top;
-    opacity: 0.4;
-  }
-  60% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-    opacity: 0.4;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-    opacity: 0;
+  @include until(sm) {
+    font-size: 11px;
   }
 }
 
@@ -316,12 +298,11 @@
 @include reduced-motion {
   .hero__grid,
   .hero__glow,
-  .hero__badge-dot,
-  .hero__scroll-line {
+  .hero__badge-dot {
     animation: none;
   }
 
-  .hero__scroll {
+  .hero__status {
     opacity: 1;
     animation: none;
   }
@@ -332,10 +313,6 @@
 
   .hero__glow {
     opacity: 0.8;
-  }
-
-  .hero__scroll-line {
-    opacity: 0.3;
   }
 }
 
@@ -359,10 +336,5 @@
   // Glow effect doesn't work well on light bg — simplify to a solid dot
   .hero__badge-dot {
     box-shadow: none;
-  }
-
-  // Scroll indicator needs more contrast on light bg
-  .hero__scroll-line {
-    opacity: 0.35;
   }
 }
