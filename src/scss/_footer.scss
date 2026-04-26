@@ -1,0 +1,185 @@
+// ============================================================================
+// FOOTER — Premium 4-column layout
+// ============================================================================
+// Gradient divider → Brand | Navigation | Contact | Legal
+// Bottom bar: copyright only (legal links moved to own column)
+// Animated underlines on hover, consistent with site polish level
+// ============================================================================
+
+.footer {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// Gradient divider — replaces hard border-top
+.footer__divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border) 20%,
+    var(--color-accent-muted) 50%,
+    var(--color-border) 80%,
+    transparent
+  );
+}
+
+// ---------------------------------------------------------------------------
+// TOP — 4 columns
+// ---------------------------------------------------------------------------
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-10;
+  padding: $space-12 0 $space-12;
+
+  @include from(md) {
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: $space-6;
+  }
+
+  @include from(xl) {
+    gap: $space-12;
+  }
+}
+
+// Brand column
+.footer__brand {
+  max-width: 300px;
+
+  p {
+    @include body-text($text-sm);
+    color: var(--color-text-tertiary);
+    margin-top: $space-4;
+    line-height: 1.7;
+  }
+
+  @include until(md) {
+    max-width: none;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+// Footer logo
+.footer__logo {
+  font-family: $font-heading;
+  font-size: $text-2xl;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  display: inline-block;
+  transition: opacity $duration-normal $ease-out;
+
+  span {
+    @include gradient-text;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Column headings
+.footer__heading {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: $space-5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  @include until(md) {
+    text-align: center;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SHARED COLUMN STYLES — Nav, Contact, Legal
+// ---------------------------------------------------------------------------
+@mixin footer-link-column {
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+
+    @include until(md) {
+      align-items: center;
+    }
+  }
+
+  a {
+    font-size: $text-sm;
+    color: var(--color-text-tertiary);
+    display: inline-block;
+    padding: $space-1 0;
+    position: relative;
+    transition: color $duration-normal $ease-out;
+
+    // Animated underline
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width $duration-normal $ease-out;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-text-secondary);
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+
+    @include focus-ring;
+  }
+}
+
+.footer__nav {
+  @include footer-link-column;
+}
+
+.footer__contact {
+  @include footer-link-column;
+
+  span {
+    font-size: $text-sm;
+    color: var(--color-text-tertiary);
+    display: inline-block;
+    padding: $space-1 0;
+  }
+}
+
+.footer__legal-col {
+  @include footer-link-column;
+}
+
+// ---------------------------------------------------------------------------
+// BOTTOM BAR — Copyright only
+// ---------------------------------------------------------------------------
+.footer__bottom {
+  display: flex;
+  justify-content: center;
+  padding: $space-6 0;
+  border-top: 1px solid var(--color-border);
+
+  @include from(md) {
+    justify-content: flex-start;
+  }
+
+  p {
+    font-size: $text-xs;
+    color: var(--color-text-tertiary);
+    line-height: 1;
+  }
+}

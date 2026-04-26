@@ -1,0 +1,155 @@
+// ============================================================================
+// TESTIMONIALS — Client social proof
+// ============================================================================
+// 3 cards: quote text + author (name, role, company)
+// Decorative oversized quote mark in accent color
+// Avatar shows initials (replace with real photos when available)
+// Surface-0 background (continues alternating rhythm)
+// ============================================================================
+
+.testimonials {
+  // Alternating section background — fixes surface-0/surface-0 streak with Services
+  background: var(--color-surface-1);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  // Skip 2-col — 3 cards in 2 columns creates an orphan.
+  // Go straight to 3-col at lg where cards have enough width (~300px).
+  @include from(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TESTIMONIAL CARD
+// ---------------------------------------------------------------------------
+.testimonial-card {
+  @include surface(2);
+  border-radius: var(--radius-lg);
+  padding: $space-8;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  transition: border-color $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  @include until(sm) {
+    padding: $space-6;
+  }
+}
+
+// Decorative quote mark
+.testimonial-card__quote {
+  position: absolute;
+  top: $space-4;
+  right: $space-6;
+  font-family: $font-heading;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
+
+// Quote text
+.testimonial-card__text {
+  @include body-text($text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+
+  @include from(md) {
+    font-size: $text-base;
+  }
+}
+
+// Author footer
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+// Avatar — initials in a circle
+// Replace with <img> when real photos are available
+.testimonial-card__avatar {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  font-family: $font-heading;
+  font-size: $text-xs;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.testimonial-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-card__name {
+  font-family: $font-heading;
+  font-size: $text-sm;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.testimonial-card__role {
+  font-family: $font-body;
+  font-size: $text-xs;
+  color: var(--color-text-tertiary);
+  line-height: 1.3;
+}
+
+// ---------------------------------------------------------------------------
+// STAGGER for reveal
+// ---------------------------------------------------------------------------
+.testimonials__grid .testimonial-card {
+  @include stagger(3, 100ms);
+}
+
+// ---------------------------------------------------------------------------
+// REDUCED MOTION
+// ---------------------------------------------------------------------------
+@include reduced-motion {
+  .testimonial-card {
+    transition: none !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// LIGHT MODE — Cards need shadow to separate from background
+// ---------------------------------------------------------------------------
+.light-mode .testimonial-card {
+  box-shadow: var(--shadow-sm);
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+}

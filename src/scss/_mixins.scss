@@ -1,0 +1,366 @@
+// ============================================================================
+// KLIK_IT DESIGN SYSTEM — Mixins & Utilities
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// RESPONSIVE BREAKPOINTS
+// ---------------------------------------------------------------------------
+// Mobile-first: use min-width
+// Usage: @include from(md) { ... }
+// ---------------------------------------------------------------------------
+@mixin from($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $bp-sm) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $bp-md) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $bp-lg) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $bp-xl) {
+      @content;
+    }
+  }
+  @if $breakpoint == 2xl {
+    @media (min-width: $bp-2xl) {
+      @content;
+    }
+  }
+}
+
+// Desktop-first: use max-width (for exceptions)
+// Usage: @include until(md) { ... }
+@mixin until($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: $bp-sm - 1px) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (max-width: $bp-md - 1px) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: $bp-lg - 1px) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: $bp-xl - 1px) {
+      @content;
+    }
+  }
+  @if $breakpoint == 2xl {
+    @media (max-width: $bp-2xl - 1px) {
+      @content;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// LAYOUT
+// ---------------------------------------------------------------------------
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $space-6;
+  padding-right: $space-6;
+
+  @include from(xl) {
+    padding-left: $space-8;
+    padding-right: $space-8;
+  }
+}
+
+@mixin container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $space-6;
+  padding-right: $space-6;
+
+  @include from(xl) {
+    padding-left: $space-8;
+    padding-right: $space-8;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TYPOGRAPHY
+// ---------------------------------------------------------------------------
+@mixin heading($size) {
+  font-family: $font-heading;
+  font-size: $size;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+@mixin body-text($size: $text-base) {
+  font-family: $font-body;
+  font-size: $size;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+@mixin label-text {
+  font-family: $font-body;
+  font-size: $text-sm;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}
+
+@mixin mono-text {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  letter-spacing: -0.01em;
+}
+
+// Gradient text utility
+@mixin gradient-text {
+  background: var(--gradient-accent-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ---------------------------------------------------------------------------
+// SURFACES & GLASS
+// ---------------------------------------------------------------------------
+@mixin surface($level: 1) {
+  @if $level == 1 {
+    background: var(--color-surface-1);
+    border: 1px solid var(--color-border);
+  }
+  @if $level == 2 {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border-hover);
+  }
+  @if $level == 3 {
+    background: var(--color-surface-3);
+    border: 1px solid var(--color-border-active);
+  }
+}
+
+@mixin glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+// ---------------------------------------------------------------------------
+// INTERACTIVE
+// ---------------------------------------------------------------------------
+@mixin interactive-lift {
+  transition: transform $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+    transition-duration: $duration-fast;
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// BUTTONS
+// ---------------------------------------------------------------------------
+// Size scale: sm (nav), md (default), lg (hero/CTA)
+// ---------------------------------------------------------------------------
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  font-family: $font-body;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background $duration-normal $ease-out,
+    color $duration-normal $ease-out, transform $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+  // Default size: md
+  font-size: $text-sm;
+  padding: $space-3 $space-6;
+
+  @include focus-ring;
+
+  &:active {
+    transform: scale(0.98);
+    transition-duration: $duration-fast;
+  }
+}
+
+@mixin button-sm {
+  font-size: $text-xs;
+  padding: $space-2 $space-5;
+}
+
+@mixin button-lg {
+  font-size: $text-base;
+  padding: $space-4 $space-8;
+}
+
+@mixin button-primary {
+  @include button-base;
+  @include button-lg;
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+
+  // Arrow icon micro-animation
+  svg {
+    transition: transform $duration-normal $ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-accent-hover);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-1px);
+
+      svg {
+        transform: translateX(3px);
+      }
+    }
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  @include button-lg;
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-hover);
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-surface-2);
+      border-color: var(--color-border-active);
+    }
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background: transparent;
+  color: var(--color-accent);
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-accent-subtle);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// ANIMATIONS — Reveal system
+// ---------------------------------------------------------------------------
+// Elements start invisible, get .is-visible class via IntersectionObserver
+// ---------------------------------------------------------------------------
+@mixin reveal-base {
+  opacity: 0;
+  transition: opacity $duration-slower $ease-out,
+    transform $duration-slower $ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@mixin reveal-up($distance: 30px) {
+  @include reveal-base;
+  transform: translateY($distance);
+}
+
+@mixin reveal-left($distance: 30px) {
+  @include reveal-base;
+  transform: translateX(-$distance);
+}
+
+@mixin reveal-right($distance: 30px) {
+  @include reveal-base;
+  transform: translateX($distance);
+}
+
+@mixin reveal-scale {
+  @include reveal-base;
+  transform: scale(0.95);
+}
+
+// Stagger children delay
+// Usage: @include stagger(4, 80ms);
+@mixin stagger($count, $delay: 100ms) {
+  @for $i from 1 through $count {
+    &:nth-child(#{$i}) {
+      transition-delay: #{($i - 1) * $delay};
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// ACCESSIBILITY
+// ---------------------------------------------------------------------------
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

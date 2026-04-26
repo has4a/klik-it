@@ -1,0 +1,144 @@
+// ============================================================================
+// SERVICES — Clean static cards, always visible content
+// ============================================================================
+// No expand/collapse — each card shows icon + title + description
+// Grid: 3 columns desktop, 2 tablet, 1 mobile
+// Minimal, scannable, no surprises
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// GRID
+// ---------------------------------------------------------------------------
+.services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include from(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include from(xl) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SERVICE CARD — Static, no toggle
+// ---------------------------------------------------------------------------
+.service-card {
+  @include surface(1);
+  border-radius: var(--radius-lg);
+  padding: $space-8;
+  position: relative;
+  overflow: hidden;
+  // Only transition border — transform handled by GSAP during reveal.
+  // After reveal (.is-revealed), re-enable transform transition for hover.
+  transition: border-color $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  &.is-revealed {
+    transition: border-color $duration-normal $ease-out,
+      box-shadow $duration-normal $ease-out,
+      transform $duration-normal $ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-2px);
+    }
+  }
+
+  @include until(sm) {
+    padding: $space-6;
+  }
+}
+
+// Icon
+.service-card__icon {
+  @include flex-center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  color: var(--color-text-tertiary);
+  margin-bottom: $space-6;
+  transition: background $duration-normal $ease-out,
+    color $duration-normal $ease-out;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (hover: hover) {
+    .service-card:hover & {
+      background: var(--color-accent-muted);
+      color: var(--color-accent);
+    }
+  }
+
+  @include until(sm) {
+    width: 42px;
+    height: 42px;
+    margin-bottom: $space-4;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// Title
+.service-card__title {
+  font-family: $font-heading;
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin-bottom: $space-3;
+
+  @include until(sm) {
+    font-size: $text-base;
+  }
+}
+
+// Description
+.service-card__body {
+  p {
+    @include body-text($text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// STAGGER for reveal
+// ---------------------------------------------------------------------------
+// STAGGER — handled by GSAP ScrollTrigger.batch()
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// REDUCED MOTION
+// ---------------------------------------------------------------------------
+@include reduced-motion {
+  .service-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// LIGHT MODE — Cards need shadow to separate from background
+// ---------------------------------------------------------------------------
+.light-mode .service-card {
+  box-shadow: var(--shadow-sm);
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+}

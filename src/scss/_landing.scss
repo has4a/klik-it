@@ -1,0 +1,368 @@
+// ============================================================================
+// HERO / LANDING — First impression, most critical section
+// ============================================================================
+// Layout: Full viewport height, centered content
+// Background: Pure CSS abstract grid + radial glow (no image dependency)
+// Elements: Badge → H1 → Subtitle → Dual CTA → Scroll indicator
+// ============================================================================
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh; // Dynamic viewport height (accounts for mobile browser chrome)
+  @include flex-center;
+  flex-direction: column;
+  padding: $space-16 $space-6 $space-12;
+  overflow: hidden;
+
+  // Nav clearance
+  padding-top: calc(var(--nav-height) + #{$space-12});
+
+  @include from(md) {
+    padding: $space-32 $space-6 $space-16;
+    padding-top: calc(var(--nav-height) + #{$space-16});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// BACKGROUND — Abstract CSS Grid + Glow
+// ---------------------------------------------------------------------------
+// Creates a subtle tech grid pattern with a radial glow
+// Pure CSS, zero image downloads, instant render
+// ---------------------------------------------------------------------------
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// Dot grid pattern
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  // CSS radial-gradient creates a repeating dot pattern
+  background-image: radial-gradient(
+    circle at center,
+    var(--color-border-hover) 1px,
+    transparent 1px
+  );
+  background-size: 48px 48px;
+  // Fade out at edges
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    black 20%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    black 20%,
+    transparent 70%
+  );
+  opacity: 0.5;
+
+  // Subtle pulse animation
+  animation: grid-pulse 8s $ease-in-out infinite alternate;
+}
+
+@keyframes grid-pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+// Radial glow — signature accent color bloom
+.hero__glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 800px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 212, 221, 0.08) 0%,
+    rgba(0, 102, 255, 0.04) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: glow-drift 12s $ease-in-out infinite alternate;
+
+  @include from(lg) {
+    width: 1200px;
+    height: 800px;
+  }
+}
+
+@keyframes glow-drift {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-48%, -52%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-52%, -48%) scale(0.98);
+    opacity: 0.7;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// CONTENT
+// ---------------------------------------------------------------------------
+.hero__content {
+  position: relative;
+  z-index: $z-base;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+// ---------------------------------------------------------------------------
+// STAGGERED REVEAL — Elements appear one by one on page load
+// ---------------------------------------------------------------------------
+// Uses CSS custom property --reveal-order for timing.
+// Pure CSS, no JS dependency. Respects prefers-reduced-motion.
+// ---------------------------------------------------------------------------
+.hero-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: hero-entrance $duration-slower $ease-out forwards;
+  // Each element delayed by its order × 120ms, starting after 200ms
+  animation-delay: calc(200ms + (var(--reveal-order, 1) * 120ms));
+}
+
+@keyframes hero-entrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Reduced motion — show everything immediately
+@include reduced-motion {
+  .hero-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// BADGE — "IT riešenia od roku 2017"
+// ---------------------------------------------------------------------------
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-body;
+  font-size: $text-xs;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  padding: $space-2 $space-4;
+  border-radius: var(--radius-full);
+  margin-bottom: $space-8;
+  letter-spacing: 0.02em;
+}
+
+.hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  // Pulsing animation
+  animation: dot-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 4px var(--color-accent);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TITLE
+// ---------------------------------------------------------------------------
+.hero__title {
+  @include heading($text-5xl);
+  margin-bottom: $space-6;
+  // Slightly tighter line-height for hero
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+
+  @include from(lg) {
+    letter-spacing: -0.04em;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SUBTITLE
+// ---------------------------------------------------------------------------
+.hero__subtitle {
+  @include body-text($text-lg);
+  max-width: 560px;
+  margin: 0 auto $space-12;
+  color: var(--color-text-secondary);
+
+  @include from(md) {
+    font-size: $text-xl;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// CTA BUTTONS
+// ---------------------------------------------------------------------------
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+
+  @include from(sm) {
+    flex-direction: row;
+    justify-content: center;
+    gap: $space-4;
+  }
+}
+
+// Button component styles (reusable across site)
+.btn {
+  @include button-base;
+}
+
+.btn--primary {
+  @include button-primary;
+}
+
+.btn--secondary {
+  @include button-secondary;
+}
+
+.btn--ghost {
+  @include button-ghost;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// SCROLL INDICATOR
+// ---------------------------------------------------------------------------
+.hero__scroll {
+  position: absolute;
+  bottom: $space-8;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $z-base;
+  // Fade in after all content has revealed
+  opacity: 0;
+  animation: hero-entrance $duration-slower $ease-out forwards;
+  animation-delay: 1s;
+}
+
+.hero__scroll-line {
+  width: 2px;
+  height: 48px;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-full);
+  opacity: 0.5;
+  // Scroll hint animation
+  animation: scroll-hint 2s $ease-out infinite;
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  30% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 0.4;
+  }
+  60% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 0.4;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// REDUCED MOTION
+// ---------------------------------------------------------------------------
+@include reduced-motion {
+  .hero__grid,
+  .hero__glow,
+  .hero__badge-dot,
+  .hero__scroll-line {
+    animation: none;
+  }
+
+  .hero__scroll {
+    opacity: 1;
+    animation: none;
+  }
+
+  .hero__grid {
+    opacity: 0.4;
+  }
+
+  .hero__glow {
+    opacity: 0.8;
+  }
+
+  .hero__scroll-line {
+    opacity: 0.3;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// LIGHT MODE — Adjust hero background for light theme
+// ---------------------------------------------------------------------------
+.light-mode {
+  .hero__grid {
+    opacity: 0.3;
+  }
+
+  .hero__glow {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 157, 165, 0.1) 0%,
+      rgba(0, 82, 204, 0.05) 40%,
+      transparent 70%
+    );
+  }
+
+  // Glow effect doesn't work well on light bg — simplify to a solid dot
+  .hero__badge-dot {
+    box-shadow: none;
+  }
+
+  // Scroll indicator needs more contrast on light bg
+  .hero__scroll-line {
+    opacity: 0.35;
+  }
+}

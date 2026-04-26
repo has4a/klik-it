@@ -1,0 +1,414 @@
+// ============================================================================
+// NAVIGATION — Site Header + Nav Bar + Mobile Menu
+// ============================================================================
+// Desktop: Glass bar, fixed top, always visible with links + CTA
+// Mobile: Hamburger → fullscreen overlay (lives OUTSIDE header in DOM)
+// Scroll-aware: adds .is-scrolled class via JS for visual change
+//
+// Z-INDEX STRATEGY (clean, no hacks):
+//   - .site-header:        $z-overlay (300) — always on top
+//   - .mobile-menu:        $z-overlay - 1 (299) — below header, above content
+//   - Everything else:     default stacking
+// Mobile menu is a sibling of header in DOM, NOT a child.
+// This prevents iOS Safari stacking context bugs with nested fixed elements.
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// SITE HEADER — Fixed wrapper
+// ---------------------------------------------------------------------------
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-overlay;
+  // Subtle entry animation
+  animation: nav-slide-down $duration-slow $ease-out both;
+}
+
+@keyframes nav-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// NAV BAR
+// ---------------------------------------------------------------------------
+.nav {
+  width: 100%;
+  height: var(--nav-height);
+  transition: background $duration-normal $ease-out,
+    border-color $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  // Default state: transparent
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  // Scrolled state: glass effect (class added via JS)
+  .site-header.is-scrolled & {
+    @include glass;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+// Inner layout
+.nav__inner {
+  @include container-wide;
+  @include flex-between;
+  height: 100%;
+}
+
+// Right side group — toggle + CTA + hamburger
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+// ---------------------------------------------------------------------------
+// LOGO
+// ---------------------------------------------------------------------------
+.nav__logo {
+  font-family: $font-heading;
+  font-size: $text-xl;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  transition: opacity $duration-normal $ease-out;
+
+  span {
+    @include gradient-text;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// NAV LINKS — Desktop only
+// ---------------------------------------------------------------------------
+.nav__links {
+  display: none;
+
+  @include from(lg) {
+    display: flex;
+    align-items: center;
+    gap: $space-6;
+  }
+}
+
+.nav__link {
+  font-family: $font-body;
+  font-size: $text-sm;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: $space-2 0;
+  position: relative;
+  transition: color $duration-normal $ease-out;
+
+  // Underline hover effect
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--gradient-accent);
+    border-radius: var(--radius-full);
+    transition: width $duration-normal $ease-out;
+  }
+
+  &.is-active {
+    color: var(--color-text-primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-text-primary);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  @include focus-ring;
+}
+
+// ---------------------------------------------------------------------------
+// NAV CTA — Desktop only
+// ---------------------------------------------------------------------------
+.nav__cta {
+  display: none;
+
+  @include from(lg) {
+    @include button-base;
+    @include button-sm;
+    background: var(--color-accent-muted);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent-muted);
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--color-accent);
+        color: var(--color-text-inverse);
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-glow);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// HAMBURGER — Mobile only
+// ---------------------------------------------------------------------------
+.nav__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-2;
+  @include focus-ring;
+
+  @include from(lg) {
+    display: none;
+  }
+}
+
+.nav__hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  transition: transform $duration-normal $ease-out,
+    opacity $duration-normal $ease-out, width $duration-normal $ease-out;
+  transform-origin: center;
+
+  // Middle line — slightly shorter for visual interest
+  &:nth-child(2) {
+    width: 16px;
+    margin-left: auto;
+  }
+}
+
+// Hamburger → X animation
+.nav__hamburger[aria-expanded="true"] {
+  .nav__hamburger-line {
+    &:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// MOBILE MENU — Fullscreen overlay (OUTSIDE header in DOM)
+// ---------------------------------------------------------------------------
+// Lives as a sibling of <header>, not inside it.
+// This prevents iOS Safari stacking context bugs.
+// z-index is 1 below header so hamburger/logo remain clickable on top.
+// ---------------------------------------------------------------------------
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay - 1; // 299 — just below header (300)
+  background: var(--color-surface-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Prevent scroll behind menu on iOS
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  // Hidden by default
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity $duration-slow $ease-out,
+    visibility $duration-slow $ease-out;
+
+  // Visible when open
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  // Hide on desktop (safety net)
+  @include from(lg) {
+    display: none !important;
+  }
+}
+
+.mobile-menu__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-8;
+  width: 100%;
+  max-width: 320px;
+  padding: $space-6;
+  // Push content down slightly to account for nav bar above
+  padding-top: calc(var(--nav-height) + #{$space-6});
+}
+
+.mobile-menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+
+  li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.mobile-menu__link {
+  display: block;
+  font-family: $font-heading;
+  font-size: $text-xl;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  padding: $space-5 0;
+
+  // Stagger entrance animation
+  opacity: 0;
+  transform: translateY(16px);
+  transition: color $duration-normal $ease-out, opacity $duration-slow $ease-out,
+    transform $duration-slow $ease-out;
+
+  .mobile-menu.is-open & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Stagger each link
+  @for $i from 1 through 5 {
+    .mobile-menu.is-open li:nth-child(#{$i}) & {
+      transition-delay: #{80ms + ($i * 50ms)};
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent);
+  }
+
+  @include focus-ring;
+}
+
+// Mobile CTA
+.mobile-menu__cta {
+  @include button-primary;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: background $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out, opacity $duration-slow $ease-out,
+    transform $duration-slow $ease-out;
+
+  .mobile-menu.is-open & {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 400ms;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// THEME TOGGLE — Sun/Moon icon button
+// ---------------------------------------------------------------------------
+.theme-toggle {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: background $duration-normal $ease-out,
+    border-color $duration-normal $ease-out, color $duration-normal $ease-out,
+    transform $duration-normal $ease-out;
+  flex-shrink: 0;
+
+  @include focus-ring;
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-surface-3);
+      border-color: var(--color-border-hover);
+      color: var(--color-text-primary);
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+    transition-duration: $duration-fast;
+  }
+
+  svg {
+    transition: transform $duration-normal $ease-out,
+      opacity $duration-normal $ease-out;
+  }
+}
+
+// Icon visibility based on theme
+// Dark mode (default): show sun, hide moon
+.theme-toggle__sun {
+  display: block;
+}
+
+.theme-toggle__moon {
+  display: none;
+}
+
+// Light mode: show moon, hide sun
+.light-mode {
+  .theme-toggle__sun {
+    display: none;
+  }
+
+  .theme-toggle__moon {
+    display: block;
+  }
+}

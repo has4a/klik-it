@@ -1,0 +1,186 @@
+// ============================================================================
+// KLIK_IT DESIGN SYSTEM — Design Tokens
+// ============================================================================
+// Architecture: SCSS variables for static values (breakpoints, font stacks)
+// CSS Custom Properties for everything theme-switchable (colors, shadows)
+// This allows dark/light mode switch with a single class on <html>
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// 1. BREAKPOINTS (static — no need for theming)
+// ---------------------------------------------------------------------------
+$bp-sm: 480px; // Small phones
+$bp-md: 768px; // Large phones / small tablets
+$bp-lg: 1024px; // Tablets / small laptops
+$bp-xl: 1280px; // Laptops
+$bp-2xl: 1536px; // Large screens
+
+// ---------------------------------------------------------------------------
+// 2. FONT STACKS (static)
+// ---------------------------------------------------------------------------
+$font-heading: "Sora", system-ui, -apple-system, sans-serif;
+$font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+$font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+// ---------------------------------------------------------------------------
+// 3. SPACING SCALE (static — consistent rhythm)
+// ---------------------------------------------------------------------------
+// Based on 4px grid: 4, 8, 12, 16, 24, 32, 48, 64, 96, 128
+$space-1: 0.25rem; // 4px
+$space-2: 0.5rem; // 8px
+$space-3: 0.75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.25rem; // 20px
+$space-6: 1.5rem; // 24px
+$space-8: 2rem; // 32px
+$space-10: 2.5rem; // 40px
+$space-12: 3rem; // 48px
+$space-16: 4rem; // 64px
+$space-24: 6rem; // 96px
+$space-32: 8rem; // 128px
+
+// ---------------------------------------------------------------------------
+// 4. TYPE SCALE (fluid, based on clamp)
+// ---------------------------------------------------------------------------
+// Using a modular scale with responsive clamp values
+// Pattern: clamp(min, preferred, max)
+$text-xs: clamp(0.75rem, 0.7rem + 0.15vw, 0.8125rem); // 12-13px
+$text-sm: clamp(0.8125rem, 0.78rem + 0.2vw, 0.875rem); // 13-14px
+$text-base: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem); // 15-16px
+$text-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.125rem); // 17-18px
+$text-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.375rem); // 20-22px
+$text-2xl: clamp(1.5rem, 1.2rem + 1vw, 1.875rem); // 24-30px
+$text-3xl: clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem); // 30-40px
+$text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem); // 36-52px
+$text-5xl: clamp(2.75rem, 2rem + 3vw, 4.5rem); // 44-72px
+
+// ---------------------------------------------------------------------------
+// 5. TRANSITIONS (static)
+// ---------------------------------------------------------------------------
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+$duration-fast: 150ms;
+$duration-normal: 300ms;
+$duration-slow: 500ms;
+$duration-slower: 800ms;
+
+// ---------------------------------------------------------------------------
+// 6. Z-INDEX SCALE (static — prevents z-index wars)
+// ---------------------------------------------------------------------------
+$z-base: 1;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-overlay: 300;
+$z-modal: 400;
+$z-toast: 500;
+
+// ---------------------------------------------------------------------------
+// 7. CSS CUSTOM PROPERTIES — DARK THEME (default)
+// ---------------------------------------------------------------------------
+// Usage: var(--color-surface-1), var(--shadow-md), etc.
+// Switch theme by adding .light-mode class on <html>
+// ---------------------------------------------------------------------------
+:root {
+  // ---- Color: Surfaces (3-level depth system) ----
+  --color-surface-0: #07070b; // Deepest — page background
+  --color-surface-1: #0e0e15; // Cards, elevated containers
+  --color-surface-2: #16161f; // Inputs, hover states
+  --color-surface-3: #1e1e2a; // Active states, tooltips
+
+  // ---- Color: Borders ----
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-border-active: rgba(255, 255, 255, 0.18);
+
+  // ---- Color: Text ----
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #9a9ab0;
+  --color-text-tertiary: #6e6e8a;
+  --color-text-inverse: #07070b;
+
+  // ---- Color: Accent (Signature gradient) ----
+  --color-accent: #00d4dd;
+  --color-accent-hover: #33dfea;
+  --color-accent-muted: rgba(0, 212, 221, 0.15);
+  --color-accent-subtle: rgba(0, 212, 221, 0.06);
+  --color-accent-2: #0066ff;
+  --gradient-accent: linear-gradient(135deg, #00d4dd 0%, #0066ff 100%);
+  --gradient-accent-text: linear-gradient(135deg, #00d4dd 0%, #3399ff 100%);
+
+  // ---- Color: Semantic ----
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  // ---- Shadows (layered for realism) ----
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 4px 20px rgba(0, 212, 221, 0.08);
+
+  // ---- Border Radius ----
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  // ---- Glass effect ----
+  --glass-bg: rgba(14, 14, 21, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: 16px;
+
+  // ---- Layout ----
+  --container-max: 1200px;
+  --container-wide: 1400px;
+  --content-max: 720px; // Max width for readable text
+  --section-spacing: clamp(5rem, 8vw, 8rem);
+
+  // ---- Nav ----
+  --nav-height: 64px;
+}
+
+// ---------------------------------------------------------------------------
+// 8. CSS CUSTOM PROPERTIES — LIGHT THEME
+// ---------------------------------------------------------------------------
+// Activated by adding class="light-mode" to <html>
+// Every token that changes between themes is overridden here
+// ---------------------------------------------------------------------------
+.light-mode {
+  --color-surface-0: #f8f8fb;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f0f0f5;
+  --color-surface-3: #e8e8ef;
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.15);
+  --color-border-active: rgba(0, 0, 0, 0.22);
+
+  --color-text-primary: #0e0e15;
+  --color-text-secondary: #4a4a60;
+  --color-text-tertiary: #6e6e85;
+  --color-text-inverse: #f0f0f5;
+
+  --color-accent: #009da5;
+  --color-accent-hover: #00b8c2;
+  --color-accent-muted: rgba(0, 157, 165, 0.12);
+  --color-accent-subtle: rgba(0, 157, 165, 0.04);
+  --color-accent-2: #0052cc;
+  --gradient-accent: linear-gradient(135deg, #009da5 0%, #0052cc 100%);
+  --gradient-accent-text: linear-gradient(135deg, #009da5 0%, #2277cc 100%);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.07);
+  --shadow-glow: 0 4px 20px rgba(0, 157, 165, 0.08);
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-blur: 16px;
+}

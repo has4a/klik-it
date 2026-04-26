@@ -1,0 +1,145 @@
+// ============================================================================
+// PROCESS — How we work, 4-step flow
+// ============================================================================
+// Desktop: 4 columns with connecting line
+// Mobile: Vertical stack with left-aligned numbers
+// Numbers use mono font for tech identity
+// ============================================================================
+
+.process {
+  // surface-0 (default) — testimonials above is surface-1, contact below is surface-1
+}
+
+.process__steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+  position: relative;
+
+  @include from(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include from(2xl) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// STEP CARD
+// ---------------------------------------------------------------------------
+.process__step {
+  position: relative;
+  padding: $space-8 $space-6;
+  border-radius: var(--radius-lg);
+  @include surface(1);
+  // Only border — transform handled by GSAP during reveal
+  transition: border-color $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  &.is-revealed {
+    transition: border-color $duration-normal $ease-out,
+      box-shadow $duration-normal $ease-out,
+      transform $duration-normal $ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-2px);
+    }
+  }
+
+  @include until(sm) {
+    padding: $space-6;
+  }
+
+  // Connector line between steps (desktop 4-col only)
+  @include from(2xl) {
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: $space-4;
+      height: 1px;
+      background: var(--gradient-accent);
+      opacity: 0.25;
+      transform: translateX(100%);
+    }
+  }
+}
+
+// Step number — large, mono, muted
+.process__number {
+  display: block;
+  font-family: $font-mono;
+  font-size: $text-4xl;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-accent);
+  opacity: 0.25;
+  margin-bottom: $space-4;
+
+  @include from(2xl) {
+    font-size: $text-3xl;
+  }
+}
+
+// Step title
+.process__title {
+  font-family: $font-heading;
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: $space-3;
+  line-height: 1.3;
+
+  @include until(sm) {
+    font-size: $text-base;
+  }
+}
+
+// Step description
+.process__desc {
+  @include body-text($text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+// ---------------------------------------------------------------------------
+// STAGGER
+// ---------------------------------------------------------------------------
+// STAGGER — handled by GSAP ScrollTrigger.batch()
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// LIGHT MODE
+// ---------------------------------------------------------------------------
+// Process numbers need more contrast on light backgrounds
+.light-mode .process__number {
+  opacity: 0.4;
+}
+
+// Cards need shadow to separate from background
+.light-mode .process__step {
+  box-shadow: var(--shadow-sm);
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// REDUCED MOTION
+// ---------------------------------------------------------------------------
+@include reduced-motion {
+  .process__step {
+    transition: none !important;
+    transform: none !important;
+  }
+}

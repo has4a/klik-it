@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Cookies — Klik_IT</title>
+    <meta
+      name="description"
+      content="Informácie o používaní cookies na webovej stránke Klik_IT."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://klikit.sk/cookies-policy" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme detection — runs before paint to prevent flash -->
+    <script>
+      (function () {
+        var theme = localStorage.getItem("klikit-theme");
+        if (
+          theme === "light" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: light)").matches)
+        ) {
+          document.documentElement.classList.add("light-mode");
+        }
+      })();
+    </script>
+
+    <style>
+      /* ------------------------------------------------------------------ */
+      /* Klik_IT design system — Dark mode (default) + Light mode           */
+      /* ------------------------------------------------------------------ */
+      :root {
+        --bg: #07070b;
+        --surface: #0d0d14;
+        --border: rgba(255, 255, 255, 0.06);
+        --text-primary: #f0f0f5;
+        --text-secondary: #9494a8;
+        --text-tertiary: #5e5e72;
+        --accent: #00d4dd;
+        --accent-hover: #33e0e7;
+        --accent-muted: rgba(0, 212, 221, 0.08);
+        --font-heading: "Sora", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      .light-mode {
+        --bg: #f8f8fb;
+        --surface: #ffffff;
+        --border: rgba(0, 0, 0, 0.1);
+        --text-primary: #0e0e15;
+        --text-secondary: #4a4a60;
+        --text-tertiary: #6e6e85;
+        --accent: #009da5;
+        --accent-hover: #00b8c2;
+        --accent-muted: rgba(0, 157, 165, 0.12);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text-secondary);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .page {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 6rem;
+      }
+
+      /* Nav */
+      .page-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .page-nav__logo {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        letter-spacing: -0.03em;
+      }
+
+      .page-nav__logo span {
+        background: linear-gradient(135deg, #00d4dd, #0066ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .light-mode .page-nav__logo span {
+        background: linear-gradient(135deg, #009da5, #0052cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-nav__back {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .page-nav__back:hover {
+        color: var(--accent);
+      }
+
+      /* Headings */
+      h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+
+      .page__updated {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2.5rem;
+      }
+
+      h2 {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 2.5rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+
+      h3 {
+        font-family: var(--font-heading);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 2px;
+        transition: text-decoration-color 0.2s;
+      }
+
+      a:hover {
+        text-decoration-color: var(--accent);
+      }
+
+      strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      /* Table */
+      .cookie-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.25rem 0 1.5rem;
+        font-size: 0.85rem;
+      }
+
+      .cookie-table th,
+      .cookie-table td {
+        text-align: left;
+        padding: 0.625rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .cookie-table th {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .cookie-table td {
+        color: var(--text-secondary);
+      }
+
+      .cookie-table code {
+        font-family: var(--font-mono);
+        font-size: 0.8em;
+        color: var(--accent);
+        background: var(--accent-muted);
+        padding: 0.125em 0.375em;
+        border-radius: 4px;
+      }
+
+      /* Badge */
+      .badge {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.2em 0.6em;
+        border-radius: 4px;
+        background: var(--accent-muted);
+        color: var(--accent);
+      }
+
+      .badge--gray {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text-tertiary);
+      }
+
+      .light-mode .badge--gray {
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background: var(--border);
+        margin: 2rem 0;
+      }
+
+      .page-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      @media print {
+        body {
+          background: white;
+          color: #333;
+        }
+        h1,
+        h2,
+        h3,
+        strong {
+          color: black;
+        }
+        .page-nav__back {
+          display: none;
+        }
+        .badge {
+          border: 1px solid #ccc;
+          background: none;
+          color: #333;
+        }
+        .cookie-table code {
+          background: #f0f0f0;
+          color: #333;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <nav class="page-nav">
+        <a href="/" class="page-nav__logo">Klik<span>_IT</span></a>
+        <a href="/" class="page-nav__back">← Späť na hlavnú stránku</a>
+      </nav>
+
+      <h1>Zásady používania cookies</h1>
+      <p class="page__updated">Posledná aktualizácia: február 2026</p>
+
+      <p>
+        Táto stránka vysvetľuje, aké cookies a podobné technológie používame na
+        webovej stránke <strong>klikit.sk</strong>, prečo ich používame a aké
+        máte možnosti voľby.
+      </p>
+
+      <h2>Čo sú cookies?</h2>
+      <p>
+        Cookies sú malé textové súbory, ktoré sa ukladajú vo vašom prehliadači
+        pri návšteve webovej stránky. Pomáhajú stránke zapamätať si vaše
+        nastavenia, analyzovať návštevnosť a zabezpečiť správne fungovanie.
+      </p>
+
+      <h2>Aké cookies používame</h2>
+      <p>Cookies rozdeľujeme do dvoch kategórií podľa ich účelu:</p>
+
+      <h3>
+        1. Nevyhnutné cookies
+        <span class="badge--gray badge">vždy aktívne</span>
+      </h3>
+      <p>
+        Tieto cookies sú potrebné pre základné fungovanie a bezpečnosť stránky.
+        Nemôžete ich odmietnuť, pretože bez nich by stránka nefungovala správne.
+      </p>
+
+      <div class="table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+              <th>Poskytovateľ</th>
+              <th>Účel</th>
+              <th>Platnosť</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>cookie_consent</code></td>
+              <td>klikit.sk</td>
+              <td>Ukladá vašu voľbu ohľadom cookies</td>
+              <td>Trvalé (localStorage)</td>
+            </tr>
+            <tr>
+              <td><code>__cf_bm</code></td>
+              <td>Cloudflare</td>
+              <td>Ochrana proti botom a DDoS útokom</td>
+              <td>30 minút</td>
+            </tr>
+            <tr>
+              <td><code>_GRECAPTCHA</code></td>
+              <td>Google reCAPTCHA</td>
+              <td>Ochrana kontaktného formulára pred spamom</td>
+              <td>6 mesiacov</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. Analytické cookies <span class="badge">vyžadujú súhlas</span></h3>
+      <p>
+        Tieto cookies nám pomáhajú pochopiť, ako návštevníci používajú našu
+        stránku. Dáta sú anonymizované a slúžia výlučne na zlepšovanie obsahu a
+        používateľského zážitku. Aktivujú sa až po vašom výslovnom súhlase.
+      </p>
+
+      <div class="table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+              <th>Poskytovateľ</th>
+              <th>Účel</th>
+              <th>Platnosť</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>_ga</code></td>
+              <td>Google Analytics 4</td>
+              <td>Rozlišuje unikátnych návštevníkov</td>
+              <td>2 roky</td>
+            </tr>
+            <tr>
+              <td><code>_ga_FT6JSLJ4X3</code></td>
+              <td>Google Analytics 4</td>
+              <td>Udržiava stav relácie</td>
+              <td>2 roky</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Ako spravovať cookies</h2>
+      <p>
+        Pri prvej návšteve vám zobrazíme banner, kde si vyberiete, či súhlasíte
+        s analytickými cookies. Vašu voľbu si môžete kedykoľvek zmeniť:
+      </p>
+      <p>
+        <strong>Vymazanie preferencie:</strong> V nastaveniach prehliadača
+        vymažte údaje lokálneho úložiska (localStorage) pre stránku klikit.sk.
+        Pri ďalšej návšteve sa vám banner zobrazí znova.
+      </p>
+      <p>
+        <strong>Blokovanie v prehliadači:</strong> Väčšina prehliadačov umožňuje
+        blokovať alebo mazať cookies cez nastavenia. Upozorňujeme, že blokovanie
+        nevyhnutných cookies môže obmedziť funkčnosť stránky.
+      </p>
+
+      <h2>Tretie strany</h2>
+      <p>
+        Niektoré cookies sú nastavované tretími stranami (Google, Cloudflare).
+        Nemáme kontrolu nad tým, ako tieto strany spracovávajú dáta. Viac
+        informácií nájdete v ich vlastných zásadách ochrany súkromia:
+      </p>
+      <p>
+        Google:
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener"
+          >policies.google.com/privacy</a
+        ><br />
+        Cloudflare:
+        <a
+          href="https://www.cloudflare.com/privacypolicy/"
+          target="_blank"
+          rel="noopener"
+          >cloudflare.com/privacypolicy</a
+        >
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Ak máte otázky ohľadom cookies alebo ochrany údajov, kontaktujte nás na
+        <a href="/cdn-cgi/l/email-protection#97fef9f1f8d7fcfbfefcfee3b9e4fc"
+          ><span
+            class="__cf_email__"
+            data-cfemail="81e8efe7eec1eaede8eae8f5aff2ea"
+            >[email&#160;protected]</span
+          ></a
+        >.
+      </p>
+
+      <hr />
+
+      <p>
+        Pozrite si tiež naše
+        <a href="/privacy-policy.html">Zásady ochrany osobných údajov</a>.
+      </p>
+
+      <footer class="page-footer">
+        <p>© 2025 Klik_IT. Všetky práva vyhradené.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+// ============================================================================
+// ABOUT — Asymmetric layout with stats + content
+// ============================================================================
+// Left: 3 stat blocks with large numbers (visual impact)
+// Right: Section label + heading + body text
+// Mobile: Stacks vertically, stats first
+// ============================================================================
+
+.about {
+  // Alternating section background — creates visual rhythm
+  background: var(--color-surface-1);
+  overflow: visible;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-16;
+  align-items: center;
+
+  @include from(lg) {
+    grid-template-columns: 1fr 1.4fr;
+    gap: $space-12;
+  }
+
+  @include from(xl) {
+    gap: $space-24;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// STATS — Left column
+// ---------------------------------------------------------------------------
+.about__stats {
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+
+  @include until(lg) {
+    // On mobile: horizontal row
+    flex-direction: row;
+    justify-content: center;
+    gap: $space-6;
+    text-align: center;
+  }
+
+  @include until(sm) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.about__stat {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-8 $space-6;
+  border-radius: var(--radius-lg);
+  @include surface(2);
+  transition: border-color $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out;
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  @include until(lg) {
+    flex: 1;
+    align-items: center;
+    padding: $space-6 $space-4;
+  }
+}
+
+// Light mode — stat cards need shadow for separation
+.light-mode .about__stat {
+  box-shadow: var(--shadow-sm);
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+.about__stat-number {
+  font-family: $font-heading;
+  font-size: $text-5xl;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.about__stat-label {
+  font-family: $font-body;
+  font-size: $text-sm;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  line-height: 1.4;
+
+  @include until(lg) {
+    font-size: $text-xs;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// CONTENT — Right column
+// ---------------------------------------------------------------------------
+.about__content {
+  .section-label {
+    text-align: left;
+
+    @include until(lg) {
+      text-align: center;
+    }
+  }
+
+  h2 {
+    text-align: left;
+    margin-bottom: $space-6;
+
+    @include until(lg) {
+      text-align: center;
+    }
+  }
+
+  p {
+    max-width: var(--content-max);
+
+    @include until(lg) {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

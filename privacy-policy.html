@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ochrana osobných údajov — Klik_IT</title>
+    <meta
+      name="description"
+      content="Zásady ochrany osobných údajov spoločnosti Klik_IT."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://klikit.sk/privacy-policy" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Theme detection — runs before paint to prevent flash -->
+    <script>
+      (function () {
+        var theme = localStorage.getItem("klikit-theme");
+        if (
+          theme === "light" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: light)").matches)
+        ) {
+          document.documentElement.classList.add("light-mode");
+        }
+      })();
+    </script>
+
+    <style>
+      :root {
+        --bg: #07070b;
+        --surface: #0d0d14;
+        --border: rgba(255, 255, 255, 0.06);
+        --text-primary: #f0f0f5;
+        --text-secondary: #9494a8;
+        --text-tertiary: #5e5e72;
+        --accent: #00d4dd;
+        --accent-hover: #33e0e7;
+        --accent-muted: rgba(0, 212, 221, 0.08);
+        --font-heading: "Sora", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      .light-mode {
+        --bg: #f8f8fb;
+        --surface: #ffffff;
+        --border: rgba(0, 0, 0, 0.1);
+        --text-primary: #0e0e15;
+        --text-secondary: #4a4a60;
+        --text-tertiary: #6e6e85;
+        --accent: #009da5;
+        --accent-hover: #00b8c2;
+        --accent-muted: rgba(0, 157, 165, 0.12);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text-secondary);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .page {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 6rem;
+      }
+
+      .page-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .page-nav__logo {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        letter-spacing: -0.03em;
+      }
+
+      .page-nav__logo span {
+        background: linear-gradient(135deg, #00d4dd, #0066ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .light-mode .page-nav__logo span {
+        background: linear-gradient(135deg, #009da5, #0052cc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-nav__back {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .page-nav__back:hover {
+        color: var(--accent);
+      }
+
+      h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+
+      .page__updated {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        margin-bottom: 2.5rem;
+      }
+
+      h2 {
+        font-family: var(--font-heading);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 2.5rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+
+      h3 {
+        font-family: var(--font-heading);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 2px;
+        transition: text-decoration-color 0.2s;
+      }
+
+      a:hover {
+        text-decoration-color: var(--accent);
+      }
+
+      ul {
+        margin: 0.5rem 0 1.25rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+      }
+
+      li {
+        line-height: 1.6;
+      }
+
+      strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background: var(--border);
+        margin: 2rem 0;
+      }
+
+      .page-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+      }
+
+      .note {
+        background: var(--accent-muted);
+        border-left: 3px solid var(--accent);
+        padding: 1rem 1.25rem;
+        border-radius: 0 8px 8px 0;
+        margin: 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      @media print {
+        body {
+          background: white;
+          color: #333;
+        }
+        h1,
+        h2,
+        h3,
+        strong {
+          color: black;
+        }
+        .page-nav__back {
+          display: none;
+        }
+        .note {
+          border-left-color: #333;
+          background: #f5f5f5;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <nav class="page-nav">
+        <a href="/" class="page-nav__logo">Klik<span>_IT</span></a>
+        <a href="/" class="page-nav__back">← Späť na hlavnú stránku</a>
+      </nav>
+
+      <h1>Zásady ochrany osobných údajov</h1>
+      <p class="page__updated">Posledná aktualizácia: február 2026</p>
+
+      <div class="note">
+        Vaše súkromie berieme vážne. Tento dokument vysvetľuje, aké údaje
+        zhromažďujeme, prečo ich spracovávame a aké máte práva. Ak máte
+        akékoľvek otázky, neváhajte nás kontaktovať.
+      </div>
+
+      <h2>1. Kto sme</h2>
+      <p>
+        Prevádzkovateľom webovej stránky <strong>klikit.sk</strong> je
+        spoločnosť Klik_IT so sídlom v Žiline, Slovenská republika (ďalej len
+        „my" alebo „prevádzkovateľ").
+      </p>
+      <p>
+        Kontaktné údaje pre otázky o ochrane údajov:<br />
+        E-mail: <a href="mailto:info@klikit.sk">info@klikit.sk</a><br />
+        Telefón: <a href="tel:+421910520846">+421 910 520 846</a>
+      </p>
+
+      <h2>2. Aké údaje zhromažďujeme</h2>
+
+      <h3>a) Údaje z kontaktného formulára</h3>
+      <p>Keď nám pošlete správu cez kontaktný formulár, zhromažďujeme:</p>
+      <ul>
+        <li>Meno a priezvisko</li>
+        <li>E-mailová adresa</li>
+        <li>Telefónne číslo (nepovinné)</li>
+        <li>Text správy</li>
+      </ul>
+
+      <h3>b) Analytické údaje</h3>
+      <p>
+        Ak ste udelili súhlas s analytickými cookies, zbierame anonymizované
+        údaje o tom, ako používate našu stránku — napríklad ktoré sekcie
+        navštevujete, ako dlho zostávate, z akého zariadenia prichádzate. Tieto
+        údaje sú zbierané prostredníctvom služby Google Analytics 4 a nie je
+        možné podľa nich identifikovať konkrétnu osobu.
+      </p>
+
+      <h3>c) Technické údaje</h3>
+      <p>
+        Pri každej návšteve naše servery (Cloudflare) automaticky zaznamenávajú
+        technické údaje potrebné pre fungovanie a bezpečnosť: IP adresu, typ
+        prehliadača, operačný systém a čas prístupu. Tieto údaje sa neuchovávajú
+        dlhšie, než je nevyhnutné pre zabezpečenie služby.
+      </p>
+
+      <h2>3. Prečo údaje spracovávame</h2>
+      <p>Vaše údaje spracovávame na základe nasledujúcich právnych základov:</p>
+      <ul>
+        <li>
+          <strong>Oprávnený záujem</strong> (čl. 6 ods. 1 písm. f) GDPR) —
+          odpoveď na vašu správu z kontaktného formulára, zabezpečenie a ochrana
+          webovej stránky.
+        </li>
+        <li>
+          <strong>Súhlas</strong> (čl. 6 ods. 1 písm. a) GDPR) — analytické
+          cookies (Google Analytics 4). Súhlas môžete kedykoľvek odvolať.
+        </li>
+        <li>
+          <strong>Oprávnený záujem</strong> — ochrana proti spamu
+          prostredníctvom Google reCAPTCHA.
+        </li>
+      </ul>
+
+      <h2>4. Komu údaje zdieľame</h2>
+      <p>Vaše osobné údaje nikdy nepredávame. Zdieľame ich výlučne s:</p>
+      <ul>
+        <li>
+          <strong>Google LLC</strong> — prevádzkovateľ služieb Google Analytics
+          a reCAPTCHA. Dáta môžu byť prenášané do USA na základe štandardných
+          zmluvných doložiek (SCC).
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener"
+            >Zásady ochrany súkromia Google</a
+          >.
+        </li>
+        <li>
+          <strong>Cloudflare, Inc.</strong> — poskytovateľ CDN a bezpečnostných
+          služieb. Spracováva technické údaje na ochranu pred útokmi.
+          <a
+            href="https://www.cloudflare.com/privacypolicy/"
+            target="_blank"
+            rel="noopener"
+            >Zásady ochrany súkromia Cloudflare</a
+          >.
+        </li>
+      </ul>
+
+      <h2>5. Ako dlho údaje uchovávame</h2>
+      <ul>
+        <li>
+          <strong>Údaje z formulára:</strong> Po dobu nevyhnutnú na vybavenie
+          vašej požiadavky, maximálne 12 mesiacov. Potom sú vymazané.
+        </li>
+        <li>
+          <strong>Analytické údaje:</strong> Google Analytics uchováva údaje
+          štandardne 14 mesiacov. Údaje sú anonymizované.
+        </li>
+        <li>
+          <strong>Technické logy:</strong> Cloudflare uchováva logy maximálne 72
+          hodín.
+        </li>
+        <li>
+          <strong>Cookie preferencie:</strong> Vaša voľba ohľadom cookies sa
+          ukladá v lokálnom úložisku prehliadača bez časového obmedzenia. Môžete
+          ju kedykoľvek vymazať.
+        </li>
+      </ul>
+
+      <h2>6. Vaše práva</h2>
+      <p>
+        Podľa nariadenia GDPR (Nariadenie EÚ 2016/679) máte nasledujúce práva:
+      </p>
+      <ul>
+        <li>
+          <strong>Právo na prístup</strong> (čl. 15) — môžete požiadať o kópiu
+          údajov, ktoré o vás spracovávame.
+        </li>
+        <li>
+          <strong>Právo na opravu</strong> (čl. 16) — ak sú vaše údaje nepresné
+          alebo neúplné.
+        </li>
+        <li>
+          <strong>Právo na vymazanie</strong> (čl. 17) — môžete požiadať o
+          vymazanie vašich údajov.
+        </li>
+        <li><strong>Právo na obmedzenie spracovania</strong> (čl. 18).</li>
+        <li><strong>Právo na prenosnosť údajov</strong> (čl. 20).</li>
+        <li>
+          <strong>Právo namietať</strong> (čl. 21) — proti spracovaniu na
+          základe oprávneného záujmu.
+        </li>
+        <li>
+          <strong>Právo odvolať súhlas</strong> (čl. 7) — kedykoľvek, bez vplyvu
+          na zákonnosť predchádzajúceho spracovania.
+        </li>
+      </ul>
+      <p>
+        Na uplatnenie svojich práv nás kontaktujte na
+        <a href="mailto:info@klikit.sk">info@klikit.sk</a>. Na vašu žiadosť
+        odpovieme do 30 dní.
+      </p>
+
+      <h2>7. Právo podať sťažnosť</h2>
+      <p>
+        Ak sa domnievate, že spracovanie vašich osobných údajov porušuje GDPR,
+        máte právo podať sťažnosť na dozorný orgán:
+      </p>
+      <p>
+        <strong>Úrad na ochranu osobných údajov Slovenskej republiky</strong
+        ><br />
+        Hraničná 12, 820 07 Bratislava 27<br />
+        Web:
+        <a href="https://dataprotection.gov.sk" target="_blank" rel="noopener"
+          >dataprotection.gov.sk</a
+        ><br />
+        E-mail: statny.dozor@pdp.gov.sk
+      </p>
+
+      <h2>8. Bezpečnosť údajov</h2>
+      <p>
+        Na ochranu vašich údajov používame primerané technické a organizačné
+        opatrenia vrátane šifrovania prenosu (HTTPS/TLS), ochrany proti útokom
+        (Cloudflare WAF), ochrany formulára proti spamu (reCAPTCHA) a
+        pravidelnej aktualizácie softvéru.
+      </p>
+
+      <h2>9. Zmeny zásad</h2>
+      <p>
+        Tieto zásady môžeme príležitostne aktualizovať. Pri významných zmenách
+        vás budeme informovať prostredníctvom oznámenia na webovej stránke.
+        Dátum poslednej aktualizácie je uvedený na začiatku dokumentu.
+      </p>
+
+      <hr />
+
+      <p>
+        Pozrite si tiež naše
+        <a href="/cookies-policy.html">Zásady používania cookies</a>.
+      </p>
+
+      <footer class="page-footer">
+        <p>© 2025 Klik_IT. Všetky práva vyhradené.</p>
+      </footer>
+    </div>
+  </body>
+</html>

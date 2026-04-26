@@ -1,0 +1,613 @@
+// ============================================================================
+// KLIK_IT — Main Stylesheet Entry Point
+// ============================================================================
+// Order matters: tokens → reset → base → components → sections
+// ============================================================================
+// NOTE: If using Lenis, also add to main.js: import 'lenis/dist/lenis.css'
+// Or install and import will be handled by Vite automatically
+// ============================================================================
+
+// --- Foundation ---
+@import "variables";
+@import "mixins";
+
+// ============================================================================
+// RESET — Modern, minimal, opinion-free
+// ============================================================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Remove default list styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Reset links
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Reset form elements
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+// Images
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Remove default fieldset styles
+fieldset {
+  border: none;
+}
+
+// Table reset
+table {
+  border-collapse: collapse;
+}
+
+// ============================================================================
+// BASE — HTML & Body
+// ============================================================================
+html {
+  // Smooth scrolling (respects prefers-reduced-motion in JS)
+  scroll-behavior: smooth;
+  // Prevent font size inflation on mobile
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  // Better font rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // Prevent tap highlight on mobile
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $text-base;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-0);
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  // Smooth transition when switching themes (background only — color on children handles itself)
+  transition: background-color $duration-slow $ease-out;
+  // Safe area insets for notched devices
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+// ---------------------------------------------------------------------------
+// SKIP LINK — First focusable element for keyboard users
+// ---------------------------------------------------------------------------
+.skip-link {
+  @include visually-hidden;
+  position: fixed;
+  top: $space-4;
+  left: $space-4;
+  z-index: 9999;
+  padding: $space-3 $space-6;
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-family: $font-body;
+  font-size: $text-sm;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+
+  &:focus {
+    // Override visually-hidden when focused
+    width: auto;
+    height: auto;
+    clip: auto;
+    margin: 0;
+    overflow: visible;
+  }
+}
+
+// Lock body when mobile menu is open
+body.menu-open {
+  overflow: hidden;
+}
+
+// ---------------------------------------------------------------------------
+// iOS / MOBILE FIXES
+// ---------------------------------------------------------------------------
+// Prevent auto-zoom on input focus (iOS Safari)
+@include until(md) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+// iOS viewport height fix (for non-dvh browsers)
+@supports not (min-height: 100dvh) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+}
+
+// ============================================================================
+// TYPOGRAPHY — Global heading & text styles
+// ============================================================================
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-heading;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: $text-5xl;
+}
+h2 {
+  font-size: $text-4xl;
+}
+h3 {
+  font-size: $text-2xl;
+}
+h4 {
+  font-size: $text-xl;
+}
+
+p {
+  @include body-text;
+  text-wrap: pretty;
+
+  + p {
+    margin-top: $space-4;
+  }
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+small {
+  font-size: $text-sm;
+}
+
+// ============================================================================
+// SELECTION
+// ============================================================================
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+// ============================================================================
+// LAYOUT — Section & Container
+// ============================================================================
+section {
+  position: relative;
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+}
+
+.container {
+  @include container;
+}
+
+.container--wide {
+  @include container-wide;
+}
+
+// ============================================================================
+// SECTION HEADER — Reusable pattern for section titles
+// ============================================================================
+// Usage:
+// <div class="section-header">
+//   <span class="section-label">O nás</span>
+//   <h2>Spoľahlivý <span class="text-accent">IT partner</span></h2>
+//   <p>Subheadline text</p>
+// </div>
+// ============================================================================
+.section-header {
+  text-align: center;
+  margin-bottom: $space-12;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-mono;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  margin-bottom: $space-4;
+  font-size: $text-xs;
+
+  // Dash prefix for tech feel
+  &::before {
+    content: "—";
+    color: var(--color-accent);
+    opacity: 0.5;
+  }
+}
+
+.section-header h2 {
+  margin-bottom: $space-4;
+}
+
+.section-header p {
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Text accent color
+.text-accent {
+  @include gradient-text;
+}
+
+// Visually hidden (for screen readers)
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// ============================================================================
+// GLOBAL ANIMATION DEFAULTS — Reduced motion support
+// ============================================================================
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// ============================================================================
+// SCROLL REVEAL — GSAP handles animations, CSS provides fallback
+// ============================================================================
+// GSAP sets initial state (opacity: 0, y: 24) inline and animates on scroll.
+// If GSAP fails to load, JS adds .is-visible class → show everything.
+// ============================================================================
+[data-reveal].is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+// ============================================================================
+// SECTION IMPORTS
+// ============================================================================
+@import "nav";
+@import "landing";
+@import "trust";
+@import "about";
+@import "services";
+@import "testimonials";
+@import "process";
+@import "contact";
+@import "faq";
+@import "footer";
+@import "cookie-consent";
+
+// ============================================================================
+// FLOATING CONTACT WIDGET
+// ============================================================================
+// Fixed bottom-right, expands on click to show contact options.
+// Glass effect consistent with nav bar.
+// Hidden in hero area (appears after scrolling past first section).
+// ============================================================================
+.floating-contact {
+  position: fixed;
+  bottom: $space-6;
+  right: $space-6;
+  z-index: $z-sticky;
+  // Start hidden, JS will show after scroll
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity $duration-normal $ease-out,
+    transform $duration-normal $ease-out;
+  pointer-events: none;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  @include until(sm) {
+    bottom: $space-4;
+    right: $space-4;
+  }
+}
+
+// Trigger button
+.floating-contact__trigger {
+  @include flex-center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transition: transform $duration-normal $ease-out,
+    box-shadow $duration-normal $ease-out, background $duration-normal $ease-out;
+
+  @include focus-ring;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-xl), var(--shadow-glow);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+    transition-duration: $duration-fast;
+  }
+}
+
+// Icon swap
+.floating-contact__icon-close {
+  display: none;
+}
+
+.floating-contact__trigger[aria-expanded="true"] {
+  background: var(--color-surface-3);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-md);
+
+  .floating-contact__icon-default {
+    display: none;
+  }
+
+  .floating-contact__icon-close {
+    display: block;
+  }
+}
+
+// Panel
+.floating-contact__panel {
+  position: absolute;
+  bottom: calc(100% + #{$space-3});
+  right: 0;
+  width: 260px;
+  @include glass;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  // Hidden by default
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.95);
+  transform-origin: bottom right;
+  transition: opacity $duration-normal $ease-out,
+    visibility $duration-normal $ease-out, transform $duration-normal $ease-out;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.floating-contact__heading {
+  font-family: $font-heading;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.floating-contact__options {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.floating-contact__option {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3;
+  border-radius: var(--radius-md);
+  font-size: $text-xs;
+  color: var(--color-text-secondary);
+  transition: background $duration-normal $ease-out,
+    color $duration-normal $ease-out;
+
+  @include focus-ring;
+
+  svg {
+    flex-shrink: 0;
+    color: var(--color-text-tertiary);
+    transition: color $duration-normal $ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--color-surface-2);
+      color: var(--color-text-primary);
+
+      svg {
+        color: var(--color-accent);
+      }
+    }
+  }
+
+  // "Napísať správu" option — slightly differentiated
+  &--form {
+    color: var(--color-accent);
+    font-weight: 500;
+
+    svg {
+      color: var(--color-accent);
+    }
+  }
+}
+
+// ============================================================================
+// MICRO-DETAIL REFINEMENTS
+// ============================================================================
+
+// Textarea — subtle resize handle styling
+textarea {
+  resize: vertical;
+
+  &::-webkit-resizer {
+    // Hide default ugly resizer, keep resize: vertical functionality
+    display: none;
+  }
+}
+
+// Smooth focus transitions on all interactive elements
+a,
+button,
+input,
+textarea,
+select,
+details summary {
+  transition-property: color, background-color, border-color, box-shadow,
+    opacity;
+  transition-duration: $duration-normal;
+  transition-timing-function: $ease-out;
+}
+
+// ============================================================================
+// PRINT STYLESHEET
+// ============================================================================
+// Corporate clients sometimes print pages. This ensures it's usable.
+// ============================================================================
+@media print {
+  // Remove decorative/interactive elements
+  .site-header,
+  .mobile-menu,
+  .hero__bg,
+  .hero__scroll,
+  .theme-toggle,
+  .skip-link,
+  .floating-contact,
+  .cookie-consent {
+    display: none !important;
+  }
+
+  // Reset backgrounds and colors for print
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  section {
+    background: white !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    break-inside: avoid;
+  }
+
+  // Make all text readable on white
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black !important;
+  }
+
+  p,
+  span,
+  li,
+  a {
+    color: #333 !important;
+  }
+
+  // Disable gradient text (invisible in print)
+  .text-accent {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #007a80 !important;
+  }
+
+  // Show link URLs
+  .contact__detail-text a::after,
+  .footer__contact a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666;
+  }
+
+  // Remove animations and transforms
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  // Remove shadows and borders for cleaner print
+  .service-card,
+  .process__step,
+  .faq__item,
+  .about__stat,
+  .contact__form-wrapper,
+  .testimonial-card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+
+  // Hide decorative quote marks in print
+  .testimonial-card__quote {
+    display: none !important;
+  }
+
+  // Hero — reduce space, no fullscreen
+  .hero {
+    min-height: auto !important;
+    padding: 3rem 1rem !important;
+  }
+}

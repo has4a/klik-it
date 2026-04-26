@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO & Meta -->
+    <title>Klik_IT — Spoľahlivý IT partner pre váš biznis</title>
+    <meta
+      name="description"
+      content="Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT."
+    />
+    <meta name="author" content="Klik_IT" />
+    <link rel="canonical" href="https://klikit.sk/" />
+
+    <!-- Open Graph — Facebook, LinkedIn, iMessage, Slack, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://klikit.sk/" />
+    <meta
+      property="og:title"
+      content="Klik_IT — Spoľahlivý IT partner pre váš biznis"
+    />
+    <meta
+      property="og:description"
+      content="Komplexná správa serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT."
+    />
+    <meta property="og:image" content="https://klikit.sk/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="sk_SK" />
+    <meta property="og:site_name" content="Klik_IT" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Klik_IT — Spoľahlivý IT partner pre váš biznis"
+    />
+    <meta
+      name="twitter:description"
+      content="Komplexná správa serverov, sietí a cloudových riešení pre firmy. Od roku 2017."
+    />
+    <meta name="twitter:image" content="https://klikit.sk/og-image.jpg" />
+
+    <!-- Favicon set (nahraď súbory vlastnými) -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts: Sora (headings) + DM Sans (body) + JetBrains Mono (labels) -->
+    <!-- Preconnect + preload for critical fonts (reduces FOUT) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GA4 loaded conditionally via CookieConsent.js after user consent -->
+
+    <!-- Main CSS + JS (Vite handles bundling) -->
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+
+  <body>
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">Preskočiť na obsah</a>
+
+    <!-- ================================================================== -->
+    <!-- NAVIGATION                                                         -->
+    <!-- ================================================================== -->
+    <!-- Desktop: glass bar, always visible                                 -->
+    <!-- Mobile: hamburger → fullscreen overlay                             -->
+    <!-- ================================================================== -->
+    <header class="site-header" id="site-header">
+      <nav class="nav" aria-label="Hlavná navigácia">
+        <div class="nav__inner">
+          <!-- Logo -->
+          <a href="#home" class="nav__logo" aria-label="Klik IT — Domov">
+            Klik_<span>IT</span>
+          </a>
+
+          <!-- Desktop nav links (hidden on mobile via CSS) -->
+          <ul class="nav__links" role="list">
+            <li><a href="#home" class="nav__link">Domov</a></li>
+            <li><a href="#about" class="nav__link">O nás</a></li>
+            <li><a href="#services" class="nav__link">Služby</a></li>
+            <li><a href="#testimonials" class="nav__link">Referencie</a></li>
+            <li><a href="#process" class="nav__link">Proces</a></li>
+            <li><a href="#contact" class="nav__link">Kontakt</a></li>
+            <li><a href="#faq" class="nav__link">FAQ</a></li>
+          </ul>
+
+          <!-- Right side actions -->
+          <div class="nav__actions">
+            <!-- CTA button (desktop only) -->
+            <a href="#contact" class="nav__cta">Kontaktujte nás</a>
+
+            <!-- Theme toggle -->
+            <button
+              class="theme-toggle"
+              id="theme-toggle"
+              aria-label="Prepnúť farebnú tému"
+              title="Prepnúť tému"
+            >
+              <svg
+                class="theme-toggle__sun"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                />
+              </svg>
+              <svg
+                class="theme-toggle__moon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+
+            <!-- Hamburger (mobile only) -->
+            <button
+              class="nav__hamburger"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="Otvoriť menu"
+            >
+              <span class="nav__hamburger-line"></span>
+              <span class="nav__hamburger-line"></span>
+              <span class="nav__hamburger-line"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mobile fullscreen menu — outside header to avoid iOS stacking context bugs -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu__inner">
+        <ul class="mobile-menu__links" role="list">
+          <li><a href="#home" class="mobile-menu__link">Domov</a></li>
+          <li><a href="#about" class="mobile-menu__link">O nás</a></li>
+          <li><a href="#services" class="mobile-menu__link">Služby</a></li>
+          <li>
+            <a href="#testimonials" class="mobile-menu__link">Referencie</a>
+          </li>
+          <li><a href="#process" class="mobile-menu__link">Proces</a></li>
+          <li><a href="#contact" class="mobile-menu__link">Kontakt</a></li>
+          <li><a href="#faq" class="mobile-menu__link">FAQ</a></li>
+        </ul>
+
+        <a href="#contact" class="mobile-menu__cta">Kontaktujte nás</a>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <!-- ================================================================== -->
+      <!-- HERO / LANDING                                                     -->
+      <!-- ================================================================== -->
+      <!-- Progressive enhancement: static content always visible.            -->
+      <!-- CSS creates the abstract grid/pattern background.                  -->
+      <!-- Staggered reveal: badge → title → subtitle → actions              -->
+      <!-- ================================================================== -->
+      <section class="hero" id="home">
+        <!-- Abstract background — pure CSS, no image dependency -->
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__grid"></div>
+          <div class="hero__glow"></div>
+        </div>
+
+        <div class="hero__content">
+          <div class="hero__badge hero-reveal" style="--reveal-order: 1">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            IT riešenia od roku 2017
+          </div>
+
+          <h1 class="hero__title hero-reveal" style="--reveal-order: 2">
+            Vaša IT infraštruktúra.<br />
+            Naša <span class="text-accent">zodpovednosť.</span>
+          </h1>
+
+          <p class="hero__subtitle hero-reveal" style="--reveal-order: 3">
+            Komplexná správa serverov, sietí a cloudových riešení pre firmy,
+            ktoré sa chcú sústrediť na svoj biznis — nie na IT problémy.
+          </p>
+
+          <div class="hero__actions hero-reveal" style="--reveal-order: 4">
+            <a href="#services" class="btn btn--primary">
+              Naše služby
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn--secondary">
+              Dohodnúť konzultáciu
+            </a>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero__scroll" aria-hidden="true">
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TRUST BAR — Social proof logos                                     -->
+      <!-- ================================================================== -->
+      <!-- Builds credibility immediately after hero                          -->
+      <!-- Replace placeholder names with real client logos when available     -->
+      <!-- ================================================================== -->
+      <section class="trust" aria-label="Naši klienti">
+        <div class="container">
+          <p class="trust__label" data-reveal>
+            Dôverujú nám firmy naprieč Slovenskom
+          </p>
+          <div class="trust__logos" data-reveal>
+            <!-- Replace these with actual client logos (<img> or inline SVG) -->
+            <!-- Using text placeholders until real logos are provided -->
+            <div class="trust__logo">
+              <span>Partner 1</span>
+            </div>
+            <div class="trust__logo">
+              <span>Partner 2</span>
+            </div>
+            <div class="trust__logo">
+              <span>Partner 3</span>
+            </div>
+            <div class="trust__logo">
+              <span>Partner 4</span>
+            </div>
+            <div class="trust__logo">
+              <span>Partner 5</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- ABOUT                                                              -->
+      <!-- ================================================================== -->
+      <!-- Asymmetric layout: big stat left, text right                       -->
+      <!-- Shows credibility through numbers + description                    -->
+      <!-- ================================================================== -->
+      <section class="about" id="about">
+        <div class="container">
+          <div class="about__grid">
+            <!-- Left: Stats / Visual impact -->
+            <div class="about__stats" data-reveal="left">
+              <div class="about__stat">
+                <span
+                  class="about__stat-number text-accent"
+                  data-count="7"
+                  data-suffix="+"
+                  >7+</span
+                >
+                <span class="about__stat-label">rokov skúseností</span>
+              </div>
+              <div class="about__stat">
+                <span
+                  class="about__stat-number text-accent"
+                  data-count="100"
+                  data-suffix="+"
+                  >100+</span
+                >
+                <span class="about__stat-label">spokojných klientov</span>
+              </div>
+              <div class="about__stat">
+                <span class="about__stat-number text-accent">24/7</span>
+                <span class="about__stat-label">monitoring & podpora</span>
+              </div>
+            </div>
+
+            <!-- Right: Text content -->
+            <div class="about__content" data-reveal="right">
+              <span class="section-label">O nás</span>
+              <h2>
+                Spoľahlivý<br />
+                <span class="text-accent">IT partner</span>
+              </h2>
+              <p>
+                Od roku 2017 poskytujeme komplexnú správu IT infraštruktúr pre
+                zabezpečenie spoľahlivého chodu vašich systémov. Sústreďujeme sa
+                na kvalitnú správu serverov a optimalizáciu sietí, ktorá
+                zaručuje stabilitu, výkon a vysokú dostupnosť.
+              </p>
+              <p>
+                Vaše firemné servery, databázy a citlivé informácie sú bezpečne
+                uložené a chránené najmodernejšími technológiami. Zabezpečte
+                kontinuitu vašich IT operácií a sústreďte sa na rast vašej
+                firmy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- SERVICES                                                           -->
+      <!-- ================================================================== -->
+      <!-- Static cards — always visible icon + title + description           -->
+      <!-- Clean, scannable, no toggle/expand                                 -->
+      <!-- ================================================================== -->
+      <section class="services" id="services">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="section-label">Služby</span>
+            <h2>Čo pre vás <span class="text-accent">zabezpečíme</span></h2>
+            <p>
+              Komplexné IT riešenia pod jednou strechou — od serverov cez siete
+              až po cloud a každodennú podporu vašich zamestnancov.
+            </p>
+          </div>
+
+          <div class="services__grid">
+            <!-- Service 1 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="8" rx="2" />
+                  <rect x="2" y="14" width="20" height="8" rx="2" />
+                  <circle cx="6" cy="6" r="1" />
+                  <circle cx="6" cy="18" r="1" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Správa serverov</h3>
+              <div class="service-card__body">
+                <p>
+                  Kompletná konfigurácia, inštalácia a neustály dohľad nad
+                  serverovými infraštruktúrami — on-premises, virtuálne aj
+                  hostované.
+                </p>
+              </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Návrh a správa sietí</h3>
+              <div class="service-card__body">
+                <p>
+                  Kompletná štrukturovaná kabeláž, konfigurácia sieťových prvkov
+                  a bezpečnostné riešenia. Flexibilná, bezpečná a škálovateľná
+                  sieť.
+                </p>
+              </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Správa zariadení cez MDM</h3>
+              <div class="service-card__body">
+                <p>
+                  Vzdialená správa Apple zariadení prostredníctvom globálneho
+                  MDM. Konfigurácia tisícov zariadení pár klikmi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"
+                  />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Klik Cloud</h3>
+              <div class="service-card__body">
+                <p>
+                  Cloudové riešenia pre zdieľanie a správu dát. Hostovanie
+                  aplikácií alebo bezpečné vzdialené zálohovanie.
+                </p>
+              </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Podpora užívateľov</h3>
+              <div class="service-card__body">
+                <p>
+                  Kompletná starostlivosť o zariadenia vašich zamestnancov.
+                  Technická podpora vždy k dispozícii.
+                </p>
+              </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card" data-reveal>
+              <div class="service-card__icon" aria-hidden="true">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Klik Web</h3>
+              <div class="service-card__body">
+                <p>
+                  Kompletný návrh a realizácia webových stránok na mieru alebo
+                  podľa šablóny pre rýchle spustenie.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TESTIMONIALS — Social proof from real clients                      -->
+      <!-- ================================================================== -->
+      <!-- Placed after Services ("what we do") and before Process            -->
+      <!-- ("how we work") — builds trust at the decision point               -->
+      <!-- Replace placeholder content with real client testimonials          -->
+      <!-- ================================================================== -->
+      <section
+        class="testimonials"
+        id="testimonials"
+        aria-label="Referencie klientov"
+      >
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="section-label">Referencie</span>
+            <h2>Čo o nás hovoria <span class="text-accent">klienti</span></h2>
+            <p>
+              Spolupracujeme s firmami naprieč odvetviami. Tu je, čo o našej
+              práci hovoria.
+            </p>
+          </div>
+
+          <div class="testimonials__grid">
+            <!-- Testimonial 1 -->
+            <blockquote class="testimonial-card" data-reveal>
+              <div class="testimonial-card__quote" aria-hidden="true">"</div>
+              <p class="testimonial-card__text">
+                Odkedy nám Klik_IT spravuje infraštruktúru, nemáme žiadne
+                výpadky. Konečne sa môžeme sústrediť na náš biznis a nie na
+                technické problémy.
+              </p>
+              <footer class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true">
+                  MK
+                </div>
+                <div class="testimonial-card__info">
+                  <cite class="testimonial-card__name">Martin Kováč</cite>
+                  <span class="testimonial-card__role"
+                    >Konateľ, Kováč & Partners s.r.o.</span
+                  >
+                </div>
+              </footer>
+            </blockquote>
+
+            <!-- Testimonial 2 -->
+            <blockquote class="testimonial-card" data-reveal>
+              <div class="testimonial-card__quote" aria-hidden="true">"</div>
+              <p class="testimonial-card__text">
+                Profesionálny prístup a rýchla reakcia. Migráciu na nový server
+                zvládli cez víkend bez akéhokoľvek dopadu na našu prevádzku.
+                Odporúčam každému.
+              </p>
+              <footer class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true">
+                  AH
+                </div>
+                <div class="testimonial-card__info">
+                  <cite class="testimonial-card__name">Andrea Horváthová</cite>
+                  <span class="testimonial-card__role"
+                    >IT manažérka, NovaTech Group</span
+                  >
+                </div>
+              </footer>
+            </blockquote>
+
+            <!-- Testimonial 3 -->
+            <blockquote class="testimonial-card" data-reveal>
+              <div class="testimonial-card__quote" aria-hidden="true">"</div>
+              <p class="testimonial-card__text">
+                Oceňujeme hlavne proaktívny monitoring — problémy riešia ešte
+                predtým, než si ich vôbec všimneme. Za tri roky spolupráce
+                maximálna spokojnosť.
+              </p>
+              <footer class="testimonial-card__author">
+                <div class="testimonial-card__avatar" aria-hidden="true">
+                  PŠ
+                </div>
+                <div class="testimonial-card__info">
+                  <cite class="testimonial-card__name">Peter Šimko</cite>
+                  <span class="testimonial-card__role"
+                    >Riaditeľ, Šimko Logistics</span
+                  >
+                </div>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- PROCESS — How we work                                              -->
+      <!-- ================================================================== -->
+      <!-- Reduces uncertainty — shows what happens after first contact        -->
+      <!-- 4 steps with numbered cards, horizontal on desktop                 -->
+      <!-- ================================================================== -->
+      <section class="process" id="process">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="section-label">Ako pracujeme</span>
+            <h2>
+              Od prvého kontaktu po
+              <span class="text-accent">spoľahlivú prevádzku</span>
+            </h2>
+            <p>Transparentný proces, ktorý vám dáva istotu v každom kroku.</p>
+          </div>
+
+          <div class="process__steps">
+            <div class="process__step" data-reveal>
+              <span class="process__number">01</span>
+              <h3 class="process__title">Konzultácia</h3>
+              <p class="process__desc">
+                Bezplatne zanalyzujeme vašu aktuálnu IT infraštruktúru a
+                identifikujeme oblasti na zlepšenie.
+              </p>
+            </div>
+
+            <div class="process__step" data-reveal>
+              <span class="process__number">02</span>
+              <h3 class="process__title">Návrh riešenia</h3>
+              <p class="process__desc">
+                Pripravíme riešenie na mieru — s jasným rozpočtom, časovým
+                plánom a očakávanými výsledkami.
+              </p>
+            </div>
+
+            <div class="process__step" data-reveal>
+              <span class="process__number">03</span>
+              <h3 class="process__title">Implementácia</h3>
+              <p class="process__desc">
+                Nasadíme riešenie s minimálnym dopadom na vašu prevádzku.
+                Migrácie realizujeme mimo pracovných hodín.
+              </p>
+            </div>
+
+            <div class="process__step" data-reveal>
+              <span class="process__number">04</span>
+              <h3 class="process__title">Monitoring & podpora</h3>
+              <p class="process__desc">
+                Nepretržitý dohľad 24/7. Proaktívne riešenie problémov ešte
+                predtým, než ich pocítite.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- CONTACT                                                            -->
+      <!-- ================================================================== -->
+      <!-- Split layout: info panel left, form card right                     -->
+      <!-- Info builds trust, form is immediately accessible                  -->
+      <!-- ================================================================== -->
+      <section class="contact" id="contact">
+        <div class="container">
+          <div class="contact__grid">
+            <!-- LEFT: Info panel -->
+            <div class="contact__info" data-reveal="left">
+              <span class="section-label">Kontakt</span>
+              <h2 class="contact__info-heading">
+                Poďme <span class="text-accent">spolupracovať</span>
+              </h2>
+              <p class="contact__info-desc">
+                Máte otázky ohľadom našich služieb? Napíšte nám. Ozveme sa vám
+                do 24 hodín.
+              </p>
+
+              <div class="contact__details">
+                <div class="contact__detail">
+                  <div class="contact__detail-icon" aria-hidden="true">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="M22 4L12 13 2 4" />
+                    </svg>
+                  </div>
+                  <span class="contact__detail-text">
+                    <a
+                      href="/cdn-cgi/l/email-protection#e48d8a828ba48f888d8f8d90ca978f"
+                      ><span
+                        class="__cf_email__"
+                        data-cfemail="b1d8dfd7def1daddd8dad8c59fc2da"
+                        >[email&#160;protected]</span
+                      ></a
+                    >
+                  </span>
+                </div>
+
+                <div class="contact__detail">
+                  <div class="contact__detail-icon" aria-hidden="true">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="contact__detail-text">
+                    <a href="tel:+421910520846">+421 910 520 846</a>
+                  </span>
+                </div>
+
+                <div class="contact__detail">
+                  <div class="contact__detail-icon" aria-hidden="true">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                      />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <span class="contact__detail-text">Žilina, Slovensko</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: Form card -->
+            <div class="contact__form-wrapper" data-reveal="right">
+              <form
+                class="contact__form"
+                id="contactForm"
+                action="/api/send-email.php"
+                method="POST"
+                novalidate
+              >
+                <!-- Honeypot -->
+                <div class="honeypot" aria-hidden="true">
+                  <input
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <!-- Name + Email -->
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="name">Meno</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      autocomplete="name"
+                      placeholder="Ján Novák"
+                      aria-describedby="name-error"
+                    />
+                    <div
+                      id="name-error"
+                      class="form-field__error"
+                      role="alert"
+                    ></div>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="email">E-mail</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      autocomplete="email"
+                      placeholder="vas@email.sk"
+                      aria-describedby="email-error"
+                    />
+                    <div
+                      id="email-error"
+                      class="form-field__error"
+                      role="alert"
+                    ></div>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="phone">Telefón</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    autocomplete="tel"
+                    placeholder="+421 9XX XXX XXX"
+                    aria-describedby="phone-error"
+                  />
+                  <div
+                    id="phone-error"
+                    class="form-field__error"
+                    role="alert"
+                  ></div>
+                </div>
+
+                <div class="form-field">
+                  <label for="message">Správa</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    placeholder="Popíšte nám, s čím vám môžeme pomôcť..."
+                    aria-describedby="message-error"
+                  ></textarea>
+                  <div
+                    id="message-error"
+                    class="form-field__error"
+                    role="alert"
+                  ></div>
+                </div>
+
+                <!-- Form Status -->
+                <div
+                  id="form-status"
+                  class="form-status"
+                  role="status"
+                  aria-live="polite"
+                ></div>
+
+                <button type="submit" class="contact__submit" id="submit-btn">
+                  Odoslať správu
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M14 2L7 9M14 2l-5 12-2-5-5-2 12-5z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- FAQ                                                                -->
+      <!-- ================================================================== -->
+      <!-- Native <details>/<summary> — works without JS                     -->
+      <!-- Clean, minimal accordion                                           -->
+      <!-- ================================================================== -->
+      <section class="faq" id="faq">
+        <div class="container">
+          <div class="section-header" data-reveal>
+            <span class="section-label">FAQ</span>
+            <h2>Často kladené <span class="text-accent">otázky</span></h2>
+            <p>
+              Nenašli ste odpoveď? Neváhajte nás kontaktovať — radi vám poradíme
+              s čímkoľvek.
+            </p>
+          </div>
+
+          <div class="faq__list">
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span>Aké sú výhody outsourcingu IT správy?</span>
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Nemusíte sa starať o veci, ktoré nie sú vaším podnikaním —
+                  prenecháte ich na nás a vy sa môžete venovať tomu, čomu
+                  najlepšie rozumiete. Ušetríte náklady na interný IT tím a
+                  získate profesionálnu správu.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span>Ako prebieha onboarding novej firmy?</span>
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Dohodneme si stretnutie, ideálne u vás, aby sme zanalyzovali
+                  aktuálnu situáciu. Vy nám predostriete požiadavky a my
+                  navrhneme optimálne riešenia.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span>Aké IT služby poskytujete?</span>
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Kompletnú správu IT infraštruktúry vrátane správy serverov,
+                  návrhu a realizácií sietí LAN/WiFi, správy zariadení cez MDM,
+                  cloudové služby a každodennú podporu užívateľov.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span
+                  >Poskytujete aj konzultácie bez dlhodobej spolupráce?</span
+                >
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Áno, poskytujeme aj jednorazové konzultácie klientom bez
+                  nutnosti dlhodobej zmluvy.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span>Ako funguje vaša spolupráca s klientami?</span>
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Poskytujeme všetky úrovne podpory — od správy a monitorovania
+                  serverov až po telefonickú a vzdialenú technickú podporu
+                  užívateľov, v závislosti od zmluvnej úrovne SLA.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq__item" data-reveal>
+              <summary class="faq__question">
+                <span
+                  >Je možné hosťovať internú aplikáciu na vašej
+                  infraštruktúre?</span
+                >
+                <svg
+                  class="faq__icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 7.5l5 5 5-5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </summary>
+              <div class="faq__answer">
+                <p>
+                  Áno. Ak nechcete investovať do vlastnej infraštruktúry alebo
+                  nemáte vhodné priestory pre server, vaše aplikácie môžu byť
+                  hostované u nás — bezpečne a spoľahlivo.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <!-- CTA -->
+          <div class="faq__cta" data-reveal>
+            <p>Nenašli ste odpoveď na svoju otázku?</p>
+            <a href="#contact" class="btn btn--secondary">Kontaktujte nás</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================================================== -->
+    <!-- FOOTER                                                             -->
+    <!-- ================================================================== -->
+    <footer class="footer" id="footer">
+      <div class="container--wide">
+        <!-- Gradient divider top -->
+        <div class="footer__divider" aria-hidden="true"></div>
+
+        <div class="footer__top">
+          <!-- Brand -->
+          <div class="footer__brand">
+            <a href="#home" class="footer__logo" aria-label="Klik IT — Domov">
+              Klik_<span>IT</span>
+            </a>
+            <p>
+              Spoľahlivý IT partner pre firmy, ktoré sa chcú sústrediť na svoj
+              biznis — nie na technológie.
+            </p>
+          </div>
+
+          <!-- Navigation -->
+          <nav class="footer__nav" aria-label="Footer navigácia">
+            <h4 class="footer__heading">Navigácia</h4>
+            <ul role="list">
+              <li><a href="#about">O nás</a></li>
+              <li><a href="#services">Služby</a></li>
+              <li><a href="#testimonials">Referencie</a></li>
+              <li><a href="#process">Proces</a></li>
+              <li><a href="#contact">Kontakt</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </nav>
+
+          <!-- Contact -->
+          <div class="footer__contact">
+            <h4 class="footer__heading">Kontakt</h4>
+            <ul role="list">
+              <li>
+                <a
+                  href="/cdn-cgi/l/email-protection#f29b9c949db2999e9b999b86dc8199"
+                  ><span
+                    class="__cf_email__"
+                    data-cfemail="fb92959d94bb90979290928fd58890"
+                    >[email&#160;protected]</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="tel:+421910520846">+421 910 520 846</a>
+              </li>
+              <li>
+                <span>Žilina, Slovensko</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div class="footer__legal-col">
+            <h4 class="footer__heading">Právne</h4>
+            <ul role="list">
+              <li><a href="/cookies-policy.html">Zásady cookies</a></li>
+              <li><a href="/privacy-policy.html">Ochrana údajov</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer__bottom">
+          <p>
+            © <span id="current-year">2025</span> Klik_IT. Všetky práva
+            vyhradené.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating contact widget — quick access from anywhere on page -->
+    <div class="floating-contact" id="floating-contact">
+      <button
+        class="floating-contact__trigger"
+        id="floating-contact-btn"
+        aria-expanded="false"
+        aria-controls="floating-contact-panel"
+        aria-label="Rýchly kontakt"
+      >
+        <!-- Contact icon (default) -->
+        <svg
+          class="floating-contact__icon-default"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
+        </svg>
+        <!-- Close icon -->
+        <svg
+          class="floating-contact__icon-close"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div
+        class="floating-contact__panel"
+        id="floating-contact-panel"
+        aria-hidden="true"
+      >
+        <p class="floating-contact__heading">Ako vám môžeme pomôcť?</p>
+        <div class="floating-contact__options">
+          <a
+            href="/cdn-cgi/l/email-protection#ee87808881ae85828785879ac09d85"
+            class="floating-contact__option"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M22 4L12 13 2 4" />
+            </svg>
+            <span
+              ><span
+                class="__cf_email__"
+                data-cfemail="335a5d555c73585f5a585a471d4058"
+                >[email&#160;protected]</span
+              ></span
+            >
+          </a>
+          <a href="tel:+421910520846" class="floating-contact__option">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            <span>+421 910 520 846</span>
+          </a>
+          <a
+            href="#contact"
+            class="floating-contact__option floating-contact__option--form"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              />
+              <path d="M14 2v6h6" />
+              <path d="M16 13H8M16 17H8M10 9H8" />
+            </svg>
+            <span>Napísať správu</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Structured Data — JSON-LD -->
+    <!-- LocalBusiness + FAQPage schema for SEO -->
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://klikit.sk/#business",
+            "name": "Klik_IT",
+            "alternateName": "Klik IT",
+            "url": "https://klikit.sk",
+            "description": "Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT.",
+            "foundingDate": "2017",
+            "telephone": "+421910520846",
+            "email": "info@klikit.sk",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Žilina",
+              "addressCountry": "SK"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Slovakia"
+            },
+            "serviceType": [
+              "Správa serverov",
+              "Návrh a správa sietí",
+              "Správa zariadení cez MDM",
+              "Cloudové riešenia",
+              "IT podpora užívateľov",
+              "Tvorba webových stránok"
+            ],
+            "knowsLanguage": ["sk", "cs", "en"],
+            "priceRange": "$$"
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://klikit.sk/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Aké sú výhody outsourcingu IT správy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nemusíte sa starať o veci, ktoré nie sú vaším podnikaním — prenecháte ich na nás a vy sa môžete venovať tomu, čomu najlepšie rozumiete. Ušetríte náklady na interný IT tím a získate profesionálnu správu."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Ako prebieha onboarding novej firmy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dohodneme si stretnutie, ideálne u vás, aby sme zanalyzovali aktuálnu situáciu. Vy nám predostriete požiadavky a my navrhneme optimálne riešenia."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Aké IT služby poskytujete?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Kompletnú správu IT infraštruktúry vrátane správy serverov, návrhu a realizácií sietí LAN/WiFi, správy zariadení cez MDM, cloudové služby a každodennú podporu užívateľov."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Poskytujete aj konzultácie bez dlhodobej spolupráce?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Áno, poskytujeme aj jednorazové konzultácie klientom bez nutnosti dlhodobej zmluvy."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Ako funguje vaša spolupráca s klientami?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Poskytujeme všetky úrovne podpory — od správy a monitorovania serverov až po telefonickú a vzdialenú technickú podporu užívateľov, v závislosti od zmluvnej úrovne SLA."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Je možné hosťovať internú aplikáciu na vašej infraštruktúre?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Áno. Ak nechcete investovať do vlastnej infraštruktúry alebo nemáte vhodné priestory pre server, vaše aplikácie môžu byť hostované u nás — bezpečne a spoľahlivo."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- reCAPTCHA v3 — loaded last, non-blocking (necessary cookie, no consent needed) -->
+    <script
+      src="https://www.google.com/recaptcha/api.js?render=6LfgvAcrAAAAAJRFkaFf4NHOixZXljjdkgG77f0d"
+      async
+      defer
+    ></script>
+
+    <!-- Cookie consent banner -->
+    <div
+      class="cookie-consent"
+      id="cookie-consent"
+      role="dialog"
+      aria-label="Nastavenie cookies"
+      aria-hidden="true"
+    >
+      <div class="cookie-consent__inner">
+        <div class="cookie-consent__content">
+          <p class="cookie-consent__text">
+            Používame cookies na analýzu návštevnosti (Google Analytics).
+            Nevyhnutné cookies (bezpečnosť, funkčnosť) sú aktívne vždy.
+            <a href="/cookies-policy.html" class="cookie-consent__link"
+              >Viac info</a
+            >
+          </p>
+        </div>
+        <div class="cookie-consent__actions">
+          <button
+            class="cookie-consent__btn cookie-consent__btn--reject"
+            id="cookie-reject"
+          >
+            Len nevyhnutné
+          </button>
+          <button
+            class="cookie-consent__btn cookie-consent__btn--accept"
+            id="cookie-accept"
+          >
+            Prijať všetko
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
