@@ -1,13 +1,13 @@
 // ============================================================================
-// Animations — GSAP ScrollTrigger + FAQ height animations
+// Animations — GSAP ScrollTrigger
 // ============================================================================
 // GSAP controls:
 //   ✓ All [data-reveal] scroll entrance animations
 //   ✓ Staggered card grids with distinct animations per section
-//   ✓ FAQ smooth open/close height animation
 //
 // CSS controls:
 //   ✓ Hero staggered entrance (CSS keyframes on load)
+//   ✓ FAQ open/close animation (grid-template-rows: 0fr ↔ 1fr trick)
 //   ✓ Hover effects, focus states, transitions
 //   ✓ Theme toggle, nav glass, floating contact
 //   ✓ Counter animation (rAF)
@@ -40,7 +40,8 @@ export function initAnimations() {
   });
 
   initScrollReveals();
-  initFAQAnimations();
+  // FAQ open/close animation is now CSS-only (grid-template-rows trick
+  // in _faq.scss); no JS-driven height/padding tween required.
 }
 
 // ============================================================================
@@ -203,115 +204,3 @@ function initScrollReveals() {
   }
 }
 
-// ============================================================================
-// FAQ — Smooth height + padding animation
-// ============================================================================
-function initFAQAnimations() {
-  const items = document.querySelectorAll(".faq__item");
-  if (!items.length) return;
-
-  items.forEach((item) => {
-    const summary = item.querySelector(".faq__question");
-    const answer = item.querySelector(".faq__answer");
-    const icon = item.querySelector(".faq__icon");
-
-    if (!summary || !answer) return;
-
-    // Mark as JS-controlled
-    item.classList.add("faq--js");
-
-    // Temporarily open to measure natural padding (browser hides content when closed)
-    const wasOpen = item.hasAttribute("open");
-    if (!wasOpen) item.setAttribute("open", "");
-
-    const computedStyle = window.getComputedStyle(answer);
-    const naturalPaddingBottom = computedStyle.paddingBottom;
-    const naturalPaddingTop = computedStyle.paddingTop;
-
-    // Restore and set initial closed state
-    if (!wasOpen) {
-      item.removeAttribute("open");
-      gsap.set(answer, {
-        height: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        opacity: 0,
-        overflow: "hidden",
-      });
-    } else {
-      gsap.set(answer, { overflow: "hidden" });
-    }
-
-    let isAnimating = false;
-
-    summary.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (isAnimating) return;
-      isAnimating = true;
-
-      const isOpen = item.hasAttribute("open");
-
-      if (isOpen) {
-        // --- CLOSE ---
-        gsap.to(answer, {
-          height: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
-          opacity: 0,
-          duration: 0.35,
-          ease: "power2.inOut",
-          onComplete: () => {
-            item.removeAttribute("open");
-            isAnimating = false;
-          },
-        });
-
-        if (icon) {
-          gsap.to(icon, {
-            rotation: 0,
-            duration: 0.3,
-            ease: "power2.inOut",
-          });
-        }
-      } else {
-        // --- OPEN ---
-        item.setAttribute("open", "");
-
-        gsap.fromTo(
-          answer,
-          {
-            height: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            opacity: 0,
-          },
-          {
-            height: "auto",
-            paddingTop: naturalPaddingTop,
-            paddingBottom: naturalPaddingBottom,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power3.out",
-            onComplete: () => {
-              // Clear height/padding so content reflows naturally on resize.
-              // Keep overflow:hidden — clearing it caused content to spill
-              // past the shrinking box during the next close animation.
-              gsap.set(answer, {
-                clearProps: "height,paddingTop,paddingBottom",
-              });
-              isAnimating = false;
-            },
-          }
-        );
-
-        if (icon) {
-          gsap.to(icon, {
-            rotation: 180,
-            duration: 0.3,
-            ease: "power2.inOut",
-          });
-        }
-      }
-    });
-  });
-}
