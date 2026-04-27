@@ -11,7 +11,13 @@
       content="Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT."
     />
     <meta name="author" content="Klik_IT" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://klikit.sk/" />
+
+    <!-- Browser chrome / form-control colour-scheme awareness -->
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#07070b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f8fb" media="(prefers-color-scheme: light)" />
 
     <!-- Open Graph — Facebook, LinkedIn, iMessage, Slack, etc. -->
     <meta property="og:type" content="website" />
@@ -27,6 +33,10 @@
     <meta property="og:image" content="https://klikit.sk/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Klik_IT — Spoľahlivý IT partner pre váš biznis"
+    />
     <meta property="og:locale" content="sk_SK" />
     <meta property="og:site_name" content="Klik_IT" />
 
@@ -41,6 +51,47 @@
       content="Komplexná správa serverov, sietí a cloudových riešení pre firmy. Od roku 2017."
     />
     <meta name="twitter:image" content="https://klikit.sk/og-image.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Klik_IT — Spoľahlivý IT partner pre váš biznis"
+    />
+
+    <!-- Structured data (JSON-LD) — eligible for Google rich results, -->
+    <!-- knowledge panel, and Maps surface for local IT services in Žilina. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Klik_IT",
+        "description": "Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT.",
+        "url": "https://klikit.sk/",
+        "logo": "https://klikit.sk/og-image.jpg",
+        "image": "https://klikit.sk/og-image.jpg",
+        "telephone": "+421910520846",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Žilina",
+          "addressCountry": "SK"
+        },
+        "foundingDate": "2017",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Slovensko"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "IT služby",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Správa serverov" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Návrh a správa sietí" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Správa zariadení cez MDM" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klik Cloud" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podpora užívateľov" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klik Web" } }
+          ]
+        }
+      }
+    </script>
 
     <!-- Favicon set (nahraď súbory vlastnými) -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />

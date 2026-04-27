@@ -219,6 +219,9 @@
   max-width: 560px;
   margin: 0 auto $space-12;
   color: var(--color-text-secondary);
+  // Distribute words evenly across lines so no orphan tail like
+  // "nie na IT problémy" hangs alone on the last line.
+  text-wrap: balance;
 
   @include from(md) {
     font-size: $text-xl;
