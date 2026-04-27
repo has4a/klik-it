@@ -293,10 +293,11 @@ function initFAQAnimations() {
             duration: 0.4,
             ease: "power3.out",
             onComplete: () => {
-              // Remove inline height so content can reflow naturally
-              // (e.g. if window resizes while open)
+              // Clear height/padding so content reflows naturally on resize.
+              // Keep overflow:hidden — clearing it caused content to spill
+              // past the shrinking box during the next close animation.
               gsap.set(answer, {
-                clearProps: "height,paddingTop,paddingBottom,overflow",
+                clearProps: "height,paddingTop,paddingBottom",
               });
               isAnimating = false;
             },

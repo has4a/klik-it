@@ -25,8 +25,13 @@
   @include surface(1);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: border-color $duration-normal $ease-out,
-    background $duration-normal $ease-out, box-shadow $duration-normal $ease-out;
+  // 400ms matches the GSAP height tween — both finish together so the
+  // user doesn't perceive a "phase change" mid-animation.
+  // box-shadow is snapped (no transition): repainting a shadow as the
+  // parent grows each frame is expensive and was the most likely cause
+  // of the half-way frame drop during open.
+  transition: border-color 0.4s $ease-out,
+    background 0.4s $ease-out;
 
   @media (hover: hover) {
     &:hover {
@@ -138,6 +143,12 @@
 // When GSAP controls FAQ, override native <details> CSS states
 // to prevent flash conflicts during GSAP timeline animations.
 .faq--js {
+  // Drop transform transition on icon — GSAP drives rotation frame-by-frame
+  // and a CSS transition on the same property creates a lag/fight.
+  .faq__icon {
+    transition: color $duration-normal $ease-out;
+  }
+
   &[open] .faq__icon {
     transform: none; // GSAP controls rotation inline
     color: inherit; // GSAP controls color inline
