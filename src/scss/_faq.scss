@@ -1,13 +1,12 @@
 // ============================================================================
-// FAQ — Native <details>/<summary>, CSS-only smooth animation
+// FAQ — Native <details>/<summary>, JS-driven smooth height transition
 // ============================================================================
-// Animation uses the grid-template-rows: 0fr ↔ 1fr trick. The answer is a
-// 1-track grid whose track size we transition; padding lives on the inner
-// <p>, never on the grid container, so the collapsed state is truly 0px.
-//
-// No JS, no height measurement, no padding tween, no clearProps reset —
-// which eliminates the race between GSAP inline styles and CSS transitions
-// that caused the end-of-animation padding stutter in the previous build.
+// Box-sizing: border-box is global (see main.scss reset), so height: 0 fully
+// collapses the box including padding — no phantom padding-bottom strip when
+// closed. JS measures natural pixel height, sets it inline, transitions
+// over height; on completion JS swaps inline height to "auto" with
+// transition disabled so there's no visual snap and content reflows on
+// resize without re-measurement.
 // ============================================================================
 
 .faq {
@@ -29,9 +28,9 @@
   @include surface(1);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  // box-shadow change on [open] is intentionally snapped (no transition):
-  // shadow repaint while the parent grows is the most expensive frame work
-  // and was a contributor to perceived stutter.
+  // box-shadow change snaps (no transition) — repainting a shadow while the
+  // parent grows each frame was the most expensive frame work and a likely
+  // cause of perceived stutter.
   transition: border-color 0.4s $ease-out, background 0.4s $ease-out;
 
   @media (hover: hover) {
@@ -102,7 +101,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// CHEVRON ICON — CSS-driven rotation on [open]
+// CHEVRON ICON — CSS rotation triggered by [open]
 // ---------------------------------------------------------------------------
 .faq__icon {
   flex-shrink: 0;
@@ -116,45 +115,37 @@
 }
 
 // ---------------------------------------------------------------------------
-// ANSWER — grid-template-rows trick
+// ANSWER — height transition driven by JS-set inline pixel values
 // ---------------------------------------------------------------------------
-// `display: grid !important` overrides the UA <details> rule that hides
-// non-summary children when not [open]. We need the element always
-// rendered so the grid-template-rows transition fires; display:none would
-// not transition.
-//
-// Padding is on the inner <p>, never on .faq__answer, so when the grid
-// track collapses to 0fr the box is truly 0px tall — the parent's
-// overflow:hidden clips the child's padding cleanly.
+// padding stays on .faq__answer; thanks to box-sizing: border-box (global
+// reset), height: 0 collapses the entire box including padding. JS sets the
+// transition inline as needed — defaulting to "none" here keeps the
+// initial closed state instant (no animation flash on page load).
 .faq__answer {
-  display: grid !important;
-  grid-template-rows: 0fr;
+  height: 0;
   overflow: hidden;
-  transition: grid-template-rows 0.4s $ease-out;
-}
-
-.faq__item[open] .faq__answer {
-  grid-template-rows: 1fr;
-}
-
-.faq__answer > p {
-  @include body-text($text-sm);
-  // Required for the grid track to actually shrink below content's
-  // intrinsic min-content size.
-  min-height: 0;
-  margin: 0;
   padding: 0 $space-6 $space-6;
-  line-height: 1.8;
-  color: var(--color-text-secondary);
-  max-width: var(--content-max);
-
-  @include from(md) {
-    font-size: $text-base;
-  }
 
   @include until(sm) {
     padding: 0 $space-4 $space-4;
   }
+
+  p {
+    @include body-text($text-sm);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: var(--content-max);
+
+    @include from(md) {
+      font-size: $text-base;
+    }
+  }
+}
+
+// No-JS fallback: when [open] is set, content shows instantly at natural
+// height. JS overrides with explicit pixel value for animation.
+.faq__item[open] .faq__answer {
+  height: auto;
 }
 
 // ---------------------------------------------------------------------------
