@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO & Meta -->
+    <title>404 — Stránka nenájdená · Klik_IT</title>
+    <meta
+      name="description"
+      content="Stránka, ktorú hľadáte, neexistuje alebo bola presmerovaná. Vráťte sa na hlavnú stránku Klik_IT."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://klikit.sk/" />
+
+    <!-- Browser chrome / form-control colour-scheme awareness -->
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#07070b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f8fb" media="(prefers-color-scheme: light)" />
+
+    <!-- Favicon set -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts: Sora (headings) + DM Sans (body) + JetBrains Mono (labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS + JS (Vite handles bundling) -->
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+
+  <body>
+    <a href="#main-content" class="skip-link">Preskočiť na obsah</a>
+
+    <!-- ================================================================== -->
+    <!-- NAVIGATION — same as index, with absolute hrefs pointing to home    -->
+    <!-- so section anchors land at the right place after navigating away.   -->
+    <!-- ================================================================== -->
+    <header class="site-header" id="site-header">
+      <nav class="nav" aria-label="Hlavná navigácia">
+        <div class="nav__inner">
+          <a href="/" class="nav__logo" aria-label="Klik IT — Domov">
+            Klik_<span>IT</span>
+          </a>
+
+          <ul class="nav__links" role="list">
+            <li><a href="/" class="nav__link">Domov</a></li>
+            <li><a href="/#about" class="nav__link">O nás</a></li>
+            <li><a href="/#services" class="nav__link">Služby</a></li>
+            <li><a href="/#testimonials" class="nav__link">Referencie</a></li>
+            <li><a href="/#process" class="nav__link">Proces</a></li>
+            <li><a href="/#contact" class="nav__link">Kontakt</a></li>
+            <li><a href="/#faq" class="nav__link">FAQ</a></li>
+          </ul>
+
+          <div class="nav__actions">
+            <a href="/#contact" class="nav__cta">Kontaktujte nás</a>
+
+            <button
+              class="theme-toggle"
+              id="theme-toggle"
+              aria-label="Prepnúť farebnú tému"
+              title="Prepnúť tému"
+            >
+              <svg
+                class="theme-toggle__sun"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                />
+              </svg>
+              <svg
+                class="theme-toggle__moon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+
+            <button
+              class="nav__hamburger"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              aria-label="Otvoriť menu"
+            >
+              <span class="nav__hamburger-line"></span>
+              <span class="nav__hamburger-line"></span>
+              <span class="nav__hamburger-line"></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu__inner">
+        <ul class="mobile-menu__links" role="list">
+          <li><a href="/" class="mobile-menu__link">Domov</a></li>
+          <li><a href="/#about" class="mobile-menu__link">O nás</a></li>
+          <li><a href="/#services" class="mobile-menu__link">Služby</a></li>
+          <li><a href="/#testimonials" class="mobile-menu__link">Referencie</a></li>
+          <li><a href="/#process" class="mobile-menu__link">Proces</a></li>
+          <li><a href="/#contact" class="mobile-menu__link">Kontakt</a></li>
+          <li><a href="/#faq" class="mobile-menu__link">FAQ</a></li>
+        </ul>
+
+        <a href="/#contact" class="mobile-menu__cta">Kontaktujte nás</a>
+      </div>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- ERROR HERO — reuses .hero structure for full visual consistency.   -->
+    <!-- Badge becomes "HTTP 404", status line stays the same as homepage   -->
+    <!-- so the IT-status brand voice is reinforced even on the error path. -->
+    <!-- ================================================================== -->
+    <main id="main-content">
+      <section class="hero">
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__grid"></div>
+          <div class="hero__glow"></div>
+        </div>
+
+        <div class="hero__content">
+          <div class="hero__badge hero-reveal" style="--reveal-order: 1">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            HTTP 404 · NOT FOUND
+          </div>
+
+          <h1 class="hero__title hero-reveal" style="--reveal-order: 2">
+            Táto cesta sa
+            <span class="text-accent">stratila</span>.
+          </h1>
+
+          <p class="hero__subtitle hero-reveal" style="--reveal-order: 3">
+            Stránka, ktorú hľadáte, neexistuje alebo bola presmerovaná.
+            Server beží, len táto adresa nesedí.
+          </p>
+
+          <div class="hero__actions hero-reveal" style="--reveal-order: 4">
+            <a href="/" class="btn btn--primary">
+              Späť na hlavnú
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="/#contact" class="btn btn--secondary">
+              Kontaktujte nás
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__status" aria-hidden="true">
+          <span class="hero__badge-dot"></span>
+          <span>24/7 monitoring · reagujeme do 24h</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
