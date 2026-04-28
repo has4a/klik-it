@@ -6,7 +6,9 @@
 // Categories:
 //   - NECESSARY (always active, no consent needed):
 //     • Cloudflare (__cf_bm, __cflb) — CDN, security, DDoS protection
-//     • reCAPTCHA (_GRECAPTCHA) — form spam protection (legitimate interest)
+//     • reCAPTCHA (_GRECAPTCHA) — lazy-loaded by Forms.js on first form
+//       focus, so the cookie is only set when the user engages the
+//       contact form (legitimate interest scoped to actual usage).
 //     • cookie_consent (our own) — stores user's cookie preference
 //
 //   - ANALYTICS (requires consent):

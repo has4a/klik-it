@@ -1473,12 +1473,9 @@
       }
     </script>
 
-    <!-- reCAPTCHA v3 — loaded last, non-blocking (necessary cookie, no consent needed) -->
-    <script
-      src="https://www.google.com/recaptcha/api.js?render=6LfgvAcrAAAAAJRFkaFf4NHOixZXljjdkgG77f0d"
-      async
-      defer
-    ></script>
+    <!-- reCAPTCHA v3 is lazy-loaded by Forms.js on first form focus — keeps -->
+    <!-- the _GRECAPTCHA cookie off the page until the user actually engages -->
+    <!-- with the contact form. -->
 
     <!-- Cookie consent banner -->
     <div

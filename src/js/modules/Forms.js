@@ -7,9 +7,29 @@
 // - Success/error status display
 // - Analytics tracking on submit
 // - Respects novalidate (replaces native validation)
+// - Lazy-loads reCAPTCHA on first form focus (privacy: defers the
+//   _GRECAPTCHA cookie until the user actually engages the form)
+//
+// reCAPTCHA INTEGRATION STATUS (2026-04):
+//   The script is loaded lazily but NOT yet called via grecaptcha.execute()
+//   from the submit flow — meaning it's currently in passive mode and does
+//   not produce a token that the backend can verify. To activate full spam
+//   protection:
+//     1. Inside submitForm(), wrap the fetch in:
+//          await new Promise(r => window.grecaptcha.ready(r));
+//          const token = await window.grecaptcha.execute(
+//            RECAPTCHA_SITE_KEY, { action: "contact_submit" }
+//          );
+//          formData.append("recaptcha_token", token);
+//     2. In api/send-email.php, POST the token to
+//        https://www.google.com/recaptcha/api/siteverify with the secret
+//        key and reject scores below ~0.5.
+//   Until that lands, the honeypot field is the only spam protection.
 // ============================================================================
 
 import { trackFormSubmit } from "./Analytics.js";
+
+const RECAPTCHA_SITE_KEY = "6LfgvAcrAAAAAJRFkaFf4NHOixZXljjdkgG77f0d";
 
 const MESSAGES = {
   name: {
@@ -38,6 +58,12 @@ export function initForms() {
 
   const submitBtn = document.getElementById("submit-btn");
   const statusEl = document.getElementById("form-status");
+
+  // Lazy-load reCAPTCHA on first interaction with any field in the form.
+  // focusin bubbles, so a single listener catches focus on every input or
+  // textarea inside the contact form. once:true auto-removes the listener
+  // after firing.
+  form.addEventListener("focusin", loadRecaptcha, { once: true });
 
   // Validate on submit
   form.addEventListener("submit", async (e) => {
@@ -89,6 +115,23 @@ export function initForms() {
       }
     });
   });
+}
+
+// ---------------------------------------------------------------------------
+// RECAPTCHA — Lazy script injection
+// ---------------------------------------------------------------------------
+// Idempotent: a re-entrant call (or re-init across hot-reloads) won't
+// double-inject. once:true on the focusin listener already prevents
+// multiple invocations during a single page lifetime; this guard is
+// belt + braces for edge cases.
+// ---------------------------------------------------------------------------
+function loadRecaptcha() {
+  if (document.querySelector('script[src*="recaptcha/api.js"]')) return;
+
+  const script = document.createElement("script");
+  script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+  script.async = true;
+  document.head.appendChild(script);
 }
 
 // ---------------------------------------------------------------------------
