@@ -111,7 +111,15 @@
     }
   }
 
-  a {
+  // <a> for navigation, <button> for JS-only triggers (e.g. cookie reopen).
+  // Button reset properties are harmless on <a> so the rule is shared.
+  a,
+  button {
+    background: none;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+
     font-size: $text-sm;
     color: var(--color-text-tertiary);
     display: inline-block;

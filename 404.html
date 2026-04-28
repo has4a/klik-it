@@ -195,5 +195,43 @@
         </div>
       </section>
     </main>
+
+    <!-- Cookie consent banner — present here too so a first-time visitor -->
+    <!-- landing on a 404 URL still gets the consent flow. CookieConsent.js -->
+    <!-- handles missing element gracefully if this is ever removed. -->
+    <div
+      class="cookie-consent"
+      id="cookie-consent"
+      role="dialog"
+      aria-label="Nastavenie cookies"
+      aria-live="polite"
+      aria-hidden="true"
+    >
+      <div class="cookie-consent__inner">
+        <div class="cookie-consent__content">
+          <p class="cookie-consent__text">
+            Používame cookies na analýzu návštevnosti (Google Analytics).
+            Nevyhnutné cookies (bezpečnosť, funkčnosť) sú aktívne vždy.
+            <a href="/cookies-policy.html" class="cookie-consent__link"
+              >Viac info</a
+            >
+          </p>
+        </div>
+        <div class="cookie-consent__actions">
+          <button
+            class="cookie-consent__btn cookie-consent__btn--reject"
+            id="cookie-reject"
+          >
+            Len nevyhnutné
+          </button>
+          <button
+            class="cookie-consent__btn cookie-consent__btn--accept"
+            id="cookie-accept"
+          >
+            Prijať všetko
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
