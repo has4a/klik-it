@@ -1,3 +1,5 @@
+@use "variables";
+
 // ============================================================================
 // KLIK_IT DESIGN SYSTEM — Mixins & Utilities
 // ============================================================================
@@ -10,27 +12,27 @@
 // ---------------------------------------------------------------------------
 @mixin from($breakpoint) {
   @if $breakpoint == sm {
-    @media (min-width: $bp-sm) {
+    @media (min-width: variables.$bp-sm) {
       @content;
     }
   }
   @if $breakpoint == md {
-    @media (min-width: $bp-md) {
+    @media (min-width: variables.$bp-md) {
       @content;
     }
   }
   @if $breakpoint == lg {
-    @media (min-width: $bp-lg) {
+    @media (min-width: variables.$bp-lg) {
       @content;
     }
   }
   @if $breakpoint == xl {
-    @media (min-width: $bp-xl) {
+    @media (min-width: variables.$bp-xl) {
       @content;
     }
   }
   @if $breakpoint == 2xl {
-    @media (min-width: $bp-2xl) {
+    @media (min-width: variables.$bp-2xl) {
       @content;
     }
   }
@@ -40,27 +42,27 @@
 // Usage: @include until(md) { ... }
 @mixin until($breakpoint) {
   @if $breakpoint == sm {
-    @media (max-width: $bp-sm - 1px) {
+    @media (max-width: variables.$bp-sm - 1px) {
       @content;
     }
   }
   @if $breakpoint == md {
-    @media (max-width: $bp-md - 1px) {
+    @media (max-width: variables.$bp-md - 1px) {
       @content;
     }
   }
   @if $breakpoint == lg {
-    @media (max-width: $bp-lg - 1px) {
+    @media (max-width: variables.$bp-lg - 1px) {
       @content;
     }
   }
   @if $breakpoint == xl {
-    @media (max-width: $bp-xl - 1px) {
+    @media (max-width: variables.$bp-xl - 1px) {
       @content;
     }
   }
   @if $breakpoint == 2xl {
-    @media (max-width: $bp-2xl - 1px) {
+    @media (max-width: variables.$bp-2xl - 1px) {
       @content;
     }
   }
@@ -86,12 +88,12 @@
   max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: $space-6;
-  padding-right: $space-6;
+  padding-left: variables.$space-6;
+  padding-right: variables.$space-6;
 
   @include from(xl) {
-    padding-left: $space-8;
-    padding-right: $space-8;
+    padding-left: variables.$space-8;
+    padding-right: variables.$space-8;
   }
 }
 
@@ -100,12 +102,12 @@
   max-width: var(--container-wide);
   margin-left: auto;
   margin-right: auto;
-  padding-left: $space-6;
-  padding-right: $space-6;
+  padding-left: variables.$space-6;
+  padding-right: variables.$space-6;
 
   @include from(xl) {
-    padding-left: $space-8;
-    padding-right: $space-8;
+    padding-left: variables.$space-8;
+    padding-right: variables.$space-8;
   }
 }
 
@@ -113,7 +115,7 @@
 // TYPOGRAPHY
 // ---------------------------------------------------------------------------
 @mixin heading($size) {
-  font-family: $font-heading;
+  font-family: variables.$font-heading;
   font-size: $size;
   font-weight: 600;
   line-height: 1.15;
@@ -121,8 +123,8 @@
   color: var(--color-text-primary);
 }
 
-@mixin body-text($size: $text-base) {
-  font-family: $font-body;
+@mixin body-text($size: variables.$text-base) {
+  font-family: variables.$font-body;
   font-size: $size;
   font-weight: 400;
   line-height: 1.7;
@@ -130,16 +132,16 @@
 }
 
 @mixin label-text {
-  font-family: $font-body;
-  font-size: $text-sm;
+  font-family: variables.$font-body;
+  font-size: variables.$text-sm;
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--color-text-secondary);
 }
 
 @mixin mono-text {
-  font-family: $font-mono;
-  font-size: $text-sm;
+  font-family: variables.$font-mono;
+  font-size: variables.$text-sm;
   letter-spacing: -0.01em;
 }
 
@@ -180,8 +182,8 @@
 // INTERACTIVE
 // ---------------------------------------------------------------------------
 @mixin interactive-lift {
-  transition: transform $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  transition: transform variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
 
   @media (hover: hover) {
     &:hover {
@@ -193,7 +195,7 @@
   &:active {
     transform: translateY(0);
     box-shadow: var(--shadow-sm);
-    transition-duration: $duration-fast;
+    transition-duration: variables.$duration-fast;
   }
 }
 
@@ -213,8 +215,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: $space-2;
-  font-family: $font-body;
+  gap: variables.$space-2;
+  font-family: variables.$font-body;
   font-weight: 600;
   line-height: 1;
   border-radius: var(--radius-full);
@@ -222,29 +224,29 @@
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: background $duration-normal $ease-out,
-    color $duration-normal $ease-out, transform $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    color variables.$duration-normal variables.$ease-out, transform variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
   // Default size: md
-  font-size: $text-sm;
-  padding: $space-3 $space-6;
+  font-size: variables.$text-sm;
+  padding: variables.$space-3 variables.$space-6;
 
   @include focus-ring;
 
   &:active {
     transform: scale(0.98);
-    transition-duration: $duration-fast;
+    transition-duration: variables.$duration-fast;
   }
 }
 
 @mixin button-sm {
-  font-size: $text-xs;
-  padding: $space-2 $space-5;
+  font-size: variables.$text-xs;
+  padding: variables.$space-2 variables.$space-5;
 }
 
 @mixin button-lg {
-  font-size: $text-base;
-  padding: $space-4 $space-8;
+  font-size: variables.$text-base;
+  padding: variables.$space-4 variables.$space-8;
 }
 
 @mixin button-primary {
@@ -255,7 +257,7 @@
 
   // Arrow icon micro-animation
   svg {
-    transition: transform $duration-normal $ease-out;
+    transition: transform variables.$duration-normal variables.$ease-out;
   }
 
   @media (hover: hover) {
@@ -305,8 +307,8 @@
 // ---------------------------------------------------------------------------
 @mixin reveal-base {
   opacity: 0;
-  transition: opacity $duration-slower $ease-out,
-    transform $duration-slower $ease-out;
+  transition: opacity variables.$duration-slower variables.$ease-out,
+    transform variables.$duration-slower variables.$ease-out;
 
   &.is-visible {
     opacity: 1;

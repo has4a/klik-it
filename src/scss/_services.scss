@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // SERVICES — Clean static cards, always visible content
 // ============================================================================
@@ -12,13 +15,13 @@
 .services__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-6;
+  gap: variables.$space-6;
 
-  @include from(md) {
+  @include mixins.from(md) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include from(xl) {
+  @include mixins.from(xl) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -27,10 +30,10 @@
 // SERVICE CARD — Anchor link, flex column so arrow sticks to bottom
 // ---------------------------------------------------------------------------
 .service-card {
-  @include surface(1);
+  @include mixins.surface(1);
   border-radius: var(--radius-lg);
-  padding: $space-8;
-  padding-bottom: $space-10;
+  padding: variables.$space-8;
+  padding-bottom: variables.$space-10;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -42,13 +45,13 @@
 
   // Only transition border — transform handled by GSAP during reveal.
   // After reveal (.is-revealed), re-enable transform transition for hover.
-  transition: border-color $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  transition: border-color variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
 
   &.is-revealed {
-    transition: border-color $duration-normal $ease-out,
-      box-shadow $duration-normal $ease-out,
-      transform $duration-normal $ease-out;
+    transition: border-color variables.$duration-normal variables.$ease-out,
+      box-shadow variables.$duration-normal variables.$ease-out,
+      transform variables.$duration-normal variables.$ease-out;
   }
 
   &:focus-visible {
@@ -63,23 +66,23 @@
     }
   }
 
-  @include until(sm) {
-    padding: $space-6;
-    padding-bottom: $space-8;
+  @include mixins.until(sm) {
+    padding: variables.$space-6;
+    padding-bottom: variables.$space-8;
   }
 }
 
 // Icon
 .service-card__icon {
-  @include flex-center;
+  @include mixins.flex-center;
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
   background: var(--color-surface-2);
   color: var(--color-text-tertiary);
-  margin-bottom: $space-6;
-  transition: background $duration-normal $ease-out,
-    color $duration-normal $ease-out;
+  margin-bottom: variables.$space-6;
+  transition: background variables.$duration-normal variables.$ease-out,
+    color variables.$duration-normal variables.$ease-out;
 
   svg {
     width: 24px;
@@ -93,10 +96,10 @@
     }
   }
 
-  @include until(sm) {
+  @include mixins.until(sm) {
     width: 42px;
     height: 42px;
-    margin-bottom: $space-4;
+    margin-bottom: variables.$space-4;
 
     svg {
       width: 20px;
@@ -107,22 +110,22 @@
 
 // Title
 .service-card__title {
-  font-family: $font-heading;
-  font-size: $text-lg;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-lg;
   font-weight: 600;
   color: var(--color-text-primary);
   line-height: 1.3;
-  margin-bottom: $space-3;
+  margin-bottom: variables.$space-3;
 
-  @include until(sm) {
-    font-size: $text-base;
+  @include mixins.until(sm) {
+    font-size: variables.$text-base;
   }
 }
 
 // Description
 .service-card__body {
   p {
-    @include body-text($text-sm);
+    @include mixins.body-text(variables.$text-sm);
     color: var(--color-text-secondary);
     line-height: 1.7;
   }
@@ -135,12 +138,12 @@
   align-items: center;
   justify-content: flex-start;
   margin-top: auto;
-  padding-top: $space-6;
+  padding-top: variables.$space-6;
   color: var(--color-text-tertiary);
   opacity: 0.4;
-  transition: transform $duration-normal $ease-out,
-    opacity $duration-normal $ease-out,
-    color $duration-normal $ease-out;
+  transition: transform variables.$duration-normal variables.$ease-out,
+    opacity variables.$duration-normal variables.$ease-out,
+    color variables.$duration-normal variables.$ease-out;
 
   svg {
     display: block;
@@ -164,7 +167,7 @@
 // ---------------------------------------------------------------------------
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
-@include reduced-motion {
+@include mixins.reduced-motion {
   .service-card,
   .service-card__arrow {
     transition: none !important;

@@ -8,8 +8,9 @@
 // ============================================================================
 
 // --- Foundation ---
-@import "variables";
-@import "mixins";
+@use "sass:meta";
+@use "variables";
+@use "mixins";
 
 // ============================================================================
 // RESET — Modern, minimal, opinion-free
@@ -84,8 +85,8 @@ html {
 }
 
 body {
-  font-family: $font-body;
-  font-size: $text-base;
+  font-family: variables.$font-body;
+  font-size: variables.$text-base;
   font-weight: 400;
   line-height: 1.7;
   color: var(--color-text-primary);
@@ -94,7 +95,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   // Smooth transition when switching themes (background only — color on children handles itself)
-  transition: background-color $duration-slow $ease-out;
+  transition: background-color variables.$duration-slow variables.$ease-out;
   // Safe area insets for notched devices
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
@@ -104,16 +105,16 @@ body {
 // SKIP LINK — First focusable element for keyboard users
 // ---------------------------------------------------------------------------
 .skip-link {
-  @include visually-hidden;
+  @include mixins.visually-hidden;
   position: fixed;
-  top: $space-4;
-  left: $space-4;
+  top: variables.$space-4;
+  left: variables.$space-4;
   z-index: 9999;
-  padding: $space-3 $space-6;
+  padding: variables.$space-3 variables.$space-6;
   background: var(--color-accent);
   color: var(--color-text-inverse);
-  font-family: $font-body;
-  font-size: $text-sm;
+  font-family: variables.$font-body;
+  font-size: variables.$text-sm;
   font-weight: 600;
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -137,7 +138,7 @@ body.menu-open {
 // iOS / MOBILE FIXES
 // ---------------------------------------------------------------------------
 // Prevent auto-zoom on input focus (iOS Safari)
-@include until(md) {
+@include mixins.until(md) {
   input,
   textarea,
   select {
@@ -161,7 +162,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $font-heading;
+  font-family: variables.$font-heading;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -170,24 +171,24 @@ h6 {
 }
 
 h1 {
-  font-size: $text-5xl;
+  font-size: variables.$text-5xl;
 }
 h2 {
-  font-size: $text-4xl;
+  font-size: variables.$text-4xl;
 }
 h3 {
-  font-size: $text-2xl;
+  font-size: variables.$text-2xl;
 }
 h4 {
-  font-size: $text-xl;
+  font-size: variables.$text-xl;
 }
 
 p {
-  @include body-text;
+  @include mixins.body-text;
   text-wrap: pretty;
 
   + p {
-    margin-top: $space-4;
+    margin-top: variables.$space-4;
   }
 }
 
@@ -197,7 +198,7 @@ b {
 }
 
 small {
-  font-size: $text-sm;
+  font-size: variables.$text-sm;
 }
 
 // ============================================================================
@@ -218,11 +219,11 @@ section {
 }
 
 .container {
-  @include container;
+  @include mixins.container;
 }
 
 .container--wide {
-  @include container-wide;
+  @include mixins.container-wide;
 }
 
 // ============================================================================
@@ -236,14 +237,14 @@ section {
 // ============================================================================
 .section-header {
   text-align: center;
-  margin-bottom: $space-12;
+  margin-bottom: variables.$space-12;
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .section-header h2 {
-  margin-bottom: $space-4;
+  margin-bottom: variables.$space-4;
 }
 
 .section-header p {
@@ -258,18 +259,18 @@ section {
 
 // Text accent color
 .text-accent {
-  @include gradient-text;
+  @include mixins.gradient-text;
 }
 
 // Visually hidden (for screen readers)
 .visually-hidden {
-  @include visually-hidden;
+  @include mixins.visually-hidden;
 }
 
 // ============================================================================
 // GLOBAL ANIMATION DEFAULTS — Reduced motion support
 // ============================================================================
-@include reduced-motion {
+@include mixins.reduced-motion {
   *,
   *::before,
   *::after {
@@ -283,17 +284,17 @@ section {
 // ============================================================================
 // SECTION IMPORTS
 // ============================================================================
-@import "nav";
-@import "landing";
-@import "trust";
-@import "about";
-@import "services";
-@import "testimonials";
-@import "process";
-@import "contact";
-@import "faq";
-@import "footer";
-@import "cookie-consent";
+@include meta.load-css("nav");
+@include meta.load-css("landing");
+@include meta.load-css("trust");
+@include meta.load-css("about");
+@include meta.load-css("services");
+@include meta.load-css("testimonials");
+@include meta.load-css("process");
+@include meta.load-css("contact");
+@include meta.load-css("faq");
+@include meta.load-css("footer");
+@include meta.load-css("cookie-consent");
 
 // ============================================================================
 // SCROLL REVEAL — IntersectionObserver-driven, CSS-animated
@@ -302,7 +303,7 @@ section {
 // (services / process / testimonials / faq) apply with adequate cascade
 // position regardless of whether the section file also touches reveal state.
 // ============================================================================
-@import "reveal";
+@include meta.load-css("reveal");
 
 // ============================================================================
 // FLOATING CONTACT WIDGET
@@ -313,14 +314,14 @@ section {
 // ============================================================================
 .floating-contact {
   position: fixed;
-  bottom: $space-6;
-  right: $space-6;
-  z-index: $z-sticky;
+  bottom: variables.$space-6;
+  right: variables.$space-6;
+  z-index: variables.$z-sticky;
   // Start hidden, JS will show after scroll
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity $duration-normal $ease-out,
-    transform $duration-normal $ease-out;
+  transition: opacity variables.$duration-normal variables.$ease-out,
+    transform variables.$duration-normal variables.$ease-out;
   pointer-events: none;
 
   &.is-visible {
@@ -329,15 +330,15 @@ section {
     pointer-events: auto;
   }
 
-  @include until(sm) {
-    bottom: $space-4;
-    right: $space-4;
+  @include mixins.until(sm) {
+    bottom: variables.$space-4;
+    right: variables.$space-4;
   }
 }
 
 // Trigger button
 .floating-contact__trigger {
-  @include flex-center;
+  @include mixins.flex-center;
   width: 56px;
   height: 56px;
   border-radius: var(--radius-full);
@@ -346,10 +347,10 @@ section {
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-lg), var(--shadow-glow);
-  transition: transform $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out, background $duration-normal $ease-out;
+  transition: transform variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out, background variables.$duration-normal variables.$ease-out;
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 
   @media (hover: hover) {
     &:hover {
@@ -360,7 +361,7 @@ section {
 
   &:active {
     transform: scale(0.95);
-    transition-duration: $duration-fast;
+    transition-duration: variables.$duration-fast;
   }
 }
 
@@ -386,24 +387,24 @@ section {
 // Panel
 .floating-contact__panel {
   position: absolute;
-  bottom: calc(100% + #{$space-3});
+  bottom: calc(100% + #{variables.$space-3});
   right: 0;
   width: 260px;
-  @include glass;
+  @include mixins.glass;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  padding: $space-5;
+  padding: variables.$space-5;
   display: flex;
   flex-direction: column;
-  gap: $space-3;
+  gap: variables.$space-3;
 
   // Hidden by default
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px) scale(0.95);
   transform-origin: bottom right;
-  transition: opacity $duration-normal $ease-out,
-    visibility $duration-normal $ease-out, transform $duration-normal $ease-out;
+  transition: opacity variables.$duration-normal variables.$ease-out,
+    visibility variables.$duration-normal variables.$ease-out, transform variables.$duration-normal variables.$ease-out;
 
   &.is-open {
     opacity: 1;
@@ -413,8 +414,8 @@ section {
 }
 
 .floating-contact__heading {
-  font-family: $font-heading;
-  font-size: $text-sm;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-sm;
   font-weight: 600;
   color: var(--color-text-primary);
   line-height: 1.3;
@@ -423,26 +424,26 @@ section {
 .floating-contact__options {
   display: flex;
   flex-direction: column;
-  gap: $space-1;
+  gap: variables.$space-1;
 }
 
 .floating-contact__option {
   display: flex;
   align-items: center;
-  gap: $space-3;
-  padding: $space-3;
+  gap: variables.$space-3;
+  padding: variables.$space-3;
   border-radius: var(--radius-md);
-  font-size: $text-xs;
+  font-size: variables.$text-xs;
   color: var(--color-text-secondary);
-  transition: background $duration-normal $ease-out,
-    color $duration-normal $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    color variables.$duration-normal variables.$ease-out;
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 
   svg {
     flex-shrink: 0;
     color: var(--color-text-tertiary);
-    transition: color $duration-normal $ease-out;
+    transition: color variables.$duration-normal variables.$ease-out;
   }
 
   @media (hover: hover) {
@@ -490,8 +491,8 @@ select,
 details summary {
   transition-property: color, background-color, border-color, box-shadow,
     opacity;
-  transition-duration: $duration-normal;
-  transition-timing-function: $ease-out;
+  transition-duration: variables.$duration-normal;
+  transition-timing-function: variables.$ease-out;
 }
 
 // ============================================================================

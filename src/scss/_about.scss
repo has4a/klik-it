@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // ABOUT — Asymmetric layout with stats + content
 // ============================================================================
@@ -15,16 +18,16 @@
 .about__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-16;
+  gap: variables.$space-16;
   align-items: center;
 
-  @include from(lg) {
+  @include mixins.from(lg) {
     grid-template-columns: 1fr 1.4fr;
-    gap: $space-12;
+    gap: variables.$space-12;
   }
 
-  @include from(xl) {
-    gap: $space-24;
+  @include mixins.from(xl) {
+    gap: variables.$space-24;
   }
 }
 
@@ -42,8 +45,8 @@
 .about__stat {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  padding: $space-6 0;
+  gap: variables.$space-3;
+  padding: variables.$space-6 0;
 
   &:not(:first-child) {
     border-top: 1px solid var(--color-border);
@@ -59,7 +62,7 @@
 }
 
 .about__stat-number {
-  font-family: $font-heading;
+  font-family: variables.$font-heading;
   font-size: clamp(3rem, 2rem + 4vw, 5.5rem); // 48-88px
   font-weight: 700;
   line-height: 1;
@@ -67,8 +70,8 @@
 }
 
 .about__stat-label {
-  font-family: $font-mono;
-  font-size: $text-xs;
+  font-family: variables.$font-mono;
+  font-size: variables.$text-xs;
   font-weight: 500;
   color: var(--color-text-tertiary);
   letter-spacing: 0.06em;
@@ -82,9 +85,9 @@
 .about__content {
   h2 {
     text-align: left;
-    margin-bottom: $space-6;
+    margin-bottom: variables.$space-6;
 
-    @include until(lg) {
+    @include mixins.until(lg) {
       text-align: center;
     }
   }
@@ -92,7 +95,7 @@
   p {
     max-width: var(--content-max);
 
-    @include until(lg) {
+    @include mixins.until(lg) {
       text-align: center;
       margin-left: auto;
       margin-right: auto;

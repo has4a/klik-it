@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // CONTACT — Split layout: info left, form right
 // ============================================================================
@@ -9,12 +12,12 @@
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-12;
+  gap: variables.$space-12;
   align-items: start;
 
-  @include from(lg) {
+  @include mixins.from(lg) {
     grid-template-columns: 1fr 1.3fr;
-    gap: $space-16;
+    gap: variables.$space-16;
   }
 }
 
@@ -27,30 +30,30 @@
 // INFO PANEL — Left side
 // ---------------------------------------------------------------------------
 .contact__info {
-  @include from(lg) {
+  @include mixins.from(lg) {
     position: sticky;
-    top: calc(var(--nav-height) + #{$space-8});
+    top: calc(var(--nav-height) + #{variables.$space-8});
   }
 }
 
 .contact__info-heading {
-  font-family: $font-heading;
-  font-size: $text-3xl;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-3xl;
   font-weight: 600;
   color: var(--color-text-primary);
   line-height: 1.2;
   letter-spacing: -0.02em;
-  margin-bottom: $space-4;
+  margin-bottom: variables.$space-4;
 
-  @include from(lg) {
-    font-size: $text-4xl;
+  @include mixins.from(lg) {
+    font-size: variables.$text-4xl;
   }
 }
 
 .contact__info-desc {
-  @include body-text($text-base);
+  @include mixins.body-text(variables.$text-base);
   color: var(--color-text-secondary);
-  margin-bottom: $space-8;
+  margin-bottom: variables.$space-8;
   max-width: 420px;
 }
 
@@ -58,27 +61,27 @@
 .contact__details {
   display: flex;
   flex-direction: column;
-  gap: $space-5;
-  padding-top: $space-6;
+  gap: variables.$space-5;
+  padding-top: variables.$space-6;
   border-top: 1px solid var(--color-border);
 }
 
 .contact__detail {
   display: flex;
   align-items: center;
-  gap: $space-4;
+  gap: variables.$space-4;
 }
 
 .contact__detail-icon {
-  @include flex-center;
+  @include mixins.flex-center;
   flex-shrink: 0;
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
   background: var(--color-surface-2);
   color: var(--color-text-tertiary);
-  transition: background $duration-normal $ease-out,
-    color $duration-normal $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    color variables.$duration-normal variables.$ease-out;
 
   svg {
     width: 18px;
@@ -102,8 +105,8 @@
 
 // Mikrolabel — same mono/xs treatment as form labels for visual rhyme
 .contact__detail-label {
-  font-family: $font-mono;
-  font-size: $text-xs;
+  font-family: variables.$font-mono;
+  font-size: variables.$text-xs;
   font-weight: 500;
   color: var(--color-text-tertiary);
   letter-spacing: 0.04em;
@@ -111,9 +114,9 @@
 }
 
 .contact__detail-text {
-  font-size: $text-sm;
+  font-size: variables.$text-sm;
   color: var(--color-text-secondary);
-  transition: color $duration-normal $ease-out;
+  transition: color variables.$duration-normal variables.$ease-out;
 
   a {
     color: var(--color-text-primary);
@@ -134,21 +137,21 @@
   background: var(--color-surface-0);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: $space-8;
+  padding: variables.$space-8;
 
-  @include from(lg) {
-    padding: $space-10;
+  @include mixins.from(lg) {
+    padding: variables.$space-10;
   }
 
-  @include until(sm) {
-    padding: $space-6;
+  @include mixins.until(sm) {
+    padding: variables.$space-6;
   }
 }
 
 .contact__form {
   display: flex;
   flex-direction: column;
-  gap: $space-5;
+  gap: variables.$space-5;
 }
 
 // Honeypot
@@ -167,15 +170,15 @@
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: $space-2;
+  gap: variables.$space-2;
 
   label {
-    font-family: $font-mono;
-    font-size: $text-xs;
+    font-family: variables.$font-mono;
+    font-size: variables.$text-xs;
     font-weight: 500;
     color: var(--color-text-secondary);
     letter-spacing: 0.02em;
-    transition: color $duration-normal $ease-out;
+    transition: color variables.$duration-normal variables.$ease-out;
   }
 
   // "(voliteľné)" hint on optional fields
@@ -193,16 +196,16 @@
   input,
   textarea {
     width: 100%;
-    padding: $space-3 $space-4;
-    font-family: $font-body;
-    font-size: $text-base;
+    padding: variables.$space-3 variables.$space-4;
+    font-family: variables.$font-body;
+    font-size: variables.$text-base;
     color: var(--color-text-primary);
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    transition: border-color $duration-normal $ease-out,
-      background $duration-normal $ease-out,
-      box-shadow $duration-normal $ease-out;
+    transition: border-color variables.$duration-normal variables.$ease-out,
+      background variables.$duration-normal variables.$ease-out,
+      box-shadow variables.$duration-normal variables.$ease-out;
 
     &::placeholder {
       color: var(--color-text-tertiary);
@@ -235,20 +238,20 @@
 .form-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-5;
+  gap: variables.$space-5;
 
-  @include from(md) {
+  @include mixins.from(md) {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 // Error message
 .form-field__error {
-  font-size: $text-xs;
+  font-size: variables.$text-xs;
   color: var(--color-error);
   min-height: 0;
   opacity: 0;
-  transition: opacity $duration-normal $ease-out;
+  transition: opacity variables.$duration-normal variables.$ease-out;
 
   &.is-active {
     opacity: 1;
@@ -259,9 +262,9 @@
 // FORM STATUS
 // ---------------------------------------------------------------------------
 .form-status {
-  padding: $space-4;
+  padding: variables.$space-4;
   border-radius: var(--radius-md);
-  font-size: $text-sm;
+  font-size: variables.$text-sm;
   text-align: center;
   display: none;
 
@@ -284,9 +287,9 @@
 // SUBMIT BUTTON
 // ---------------------------------------------------------------------------
 .contact__submit {
-  @include button-primary;
+  @include mixins.button-primary;
   width: 100%;
-  margin-top: $space-2;
+  margin-top: variables.$space-2;
   position: relative;
 
   // Loading state
@@ -316,7 +319,7 @@
 // ---------------------------------------------------------------------------
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
-@include reduced-motion {
+@include mixins.reduced-motion {
   .form-field input,
   .form-field textarea,
   .contact__detail-icon,

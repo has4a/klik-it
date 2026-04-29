@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // TRUST BAR — Client logos strip
 // ============================================================================
@@ -7,8 +10,8 @@
 
 .trust {
   // Increased spacing — trust bar is a credibility element, not an afterthought
-  padding-top: $space-12;
-  padding-bottom: $space-12;
+  padding-top: variables.$space-12;
+  padding-bottom: variables.$space-12;
   position: relative;
 
   // Gradient fade dividers — softer than hard borders
@@ -38,24 +41,24 @@
 }
 
 .trust__label {
-  font-family: $font-mono;
-  font-size: $text-xs;
+  font-family: variables.$font-mono;
+  font-size: variables.$text-xs;
   color: var(--color-text-tertiary);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: $space-6;
+  margin-bottom: variables.$space-6;
 }
 
 .trust__logos {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $space-12;
+  gap: variables.$space-12;
   flex-wrap: wrap;
 
-  @include until(md) {
-    gap: $space-6 $space-8;
+  @include mixins.until(md) {
+    gap: variables.$space-6 variables.$space-8;
   }
 }
 
@@ -64,7 +67,7 @@
   align-items: center;
   justify-content: center;
   opacity: 0.4;
-  transition: opacity $duration-normal $ease-out;
+  transition: opacity variables.$duration-normal variables.$ease-out;
   // For real logos: set height, let width auto
   height: 28px;
 
@@ -74,8 +77,8 @@
 
   // Placeholder text styling — remove when using real logos
   span {
-    font-family: $font-body;
-    font-size: $text-sm;
+    font-family: variables.$font-body;
+    font-size: variables.$text-sm;
     font-weight: 600;
     color: var(--color-text-tertiary);
     letter-spacing: 0.02em;
@@ -88,14 +91,14 @@
     object-fit: contain;
     // Make logos monochrome in dark mode
     filter: grayscale(1) brightness(0.7);
-    transition: filter $duration-normal $ease-out;
+    transition: filter variables.$duration-normal variables.$ease-out;
   }
 
   &:hover img {
     filter: grayscale(0) brightness(1);
   }
 
-  @include until(md) {
+  @include mixins.until(md) {
     height: 24px;
   }
 }

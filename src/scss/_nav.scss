@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // NAVIGATION — Site Header + Nav Bar + Mobile Menu
 // ============================================================================
@@ -21,9 +24,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: $z-overlay;
+  z-index: variables.$z-overlay;
   // Subtle entry animation
-  animation: nav-slide-down $duration-slow $ease-out both;
+  animation: nav-slide-down variables.$duration-slow variables.$ease-out both;
 }
 
 @keyframes nav-slide-down {
@@ -43,9 +46,9 @@
 .nav {
   width: 100%;
   height: var(--nav-height);
-  transition: background $duration-normal $ease-out,
-    border-color $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    border-color variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
 
   // Default state: transparent
   background: transparent;
@@ -53,15 +56,15 @@
 
   // Scrolled state: glass effect (class added via JS)
   .site-header.is-scrolled & {
-    @include glass;
+    @include mixins.glass;
     box-shadow: var(--shadow-md);
   }
 }
 
 // Inner layout
 .nav__inner {
-  @include container-wide;
-  @include flex-between;
+  @include mixins.container-wide;
+  @include mixins.flex-between;
   height: 100%;
 }
 
@@ -69,22 +72,22 @@
 .nav__actions {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: variables.$space-3;
 }
 
 // ---------------------------------------------------------------------------
 // LOGO
 // ---------------------------------------------------------------------------
 .nav__logo {
-  font-family: $font-heading;
-  font-size: $text-xl;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-xl;
   font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.03em;
-  transition: opacity $duration-normal $ease-out;
+  transition: opacity variables.$duration-normal variables.$ease-out;
 
   span {
-    @include gradient-text;
+    @include mixins.gradient-text;
   }
 
   @media (hover: hover) {
@@ -100,21 +103,21 @@
 .nav__links {
   display: none;
 
-  @include from(lg) {
+  @include mixins.from(lg) {
     display: flex;
     align-items: center;
-    gap: $space-6;
+    gap: variables.$space-6;
   }
 }
 
 .nav__link {
-  font-family: $font-body;
-  font-size: $text-sm;
+  font-family: variables.$font-body;
+  font-size: variables.$text-sm;
   font-weight: 500;
   color: var(--color-text-secondary);
-  padding: $space-2 0;
+  padding: variables.$space-2 0;
   position: relative;
-  transition: color $duration-normal $ease-out;
+  transition: color variables.$duration-normal variables.$ease-out;
 
   // Underline hover effect
   &::after {
@@ -126,7 +129,7 @@
     height: 1.5px;
     background: var(--gradient-accent);
     border-radius: var(--radius-full);
-    transition: width $duration-normal $ease-out;
+    transition: width variables.$duration-normal variables.$ease-out;
   }
 
   &.is-active {
@@ -147,7 +150,7 @@
     }
   }
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 }
 
 // ---------------------------------------------------------------------------
@@ -156,9 +159,9 @@
 .nav__cta {
   display: none;
 
-  @include from(lg) {
-    @include button-base;
-    @include button-sm;
+  @include mixins.from(lg) {
+    @include mixins.button-base;
+    @include mixins.button-sm;
     background: var(--color-accent-muted);
     color: var(--color-accent);
     border: 1px solid var(--color-accent-muted);
@@ -188,10 +191,10 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: $space-2;
-  @include focus-ring;
+  padding: variables.$space-2;
+  @include mixins.focus-ring;
 
-  @include from(lg) {
+  @include mixins.from(lg) {
     display: none;
   }
 }
@@ -202,8 +205,8 @@
   height: 2px;
   background: var(--color-text-primary);
   border-radius: var(--radius-full);
-  transition: transform $duration-normal $ease-out,
-    opacity $duration-normal $ease-out, width $duration-normal $ease-out;
+  transition: transform variables.$duration-normal variables.$ease-out,
+    opacity variables.$duration-normal variables.$ease-out, width variables.$duration-normal variables.$ease-out;
   transform-origin: center;
 
   // Middle line — slightly shorter for visual interest
@@ -241,7 +244,7 @@
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: $z-overlay - 1; // 299 — just below header (300)
+  z-index: variables.$z-overlay - 1; // 299 — just below header (300)
   background: var(--color-surface-0);
   display: flex;
   align-items: center;
@@ -255,8 +258,8 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity $duration-slow $ease-out,
-    visibility $duration-slow $ease-out;
+  transition: opacity variables.$duration-slow variables.$ease-out,
+    visibility variables.$duration-slow variables.$ease-out;
 
   // Visible when open
   &.is-open {
@@ -266,7 +269,7 @@
   }
 
   // Hide on desktop (safety net)
-  @include from(lg) {
+  @include mixins.from(lg) {
     display: none !important;
   }
 }
@@ -275,12 +278,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $space-8;
+  gap: variables.$space-8;
   width: 100%;
   max-width: 320px;
-  padding: $space-6;
+  padding: variables.$space-6;
   // Push content down slightly to account for nav bar above
-  padding-top: calc(var(--nav-height) + #{$space-6});
+  padding-top: calc(var(--nav-height) + #{variables.$space-6});
 }
 
 .mobile-menu__links {
@@ -303,18 +306,18 @@
 
 .mobile-menu__link {
   display: block;
-  font-family: $font-heading;
-  font-size: $text-xl;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-xl;
   font-weight: 600;
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
-  padding: $space-5 0;
+  padding: variables.$space-5 0;
 
   // Stagger entrance animation
   opacity: 0;
   transform: translateY(16px);
-  transition: color $duration-normal $ease-out, opacity $duration-slow $ease-out,
-    transform $duration-slow $ease-out;
+  transition: color variables.$duration-normal variables.$ease-out, opacity variables.$duration-slow variables.$ease-out,
+    transform variables.$duration-slow variables.$ease-out;
 
   .mobile-menu.is-open & {
     opacity: 1;
@@ -333,18 +336,18 @@
     color: var(--color-accent);
   }
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 }
 
 // Mobile CTA
 .mobile-menu__cta {
-  @include button-primary;
+  @include mixins.button-primary;
   width: 100%;
   opacity: 0;
   transform: translateY(16px);
-  transition: background $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out, opacity $duration-slow $ease-out,
-    transform $duration-slow $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out, opacity variables.$duration-slow variables.$ease-out,
+    transform variables.$duration-slow variables.$ease-out;
 
   .mobile-menu.is-open & {
     opacity: 1;
@@ -357,7 +360,7 @@
 // THEME TOGGLE — Sun/Moon icon button
 // ---------------------------------------------------------------------------
 .theme-toggle {
-  @include flex-center;
+  @include mixins.flex-center;
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
@@ -365,12 +368,12 @@
   border: 1px solid var(--color-border);
   cursor: pointer;
   color: var(--color-text-secondary);
-  transition: background $duration-normal $ease-out,
-    border-color $duration-normal $ease-out, color $duration-normal $ease-out,
-    transform $duration-normal $ease-out;
+  transition: background variables.$duration-normal variables.$ease-out,
+    border-color variables.$duration-normal variables.$ease-out, color variables.$duration-normal variables.$ease-out,
+    transform variables.$duration-normal variables.$ease-out;
   flex-shrink: 0;
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 
   @media (hover: hover) {
     &:hover {
@@ -383,12 +386,12 @@
 
   &:active {
     transform: scale(0.95);
-    transition-duration: $duration-fast;
+    transition-duration: variables.$duration-fast;
   }
 
   svg {
-    transition: transform $duration-normal $ease-out,
-      opacity $duration-normal $ease-out;
+    transition: transform variables.$duration-normal variables.$ease-out,
+      opacity variables.$duration-normal variables.$ease-out;
   }
 }
 

@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // PROCESS — How we work, 4-step flow
 // ============================================================================
@@ -13,16 +16,16 @@
 .process__steps {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-6;
+  gap: variables.$space-6;
   position: relative;
 
-  @include from(md) {
+  @include mixins.from(md) {
     grid-template-columns: repeat(2, 1fr);
   }
 
   // 4-col kicks in at xl (1280px) — covers most desktops, not just wide screens.
   // Gap stays $space-6 so the directional arrow has room to breathe.
-  @include from(xl) {
+  @include mixins.from(xl) {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -32,17 +35,17 @@
 // ---------------------------------------------------------------------------
 .process__step {
   position: relative;
-  padding: $space-8 $space-6;
+  padding: variables.$space-8 variables.$space-6;
   border-radius: var(--radius-lg);
-  @include surface(1);
+  @include mixins.surface(1);
   // Only border — transform handled by GSAP during reveal
-  transition: border-color $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  transition: border-color variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
 
   &.is-revealed {
-    transition: border-color $duration-normal $ease-out,
-      box-shadow $duration-normal $ease-out,
-      transform $duration-normal $ease-out;
+    transition: border-color variables.$duration-normal variables.$ease-out,
+      box-shadow variables.$duration-normal variables.$ease-out,
+      transform variables.$duration-normal variables.$ease-out;
   }
 
   @media (hover: hover) {
@@ -52,8 +55,8 @@
     }
   }
 
-  @include until(sm) {
-    padding: $space-6;
+  @include mixins.until(sm) {
+    padding: variables.$space-6;
   }
 
   // Directional connector between steps in 4-col layout — communicates flow.
@@ -61,14 +64,14 @@
   // Top value targets the visual centre of the $text-4xl number (~$space-8 padding
   // + ~half the number's cap-height); a small magic number is the cleanest way
   // to bridge a clamp() font-size without runtime math.
-  @include from(xl) {
+  @include mixins.from(xl) {
     &:not(:last-child) {
       &::after {
         content: "";
         position: absolute;
         top: 52px;
         right: 0;
-        width: $space-6;
+        width: variables.$space-6;
         height: 1px;
         background: linear-gradient(
           90deg,
@@ -91,7 +94,7 @@
         border-right: 1px solid var(--color-accent);
         opacity: 0.5;
         // Translate +$space-5 (20px) places the visual tip ~end of the 24px gap.
-        transform: translate(#{$space-5}, -50%) rotate(45deg);
+        transform: translate(#{variables.$space-5}, -50%) rotate(45deg);
       }
     }
   }
@@ -100,37 +103,37 @@
 // Step number — large, mono, muted
 .process__number {
   display: block;
-  font-family: $font-mono;
-  font-size: $text-4xl;
+  font-family: variables.$font-mono;
+  font-size: variables.$text-4xl;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--color-accent);
   opacity: 0.25;
-  margin-bottom: $space-4;
+  margin-bottom: variables.$space-4;
 
-  @include from(2xl) {
-    font-size: $text-3xl;
+  @include mixins.from(2xl) {
+    font-size: variables.$text-3xl;
   }
 }
 
 // Step title
 .process__title {
-  font-family: $font-heading;
-  font-size: $text-lg;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-lg;
   font-weight: 600;
   color: var(--color-text-primary);
-  margin-bottom: $space-3;
+  margin-bottom: variables.$space-3;
   line-height: 1.3;
 
-  @include until(sm) {
-    font-size: $text-base;
+  @include mixins.until(sm) {
+    font-size: variables.$text-base;
   }
 }
 
 // Step description
 .process__desc {
-  @include body-text($text-sm);
+  @include mixins.body-text(variables.$text-sm);
   color: var(--color-text-secondary);
   line-height: 1.7;
 }
@@ -163,7 +166,7 @@
 // ---------------------------------------------------------------------------
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
-@include reduced-motion {
+@include mixins.reduced-motion {
   .process__step {
     transition: none !important;
     transform: none !important;

@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // TESTIMONIALS — Client social proof
 // ============================================================================
@@ -15,11 +18,11 @@
 .testimonials__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-6;
+  gap: variables.$space-6;
 
   // Skip 2-col — 3 cards in 2 columns creates an orphan.
   // Go straight to 3-col at lg where cards have enough width (~300px).
-  @include from(lg) {
+  @include mixins.from(lg) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -28,15 +31,15 @@
 // TESTIMONIAL CARD
 // ---------------------------------------------------------------------------
 .testimonial-card {
-  @include surface(2);
+  @include mixins.surface(2);
   border-radius: var(--radius-lg);
-  padding: $space-8;
+  padding: variables.$space-8;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: $space-6;
-  transition: border-color $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
+  gap: variables.$space-6;
+  transition: border-color variables.$duration-normal variables.$ease-out,
+    box-shadow variables.$duration-normal variables.$ease-out;
 
   @media (hover: hover) {
     &:hover {
@@ -45,8 +48,8 @@
     }
   }
 
-  @include until(sm) {
-    padding: $space-6;
+  @include mixins.until(sm) {
+    padding: variables.$space-6;
   }
 }
 
@@ -54,9 +57,9 @@
 // a quote glyph rather than a pixel-perfect ghost on light surfaces.
 .testimonial-card__quote {
   position: absolute;
-  top: $space-4;
-  right: $space-6;
-  font-family: $font-heading;
+  top: variables.$space-4;
+  right: variables.$space-6;
+  font-family: variables.$font-heading;
   font-size: clamp(3.5rem, 5.5vw, 5.5rem);
   font-weight: 700;
   line-height: 1;
@@ -68,7 +71,7 @@
 
 // Quote text
 .testimonial-card__text {
-  @include body-text($text-sm);
+  @include mixins.body-text(variables.$text-sm);
   color: var(--color-text-secondary);
   line-height: 1.8;
   font-style: italic;
@@ -76,8 +79,8 @@
   position: relative;
   z-index: 1;
 
-  @include from(md) {
-    font-size: $text-base;
+  @include mixins.from(md) {
+    font-size: variables.$text-base;
   }
 }
 
@@ -85,21 +88,21 @@
 .testimonial-card__author {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: variables.$space-3;
 }
 
 // Avatar — initials in a circle
 // Replace with <img> when real photos are available
 .testimonial-card__avatar {
-  @include flex-center;
+  @include mixins.flex-center;
   flex-shrink: 0;
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
   background: var(--color-accent-muted);
   color: var(--color-accent);
-  font-family: $font-heading;
-  font-size: $text-xs;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-xs;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -111,8 +114,8 @@
 }
 
 .testimonial-card__name {
-  font-family: $font-heading;
-  font-size: $text-sm;
+  font-family: variables.$font-heading;
+  font-size: variables.$text-sm;
   font-weight: 600;
   font-style: normal;
   color: var(--color-text-primary);
@@ -120,8 +123,8 @@
 }
 
 .testimonial-card__role {
-  font-family: $font-body;
-  font-size: $text-xs;
+  font-family: variables.$font-body;
+  font-size: variables.$text-xs;
   color: var(--color-text-tertiary);
   line-height: 1.3;
 }
@@ -133,7 +136,7 @@
 // have spatial meaning. Subtle accent tint + accent border, not louder,
 // just visually distinct enough that the eye has somewhere to land.
 .testimonials__grid .testimonial-card:nth-child(2) {
-  @include from(lg) {
+  @include mixins.from(lg) {
     background: linear-gradient(
       180deg,
       var(--color-accent-subtle) 0%,
@@ -151,13 +154,13 @@
 // STAGGER for reveal
 // ---------------------------------------------------------------------------
 .testimonials__grid .testimonial-card {
-  @include stagger(3, 100ms);
+  @include mixins.stagger(3, 100ms);
 }
 
 // ---------------------------------------------------------------------------
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
-@include reduced-motion {
+@include mixins.reduced-motion {
   .testimonial-card {
     transition: none !important;
   }

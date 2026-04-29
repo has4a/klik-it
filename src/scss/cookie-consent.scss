@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // COOKIE CONSENT BANNER
 // ============================================================================
@@ -11,15 +14,15 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: $z-modal; // Above everything including floating contact
-  padding: $space-4 $space-6;
+  z-index: variables.$z-modal; // Above everything including floating contact
+  padding: variables.$space-4 variables.$space-6;
 
   // Hidden by default
   opacity: 0;
   visibility: hidden;
   transform: translateY(100%);
-  transition: opacity $duration-slow $ease-out,
-    visibility $duration-slow $ease-out, transform $duration-slow $ease-out;
+  transition: opacity variables.$duration-slow variables.$ease-out,
+    visibility variables.$duration-slow variables.$ease-out, transform variables.$duration-slow variables.$ease-out;
 
   &.is-visible {
     opacity: 1;
@@ -27,27 +30,27 @@
     transform: translateY(0);
   }
 
-  @include until(sm) {
-    padding: $space-4;
+  @include mixins.until(sm) {
+    padding: variables.$space-4;
   }
 }
 
 .cookie-consent__inner {
-  @include container-wide;
-  @include glass;
+  @include mixins.container-wide;
+  @include mixins.glass;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
-  padding: $space-5 $space-6;
+  padding: variables.$space-5 variables.$space-6;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-6;
+  gap: variables.$space-6;
 
-  @include until(md) {
+  @include mixins.until(md) {
     flex-direction: column;
     text-align: center;
-    gap: $space-4;
-    padding: $space-5;
+    gap: variables.$space-4;
+    padding: variables.$space-5;
   }
 }
 
@@ -57,8 +60,8 @@
 }
 
 .cookie-consent__text {
-  font-family: $font-body;
-  font-size: $text-sm;
+  font-family: variables.$font-body;
+  font-size: variables.$text-sm;
   color: var(--color-text-secondary);
   line-height: 1.6;
 }
@@ -68,7 +71,7 @@
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 2px;
-  transition: text-decoration-color $duration-normal $ease-out;
+  transition: text-decoration-color variables.$duration-normal variables.$ease-out;
 
   @media (hover: hover) {
     &:hover {
@@ -76,15 +79,15 @@
     }
   }
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 }
 
 .cookie-consent__actions {
   display: flex;
-  gap: $space-3;
+  gap: variables.$space-3;
   flex-shrink: 0;
 
-  @include until(sm) {
+  @include mixins.until(sm) {
     flex-direction: column;
     width: 100%;
   }
@@ -92,13 +95,13 @@
 
 // Shared button base
 .cookie-consent__btn {
-  @include button-base;
-  font-size: $text-sm;
-  padding: $space-2 $space-5;
+  @include mixins.button-base;
+  font-size: variables.$text-sm;
+  padding: variables.$space-2 variables.$space-5;
   white-space: nowrap;
-  @include focus-ring;
+  @include mixins.focus-ring;
 
-  @include until(sm) {
+  @include mixins.until(sm) {
     width: 100%;
     justify-content: center;
   }

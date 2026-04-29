@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 // ============================================================================
 // FAQ — Native <details>/<summary>, JS-driven smooth height transition
 // ============================================================================
@@ -18,20 +21,20 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: $space-3;
+  gap: variables.$space-3;
 }
 
 // ---------------------------------------------------------------------------
 // FAQ ITEM — <details>
 // ---------------------------------------------------------------------------
 .faq__item {
-  @include surface(1);
+  @include mixins.surface(1);
   border-radius: var(--radius-lg);
   overflow: hidden;
   // box-shadow change snaps (no transition) — repainting a shadow while the
   // parent grows each frame was the most expensive frame work and a likely
   // cause of perceived stutter.
-  transition: border-color 0.4s $ease-out, background 0.4s $ease-out;
+  transition: border-color 0.4s variables.$ease-out, background 0.4s variables.$ease-out;
 
   @media (hover: hover) {
     &:hover {
@@ -53,8 +56,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-4;
-  padding: $space-6;
+  gap: variables.$space-4;
+  padding: variables.$space-6;
   cursor: pointer;
   user-select: none;
   list-style: none;
@@ -68,19 +71,19 @@
     content: "";
   }
 
-  @include focus-ring;
+  @include mixins.focus-ring;
 
   span {
-    font-family: $font-heading;
-    font-size: $text-base;
+    font-family: variables.$font-heading;
+    font-size: variables.$text-base;
     font-weight: 600;
     color: var(--color-text-primary);
     line-height: 1.4;
-    transition: color 0.4s $ease-out;
+    transition: color 0.4s variables.$ease-out;
     flex-grow: 1;
 
-    @include from(md) {
-      font-size: $text-lg;
+    @include mixins.from(md) {
+      font-size: variables.$text-lg;
     }
   }
 
@@ -90,9 +93,9 @@
     }
   }
 
-  @include until(sm) {
-    padding: $space-4;
-    gap: $space-3;
+  @include mixins.until(sm) {
+    padding: variables.$space-4;
+    gap: variables.$space-3;
   }
 }
 
@@ -106,7 +109,7 @@
 .faq__icon {
   flex-shrink: 0;
   color: var(--color-text-tertiary);
-  transition: transform 0.4s $ease-out, color 0.4s $ease-out;
+  transition: transform 0.4s variables.$ease-out, color 0.4s variables.$ease-out;
 }
 
 .faq__item[open] .faq__icon {
@@ -124,20 +127,20 @@
 .faq__answer {
   height: 0;
   overflow: hidden;
-  padding: 0 $space-6 $space-6;
+  padding: 0 variables.$space-6 variables.$space-6;
 
-  @include until(sm) {
-    padding: 0 $space-4 $space-4;
+  @include mixins.until(sm) {
+    padding: 0 variables.$space-4 variables.$space-4;
   }
 
   p {
-    @include body-text($text-sm);
+    @include mixins.body-text(variables.$text-sm);
     line-height: 1.8;
     color: var(--color-text-secondary);
     max-width: var(--content-max);
 
-    @include from(md) {
-      font-size: $text-base;
+    @include mixins.from(md) {
+      font-size: variables.$text-base;
     }
   }
 }
@@ -153,16 +156,16 @@
 // ---------------------------------------------------------------------------
 .faq__cta {
   text-align: center;
-  margin-top: $space-16;
-  padding: $space-12 $space-8;
-  @include surface(1);
+  margin-top: variables.$space-16;
+  padding: variables.$space-12 variables.$space-8;
+  @include mixins.surface(1);
   border-radius: var(--radius-xl);
 
   p {
-    font-family: $font-heading;
-    font-size: $text-xl;
+    font-family: variables.$font-heading;
+    font-size: variables.$text-xl;
     color: var(--color-text-primary);
-    margin-bottom: $space-6;
+    margin-bottom: variables.$space-6;
     font-weight: 600;
   }
 }
@@ -170,7 +173,7 @@
 // ---------------------------------------------------------------------------
 // REDUCED MOTION
 // ---------------------------------------------------------------------------
-@include reduced-motion {
+@include mixins.reduced-motion {
   .faq__item,
   .faq__question span,
   .faq__icon,
