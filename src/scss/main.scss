@@ -281,17 +281,6 @@ section {
 }
 
 // ============================================================================
-// SCROLL REVEAL — GSAP handles animations, CSS provides fallback
-// ============================================================================
-// GSAP sets initial state (opacity: 0, y: 24) inline and animates on scroll.
-// If GSAP fails to load, JS adds .is-visible class → show everything.
-// ============================================================================
-[data-reveal].is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-// ============================================================================
 // SECTION IMPORTS
 // ============================================================================
 @import "nav";
@@ -305,6 +294,15 @@ section {
 @import "faq";
 @import "footer";
 @import "cookie-consent";
+
+// ============================================================================
+// SCROLL REVEAL — IntersectionObserver-driven, CSS-animated
+// ============================================================================
+// Imported AFTER section files so the [data-reveal] section overrides
+// (services / process / testimonials / faq) apply with adequate cascade
+// position regardless of whether the section file also touches reveal state.
+// ============================================================================
+@import "reveal";
 
 // ============================================================================
 // FLOATING CONTACT WIDGET

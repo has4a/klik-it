@@ -1,28 +1,24 @@
 // ============================================================================
-// Animations — GSAP ScrollTrigger + vanilla FAQ height animator
+// Animations — IntersectionObserver scroll reveals + vanilla FAQ accordion
 // ============================================================================
-// GSAP controls:
-//   ✓ All [data-reveal] scroll entrance animations
-//   ✓ Staggered card grids with distinct animations per section
+// Why no GSAP:
+//   The previous build imported gsap + gsap/ScrollTrigger purely to drive
+//   fade-up-on-enter reveals. That added ~50 kB gzipped to the hot path
+//   for animations a 5-line IntersectionObserver + CSS transitions match
+//   visually. Section-specific stagger lives in _reveal.scss via
+//   :nth-child rules; this module just toggles .is-revealed when an
+//   element scrolls into view.
 //
 // Vanilla JS controls:
+//   ✓ Scroll reveals — IntersectionObserver toggles .is-revealed
 //   ✓ FAQ open/close — explicit pixel-height animation via inline transition
 //
 // CSS controls:
 //   ✓ Hero staggered entrance (CSS keyframes on load)
+//   ✓ All [data-reveal] transitions, including section-specific stagger
 //   ✓ FAQ icon rotation, background, border (CSS transitions on [open])
-//   ✓ Hover effects, focus states, transitions
-//   ✓ Theme toggle, nav glass, floating contact
-//   ✓ Counter animation (rAF)
-//
-// After reveal: GSAP adds .is-revealed class and clears inline styles
-// so CSS hover transitions can take over cleanly.
+//   ✓ Hover effects, focus states
 // ============================================================================
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function initAnimations() {
   const prefersReducedMotion = window.matchMedia(
@@ -30,180 +26,54 @@ export function initAnimations() {
   ).matches;
 
   if (prefersReducedMotion) {
+    // Snap reveal elements visible without animating; CSS @media query
+    // also catches this, but the class keeps post-reveal hover transitions
+    // working consistently.
     document.querySelectorAll("[data-reveal]").forEach((el) => {
       el.classList.add("is-revealed");
     });
+    initFAQAccordion();
     return;
   }
-
-  // GSAP defaults — consistent feel across all animations
-  gsap.defaults({
-    ease: "power3.out",
-    duration: 0.8,
-  });
 
   initScrollReveals();
   initFAQAccordion();
 }
 
 // ============================================================================
-// SCROLL REVEALS
+// SCROLL REVEALS — IntersectionObserver + .is-revealed class
+// ============================================================================
+// Each [data-reveal] element is observed once; when it crosses ~88% down
+// the viewport (rootMargin: -12% bottom), .is-revealed is added and the
+// observer stops watching it. CSS in _reveal.scss handles the actual
+// fade/translate transition and section-specific stagger via :nth-child.
 // ============================================================================
 function initScrollReveals() {
-  // ------------------------------------------------------------------
-  // SOLO elements — section headers, descriptions, standalone blocks
-  // ------------------------------------------------------------------
-  const batchContainers = [
-    ".services__grid",
-    ".process__steps",
-    ".testimonials__grid",
-    ".faq__list",
-  ];
+  const items = document.querySelectorAll("[data-reveal]");
+  if (!items.length) return;
 
-  const isBatchChild = (el) => batchContainers.some((sel) => el.closest(sel));
+  // Older browsers / no IO: snap everything visible immediately.
+  if (typeof IntersectionObserver === "undefined") {
+    items.forEach((el) => el.classList.add("is-revealed"));
+    return;
+  }
 
-  const soloElements = [];
-  document.querySelectorAll("[data-reveal]").forEach((el) => {
-    if (!isBatchChild(el)) soloElements.push(el);
-  });
-
-  if (soloElements.length) {
-    gsap.set(soloElements, { opacity: 0, y: 30 });
-
-    soloElements.forEach((el) => {
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          once: true,
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        clearProps: "transform",
-        onComplete: () => el.classList.add("is-revealed"),
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
       });
-    });
-  }
-
-  // ------------------------------------------------------------------
-  // SERVICE CARDS — fade up + subtle scale
-  // ------------------------------------------------------------------
-  const serviceCards = gsap.utils.toArray(".services__grid [data-reveal]");
-
-  if (serviceCards.length) {
-    gsap.set(serviceCards, { opacity: 0, y: 40, scale: 0.97 });
-
-    ScrollTrigger.batch(serviceCards, {
-      start: "top 88%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.08,
-          duration: 0.65,
-          ease: "power2.out",
-          onComplete: function () {
-            batch.forEach((el) => {
-              gsap.set(el, { clearProps: "transform,opacity" });
-              el.classList.add("is-revealed");
-            });
-          },
-        });
-      },
-    });
-  }
-
-  // ------------------------------------------------------------------
-  // PROCESS STEPS — slide from left, sequential (emphasizes flow)
-  // ------------------------------------------------------------------
-  const processSteps = gsap.utils.toArray(".process__steps [data-reveal]");
-
-  if (processSteps.length) {
-    gsap.set(processSteps, { opacity: 0, x: -30 });
-
-    ScrollTrigger.batch(processSteps, {
-      start: "top 85%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          x: 0,
-          stagger: 0.12,
-          duration: 0.7,
-          ease: "power2.out",
-          onComplete: function () {
-            batch.forEach((el) => {
-              gsap.set(el, { clearProps: "transform,opacity" });
-              el.classList.add("is-revealed");
-            });
-          },
-        });
-      },
-    });
-  }
-
-  // ------------------------------------------------------------------
-  // TESTIMONIAL CARDS — fade up, gentle
-  // ------------------------------------------------------------------
-  const testimonialCards = gsap.utils.toArray(
-    ".testimonials__grid [data-reveal]"
+    },
+    {
+      // Mirrors the previous GSAP "top 88%" trigger — element animates
+      // as soon as its top edge crosses 88% down the viewport.
+      rootMargin: "0px 0px -12% 0px",
+    }
   );
 
-  if (testimonialCards.length) {
-    gsap.set(testimonialCards, { opacity: 0, y: 30 });
-
-    ScrollTrigger.batch(testimonialCards, {
-      start: "top 88%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power2.out",
-          onComplete: function () {
-            batch.forEach((el) => {
-              gsap.set(el, { clearProps: "transform,opacity" });
-              el.classList.add("is-revealed");
-            });
-          },
-        });
-      },
-    });
-  }
-
-  // ------------------------------------------------------------------
-  // FAQ ITEMS — fade up, tight stagger
-  // ------------------------------------------------------------------
-  const faqItems = gsap.utils.toArray(".faq__list [data-reveal]");
-
-  if (faqItems.length) {
-    gsap.set(faqItems, { opacity: 0, y: 20 });
-
-    ScrollTrigger.batch(faqItems, {
-      start: "top 88%",
-      once: true,
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.06,
-          duration: 0.6,
-          ease: "power2.out",
-          onComplete: function () {
-            batch.forEach((el) => {
-              gsap.set(el, { clearProps: "transform,opacity" });
-              el.classList.add("is-revealed");
-            });
-          },
-        });
-      },
-    });
-  }
+  items.forEach((el) => observer.observe(el));
 }
 
 // ============================================================================

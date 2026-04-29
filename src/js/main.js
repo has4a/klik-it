@@ -3,10 +3,10 @@
 // ============================================================================
 // - SCSS import (Vite)
 // - Navigation (module)
-// - GSAP scroll reveals + FAQ animations (module)
+// - IntersectionObserver scroll reveals + FAQ accordion (module)
 // - Stat counters, floating contact, analytics
 // - Active nav link tracking
-// - Lenis smooth scroll (optional)
+// - Lenis smooth scroll (optional, dynamic import)
 // ============================================================================
 
 import "../scss/main.scss";
@@ -42,15 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("[Klik_IT] Forms init failed:", e);
   }
 
-  // --- GSAP Animations (scroll reveals + FAQ) ---
+  // --- Animations (scroll reveals + FAQ accordion) ---
   try {
     initAnimations();
   } catch (e) {
-    console.error("[Klik_IT] GSAP animations init failed:", e);
-    // Fallback: show all reveal elements if GSAP fails
+    console.error("[Klik_IT] Animations init failed:", e);
+    // Fallback: snap reveal elements visible if init throws.
+    // Both .is-revealed and .is-visible map to the same end-state in CSS.
     document
       .querySelectorAll("[data-reveal]")
-      .forEach((el) => el.classList.add("is-visible"));
+      .forEach((el) => el.classList.add("is-revealed"));
   }
 
   // --- Active Nav Link ---

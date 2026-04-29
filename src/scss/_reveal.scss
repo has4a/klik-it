@@ -1,0 +1,110 @@
+// ============================================================================
+// SCROLL REVEAL — IntersectionObserver toggles .is-revealed; CSS animates
+// ============================================================================
+// Replaces the GSAP/ScrollTrigger reveal system. JS just adds the class when
+// an element crosses ~88% down the viewport (rootMargin: -12% bottom);
+// everything visual lives here so we don't ship an animation library on the
+// hot path for what is fundamentally fade-up-on-enter.
+//
+// Direction variants: data-reveal="left" / "right" override the default
+// upward translate. Section-specific tuning (services, process, testimonials,
+// FAQ) adjusts distance/scale/stagger via :nth-child to match the previous
+// GSAP-driven feel.
+// ============================================================================
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s $ease-out, transform 0.7s $ease-out;
+  will-change: opacity, transform;
+}
+
+// Direction variants for solo elements
+[data-reveal="left"] {
+  transform: translateX(-30px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(30px);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+// Legacy fallback — main.js try/catch still adds .is-visible if init throws.
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+// ---------------------------------------------------------------------------
+// SECTION TUNING — match the previous GSAP timings/distances per section
+// ---------------------------------------------------------------------------
+
+// Service cards — slightly bigger lift + scale, tighter timing, 80ms stagger
+.services__grid [data-reveal] {
+  transform: translateY(40px) scale(0.97);
+  transition-duration: 0.65s;
+
+  &.is-revealed {
+    transform: none;
+  }
+}
+@for $i from 2 through 6 {
+  .services__grid [data-reveal]:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * 80}ms;
+  }
+}
+
+// Process steps — horizontal slide (replaces GSAP x: -30), 120ms stagger
+.process__steps [data-reveal] {
+  transform: translateX(-30px);
+
+  &.is-revealed {
+    transform: none;
+  }
+}
+@for $i from 2 through 4 {
+  .process__steps [data-reveal]:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * 120}ms;
+  }
+}
+
+// Testimonial cards — slower fade-up, 100ms stagger
+.testimonials__grid [data-reveal] {
+  transition-duration: 0.8s;
+}
+@for $i from 2 through 3 {
+  .testimonials__grid [data-reveal]:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * 100}ms;
+  }
+}
+
+// FAQ items — small lift, quick, tight 60ms stagger
+.faq__list [data-reveal] {
+  transform: translateY(20px);
+  transition-duration: 0.6s;
+
+  &.is-revealed {
+    transform: none;
+  }
+}
+@for $i from 2 through 8 {
+  .faq__list [data-reveal]:nth-child(#{$i}) {
+    transition-delay: #{($i - 1) * 60}ms;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// REDUCED MOTION — bypass transitions; JS also short-circuits to .is-revealed
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
