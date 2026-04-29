@@ -169,7 +169,7 @@
     @media (hover: hover) {
       &:hover {
         background: var(--color-accent);
-        color: var(--color-text-inverse);
+        color: var(--color-on-accent);
         border-color: var(--color-accent);
         box-shadow: var(--shadow-glow);
       }

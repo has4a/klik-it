@@ -109,6 +109,13 @@ $z-toast: 500;
   --gradient-accent: linear-gradient(135deg, #00d4dd 0%, #0066ff 100%);
   --gradient-accent-text: linear-gradient(135deg, #00d4dd 0%, #3399ff 100%);
 
+  // Text color for on-accent surfaces (buttons, badges). The accent is
+  // bright in both themes, so the on-accent text must always be dark —
+  // can't share --color-text-inverse which flips per theme. WCAG AA
+  // contrast: #0a0a14 on #00d4dd ≈ 8.4:1; on #009da5 (light theme accent)
+  // ≈ 5.6:1. Both clear.
+  --color-on-accent: #0a0a14;
+
   // ---- Color: Semantic ----
   --color-success: #22c55e;
   --color-error: #ef4444;

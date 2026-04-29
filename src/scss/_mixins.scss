@@ -253,7 +253,9 @@
   @include button-base;
   @include button-lg;
   background: var(--color-accent);
-  color: var(--color-text-inverse);
+  // Always dark text on the bright accent fill — see --color-on-accent
+  // note in _variables.scss. WCAG AA passes in both themes.
+  color: var(--color-on-accent);
 
   // Arrow icon micro-animation
   svg {

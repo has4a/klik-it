@@ -112,7 +112,7 @@ body {
   z-index: 9999;
   padding: variables.$space-3 variables.$space-6;
   background: var(--color-accent);
-  color: var(--color-text-inverse);
+  color: var(--color-on-accent);
   font-family: variables.$font-body;
   font-size: variables.$text-sm;
   font-weight: 600;
@@ -206,7 +206,7 @@ small {
 // ============================================================================
 ::selection {
   background-color: var(--color-accent);
-  color: var(--color-text-inverse);
+  color: var(--color-on-accent);
 }
 
 // ============================================================================
@@ -343,7 +343,7 @@ section {
   height: 56px;
   border-radius: var(--radius-full);
   background: var(--color-accent);
-  color: var(--color-text-inverse);
+  color: var(--color-on-accent);
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-lg), var(--shadow-glow);

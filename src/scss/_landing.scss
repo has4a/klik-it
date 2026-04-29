@@ -41,7 +41,10 @@
   pointer-events: none;
 }
 
-// Dot grid pattern
+// Dot grid pattern — static. Previously had `grid-pulse infinite alternate`
+// which kept Lighthouse from finalising LCP (the grid is a viewport-sized
+// painted layer, and a perpetually-animating opacity prevented "stable
+// largest paint" detection — Performance score came back N/A as a result).
 .hero__grid {
   position: absolute;
   inset: 0;
@@ -64,21 +67,12 @@
     transparent 70%
   );
   opacity: 0.5;
-
-  // Subtle pulse animation
-  animation: grid-pulse 8s variables.$ease-in-out infinite alternate;
 }
 
-@keyframes grid-pulse {
-  0% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-
-// Radial glow — signature accent color bloom
+// Radial glow — signature accent bloom. Static for the same reason as
+// .hero__grid — was previously a 12s infinite alternate animation that
+// blocked LCP finalisation. The blurred gradient itself still gives the
+// hero its "alive" feel without any motion.
 .hero__glow {
   position: absolute;
   top: 30%;
@@ -93,26 +87,10 @@
     transparent 70%
   );
   filter: blur(60px);
-  animation: glow-drift 12s variables.$ease-in-out infinite alternate;
 
   @include mixins.from(lg) {
     width: 1200px;
     height: 800px;
-  }
-}
-
-@keyframes glow-drift {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-48%, -52%) scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-52%, -48%) scale(0.98);
-    opacity: 0.7;
   }
 }
 

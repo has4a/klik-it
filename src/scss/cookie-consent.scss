@@ -125,7 +125,7 @@
 // Accept — primary accent
 .cookie-consent__btn--accept {
   background: var(--color-accent);
-  color: var(--color-text-inverse);
+  color: var(--color-on-accent);
   border: 1px solid transparent;
 
   @media (hover: hover) {
