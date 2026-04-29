@@ -100,18 +100,23 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Fonts: Sora (headings) + DM Sans (body) + JetBrains Mono (labels) -->
-    <!-- Preconnect + preload for critical fonts (reduces FOUT) -->
+    <!-- Non-blocking load: rel=preload + onload swap to stylesheet so the -->
+    <!-- font CSS request doesn't gate first paint. font-display=swap in   -->
+    <!-- the URL handles fallback rendering while .woff2 files arrive.     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
 
     <!-- GA4 loaded conditionally via CookieConsent.js after user consent -->
 
