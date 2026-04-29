@@ -93,10 +93,12 @@
       }
     </script>
 
-    <!-- Favicon set (nahraď súbory vlastnými) -->
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Favicon — SVG primary (adapts to dark/light), used everywhere -->
+    <!-- including apple-touch-icon (iOS 14+). Replace with branded raster -->
+    <!-- assets (.png, .ico) before final launch if older-browser fidelity -->
+    <!-- matters. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Fonts: Sora (headings) + DM Sans (body) + JetBrains Mono (labels) -->

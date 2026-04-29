@@ -1,0 +1,25 @@
+{
+  "name": "Klik_IT — Spoľahlivý IT partner",
+  "short_name": "Klik_IT",
+  "description": "Komplexná správa serverov, sietí a cloudových riešení pre firmy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07070b",
+  "theme_color": "#07070b",
+  "lang": "sk",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ]
+}
