@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 
 export default defineConfig({
+  plugins: [], // Tento riadok sme pridali
   base: "/",
   build: {
     rollupOptions: {
@@ -10,7 +11,7 @@ export default defineConfig({
       // emits dist/index.html + dist/404.html with hashed asset URLs.
       input: {
         main: resolve(__dirname, "index.html"),
-        "404": resolve(__dirname, "404.html"),
+        404: resolve(__dirname, "404.html"),
       },
     },
   },
