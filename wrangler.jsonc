@@ -1,0 +1,26 @@
+{
+  // ============================================================================
+  // Klik_IT — Cloudflare Workers + Static Assets config
+  // ============================================================================
+  // This file exists so Wrangler skips its "auto-config for Vite" step which
+  // otherwise injects an `import { cloudflare } from "@cloudflare/vite-plugin"`
+  // into vite.config.js on every build — and that plugin is ESM-only, so the
+  // CJS Vite config loader fails to resolve it and the build dies.
+  //
+  // We have no Worker code; the project is purely static HTML/CSS/JS. Pointing
+  // assets.directory at dist/ tells Wrangler to deploy that folder as the
+  // edge-served static assets — exactly what the previous Pages flow did,
+  // just routed through the modern Workers + Static Assets model.
+  //
+  // not_found_handling: "404-page" means unknown routes serve dist/404.html
+  // (with HTTP 404 status) — same behaviour as our public/.htaccess gave under
+  // Apache, but native to Cloudflare's CDN.
+  // ============================================================================
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "klik-it",
+  "compatibility_date": "2026-04-30",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

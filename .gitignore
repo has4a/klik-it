@@ -33,5 +33,9 @@ desktop.ini
 .parcel-cache/
 .vite/
 
+# Cloudflare Wrangler — local cache + env, never commit
+.wrangler/
+.dev.vars
+
 # Claude Code local config (machine-specific)
 .claude/settings.local.json
