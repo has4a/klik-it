@@ -1,0 +1,13 @@
+# ============================================================================
+# Klik_IT — robots.txt
+# ============================================================================
+# Allow everything (no internal-only paths to hide). Legal pages carry their
+# own <meta name="robots" content="noindex"> so they won't enter the index
+# even though they're crawlable.
+# ============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://klikit.sk/sitemap.xml

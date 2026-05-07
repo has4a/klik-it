@@ -10,21 +10,16 @@
 // - Lazy-loads reCAPTCHA on first form focus (privacy: defers the
 //   _GRECAPTCHA cookie until the user actually engages the form)
 //
-// reCAPTCHA INTEGRATION STATUS (2026-04):
-//   The script is loaded lazily but NOT yet called via grecaptcha.execute()
-//   from the submit flow — meaning it's currently in passive mode and does
-//   not produce a token that the backend can verify. To activate full spam
-//   protection:
-//     1. Inside submitForm(), wrap the fetch in:
-//          await new Promise(r => window.grecaptcha.ready(r));
-//          const token = await window.grecaptcha.execute(
-//            RECAPTCHA_SITE_KEY, { action: "contact_submit" }
-//          );
-//          formData.append("recaptcha_token", token);
-//     2. In api/send-email.php, POST the token to
-//        https://www.google.com/recaptcha/api/siteverify with the secret
-//        key and reject scores below ~0.5.
-//   Until that lands, the honeypot field is the only spam protection.
+// reCAPTCHA INTEGRATION (2026-05):
+//   Script is lazy-loaded on first focusin (privacy: no _GRECAPTCHA cookie
+//   until the user engages the form). At submit time, grecaptcha.execute()
+//   produces a token attached to FormData as `recaptcha_token`.
+//
+//   Backend (api/send-email.php) verifies the token via
+//   https://www.google.com/recaptcha/api/siteverify and rejects scores
+//   below 0.5 — but ONLY if RECAPTCHA_SECRET is set in the PHP config.
+//   Until that secret is filled in, the backend skips verify silently and
+//   the honeypot is the only spam guard. Set the secret before launch.
 // ============================================================================
 
 import { trackFormSubmit } from "./Analytics.js";
@@ -245,6 +240,21 @@ async function submitForm(form, btn, statusEl) {
 
   try {
     const formData = new FormData(form);
+
+    // reCAPTCHA v3 token — best-effort. If grecaptcha hasn't finished
+    // loading (unlikely after focusin lazy-load + filling the form), we
+    // skip the token and let the backend fall back to honeypot-only.
+    if (window.grecaptcha && typeof window.grecaptcha.execute === "function") {
+      try {
+        await new Promise((resolve) => window.grecaptcha.ready(resolve));
+        const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, {
+          action: "contact_submit",
+        });
+        if (token) formData.append("recaptcha_token", token);
+      } catch {
+        // grecaptcha errored — proceed without token; honeypot still active
+      }
+    }
 
     const response = await fetch(form.action, {
       method: "POST",
