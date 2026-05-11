@@ -284,7 +284,7 @@ async function submitForm(form, btn, statusEl) {
     showStatus(
       statusEl,
       "error",
-      "Odoslanie zlyhalo. Skúste to znova alebo nás kontaktujte na info@klikit.sk."
+      "Odoslanie zlyhalo. Skúste to znova alebo nás kontaktujte na hello@mgtech.sk."
     );
     trackFormSubmit("error");
   } finally {

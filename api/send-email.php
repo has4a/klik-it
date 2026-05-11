@@ -36,7 +36,7 @@ header('Cache-Control: no-store');
 // ---------------------------------------------------------------------------
 // CONFIG — edit before deploy
 // ---------------------------------------------------------------------------
-const RECIPIENT_EMAIL    = 'info@klikit.sk';
+const RECIPIENT_EMAIL    = 'hello@mgtech.sk';
 const FROM_EMAIL         = 'noreply@klikit.sk';
 const FROM_NAME          = 'Klik_IT web';
 

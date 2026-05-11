@@ -56,42 +56,9 @@
       content="Klik_IT — Spoľahlivý IT partner pre váš biznis"
     />
 
-    <!-- Structured data (JSON-LD) — eligible for Google rich results, -->
-    <!-- knowledge panel, and Maps surface for local IT services in Žilina. -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Klik_IT",
-        "description": "Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT.",
-        "url": "https://klikit.sk/",
-        "logo": "https://klikit.sk/og-image.jpg",
-        "image": "https://klikit.sk/og-image.jpg",
-        "telephone": "+421910520846",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Žilina",
-          "addressCountry": "SK"
-        },
-        "foundingDate": "2017",
-        "areaServed": {
-          "@type": "Country",
-          "name": "Slovensko"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "IT služby",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Správa serverov" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Návrh a správa sietí" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Správa zariadení cez MDM" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klik Cloud" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podpora užívateľov" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Klik Web" } }
-          ]
-        }
-      }
-    </script>
+    <!-- Structured data lives in a single consolidated @graph block at the -->
+    <!-- bottom of the document (LocalBusiness + FAQPage). Keeping it there  -->
+    <!-- avoids duplication and matches Google's preferred single-script form. -->
 
     <!-- Favicon — SVG primary (adapts to dark/light), used everywhere -->
     <!-- including apple-touch-icon (iOS 14+). Replace with branded raster -->
@@ -1434,19 +1401,29 @@
             "@id": "https://klikit.sk/#business",
             "name": "Klik_IT",
             "alternateName": "Klik IT",
+            "legalName": "MG tech s. r. o.",
             "url": "https://klikit.sk",
             "description": "Komplexná správa IT infraštruktúry, serverov, sietí a cloudových riešení pre firmy. Od roku 2017 pomáhame firmám rásť bez starostí o IT.",
             "foundingDate": "2017",
             "telephone": "+421910520846",
-            "email": "info@klikit.sk",
+            "email": "hello@mgtech.sk",
+            "vatID": "SK2121537022",
+            "taxID": "2121537022",
+            "identifier": {
+              "@type": "PropertyValue",
+              "propertyID": "IČO",
+              "value": "53919441"
+            },
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "Hollého 379/51",
               "addressLocality": "Žilina",
+              "postalCode": "010 01",
               "addressCountry": "SK"
             },
             "areaServed": {
               "@type": "Country",
-              "name": "Slovakia"
+              "name": "Slovensko"
             },
             "serviceType": [
               "Správa serverov",
