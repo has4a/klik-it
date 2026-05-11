@@ -26,12 +26,16 @@ export default defineConfig({
   base: "/",
   build: {
     rollupOptions: {
-      // Multi-page build: process both the main site and the 404 page so
-      // Vite resolves the shared script/style entry inside each one and
-      // emits dist/index.html + dist/404.html with hashed asset URLs.
+      // Multi-page build: all HTML entries must be listed here so Vite
+      // processes them and copies the output into dist/. Anything missing
+      // from this list silently never reaches the deploy — which was the
+      // launch-day bug where /cookies-policy.html and /privacy-policy.html
+      // 404'd on klikit.sk.
       input: {
         main: resolve(__dirname, "index.html"),
         404: resolve(__dirname, "404.html"),
+        "cookies-policy": resolve(__dirname, "cookies-policy.html"),
+        "privacy-policy": resolve(__dirname, "privacy-policy.html"),
       },
     },
   },
