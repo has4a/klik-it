@@ -74,6 +74,12 @@ table {
 html {
   // Smooth scrolling (respects prefers-reduced-motion in JS)
   scroll-behavior: smooth;
+  // Clip horizontal overflow on the root element too — body alone isn't
+  // enough on iOS Safari, where a transformed/absolutely-positioned hero
+  // glow could leak past the viewport and cause a horizontal jitter while
+  // the user scrolls vertically. `clip` (vs `hidden`) is preferred: it
+  // doesn't create a scroll context and doesn't break sticky descendants.
+  overflow-x: clip;
   // Prevent font size inflation on mobile
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -91,7 +97,9 @@ body {
   line-height: 1.7;
   color: var(--color-text-primary);
   background-color: var(--color-surface-0);
-  overflow-x: hidden;
+  // Belt + braces alongside html's overflow-x: clip — some legacy WebKit
+  // builds (older iOS) only honour the body's clip rule, hence both.
+  overflow-x: clip;
   min-height: 100vh;
   min-height: 100dvh;
   // Smooth transition when switching themes (background only — color on children handles itself)

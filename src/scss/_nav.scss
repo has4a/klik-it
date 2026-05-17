@@ -324,8 +324,12 @@
     transform: translateY(0);
   }
 
-  // Stagger each link
-  @for $i from 1 through 5 {
+  // Stagger each link — must cover every <li> in the mobile menu.
+  // 7 items today (Domov / O nás / Služby / Referencie / Proces / Kontakt /
+  // FAQ); anything not in the loop range falls back to delay: 0 and
+  // appears to "have no animation" because it lands before staggered
+  // items even start.
+  @for $i from 1 through 7 {
     .mobile-menu.is-open li:nth-child(#{$i}) & {
       transition-delay: #{80ms + ($i * 50ms)};
     }
@@ -352,7 +356,9 @@
   .mobile-menu.is-open & {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 400ms;
+    // Last link (7th) lands at 430ms (80 + 7*50); CTA at 470ms keeps the
+    // visual order intact (CTA arrives just after the last menu link).
+    transition-delay: 470ms;
   }
 }
 

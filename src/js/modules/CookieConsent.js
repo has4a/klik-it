@@ -31,7 +31,7 @@
 // ============================================================================
 
 const CONSENT_KEY = "cookie_consent";
-const GA4_ID = "G-FT6JSLJ4X3";
+const GA4_ID = "G-SJ12M2TLK0";
 
 export function initCookieConsent() {
   // -------------------------------------------------------------------------
